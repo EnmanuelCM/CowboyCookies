@@ -38,7 +38,7 @@ public class TipoDeUsuario extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(162, 210, 255));
 
-        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/jframes/Logo de Cowboy Cookies.png"))); // NOI18N
+        jLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Logo de Cowboy Cookies.png"))); // NOI18N
 
         jButton1.setBackground(new java.awt.Color(95, 47, 35));
         jButton1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
@@ -61,7 +61,7 @@ public class TipoDeUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.CENTER)
                     .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 210, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1))
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -75,7 +75,7 @@ public class TipoDeUsuario extends javax.swing.JFrame {
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(22, 22, 22)
                         .addComponent(jLabel1)))
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
