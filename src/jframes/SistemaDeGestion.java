@@ -49,21 +49,25 @@ public class SistemaDeGestion extends javax.swing.JFrame {
         btnGestion.setBackground(new java.awt.Color(254, 176, 200));
         btnGestion.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
         btnGestion.setForeground(new java.awt.Color(95, 47, 35));
+        btnGestion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/box (1).png"))); // NOI18N
         btnGestion.setText("Gestión de Productos");
 
         btnRegistro.setBackground(new java.awt.Color(254, 176, 200));
         btnRegistro.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
         btnRegistro.setForeground(new java.awt.Color(95, 47, 35));
+        btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/shopping-cart.png"))); // NOI18N
         btnRegistro.setText("Registro de Ventas");
 
         btnControl.setBackground(new java.awt.Color(254, 176, 200));
         btnControl.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
         btnControl.setForeground(new java.awt.Color(95, 47, 35));
+        btnControl.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/statistics.png"))); // NOI18N
         btnControl.setText("Control de Inventario");
 
         btnCerrarSesion.setBackground(new java.awt.Color(254, 176, 200));
         btnCerrarSesion.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
         btnCerrarSesion.setForeground(new java.awt.Color(95, 47, 35));
+        btnCerrarSesion.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/logout.png"))); // NOI18N
         btnCerrarSesion.setText("Cerrar Sesión");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
