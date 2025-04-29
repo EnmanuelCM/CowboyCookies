@@ -172,7 +172,7 @@ public class jfLogin extends javax.swing.JFrame {
             Statement st = con.createStatement();
             ResultSet rs = st.executeQuery(query);
             if (rs.next()) {
-                JOptionPane.showConfirmDialog(this, "Sesion iniciada correctamente");
+                JOptionPane.showMessageDialog(this, "Sesion iniciada correctamente");
                 this.dispose();
                 gestion.setVisible(true);
             } else {
