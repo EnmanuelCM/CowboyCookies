@@ -140,7 +140,7 @@ public class jfLogin extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 24, -1, -1));
+        jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 24, -1, 540));
 
         jLabel4.setBackground(new java.awt.Color(102, 102, 102));
         jLabel4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Fondolog oscuro.jpg"))); // NOI18N
