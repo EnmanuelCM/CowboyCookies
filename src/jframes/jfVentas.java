@@ -54,28 +54,23 @@ public class jfVentas extends javax.swing.JFrame {
         jPanel2.setBackground(new java.awt.Color(162, 210, 255));
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(0, 0, 0));
         jLabel1.setText("Usuario");
 
         lblIDVenta.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        lblIDVenta.setForeground(new java.awt.Color(0, 0, 0));
         lblIDVenta.setText("ID Venta");
 
         txtIdVenta.setEnabled(false);
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(0, 0, 0));
         jLabel2.setText("Fecha");
 
         jPanel1.setBackground(new java.awt.Color(162, 210, 255));
-        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos para vender ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Montserrat Medium", 0, 12), new java.awt.Color(0, 0, 0))); // NOI18N
+        jPanel1.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Productos para vender ", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Montserrat Medium", 0, 12))); // NOI18N
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(0, 0, 0));
         jLabel4.setText("Buscar Productos ");
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 3, 14)); // NOI18N
-        jLabel5.setForeground(new java.awt.Color(0, 0, 0));
         jLabel5.setText("Productos disponibles ");
 
         jtproducto.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
@@ -112,7 +107,6 @@ public class jfVentas extends javax.swing.JFrame {
         btnAgregar.setText("Agregar ");
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 3, 14)); // NOI18N
-        jLabel6.setForeground(new java.awt.Color(0, 0, 0));
         jLabel6.setText("Productos Seleccionados / Venta Final");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -144,15 +138,12 @@ public class jfVentas extends javax.swing.JFrame {
         jScrollPane2.setViewportView(jTable1);
 
         jLabel7.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
-        jLabel7.setForeground(new java.awt.Color(0, 0, 0));
         jLabel7.setText("Total sin ITBS:");
 
         jLabel8.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
-        jLabel8.setForeground(new java.awt.Color(0, 0, 0));
         jLabel8.setText("ITBS Incluido:");
 
         jLabel9.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
-        jLabel9.setForeground(new java.awt.Color(0, 0, 0));
         jLabel9.setText("Total a pagar:");
 
         btnFinalizarVenta.setBackground(new java.awt.Color(95, 47, 35));
