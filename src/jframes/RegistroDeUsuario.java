@@ -47,8 +47,6 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         txtcontrasena = new javax.swing.JPasswordField();
         jLabel15 = new javax.swing.JLabel();
         txtconfirmarcontrasena = new javax.swing.JPasswordField();
-        jLabel16 = new javax.swing.JLabel();
-        cbotipodeusuario = new javax.swing.JComboBox<>();
         btncrearcuenta = new javax.swing.JButton();
         lblFondo = new javax.swing.JLabel();
 
@@ -86,14 +84,6 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         jLabel15.setForeground(new java.awt.Color(95, 47, 35));
         jLabel15.setText("Confirmar Contraseña:");
 
-        jLabel16.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        jLabel16.setForeground(new java.awt.Color(95, 47, 35));
-        jLabel16.setText("Tipo De Usuario:");
-
-        cbotipodeusuario.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        cbotipodeusuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "empleado" }));
-        cbotipodeusuario.setToolTipText("");
-
         btncrearcuenta.setBackground(new java.awt.Color(254, 176, 200));
         btncrearcuenta.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btncrearcuenta.setForeground(new java.awt.Color(95, 47, 35));
@@ -112,7 +102,10 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(20, 20, 20)
+                        .addGap(160, 160, 160)
+                        .addComponent(jLabel1))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(jPanel3Layout.createSequentialGroup()
                                 .addGap(74, 74, 74)
@@ -136,28 +129,22 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
                                                     .addComponent(txtcorreo, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                                                     .addComponent(txtusuario, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
-                                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                    .addComponent(jLabel16)
-                                    .addComponent(jLabel15))
+                                .addComponent(jLabel15)
                                 .addGap(32, 32, 32)
                                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(txtcontrasena)
-                                    .addComponent(txtconfirmarcontrasena)
-                                    .addComponent(cbotipodeusuario, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                    .addComponent(txtconfirmarcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(145, 145, 145)
-                        .addComponent(btncrearcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(160, 160, 160)
-                        .addComponent(jLabel1)))
-                .addContainerGap(47, Short.MAX_VALUE))
+                        .addGap(155, 155, 155)
+                        .addComponent(btncrearcuenta, javax.swing.GroupLayout.PREFERRED_SIZE, 160, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(45, Short.MAX_VALUE))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap()
+                .addGap(21, 21, 21)
                 .addComponent(jLabel1)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 62, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel9)
                     .addComponent(txtnombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -181,13 +168,9 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel15)
                     .addComponent(txtconfirmarcontrasena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(27, 27, 27)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel16)
-                    .addComponent(cbotipodeusuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(41, 41, 41)
+                .addGap(46, 46, 46)
                 .addComponent(btncrearcuenta)
-                .addGap(35, 35, 35))
+                .addGap(46, 46, 46))
         );
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 480, 490));
@@ -212,79 +195,81 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btncrearcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearcuentaActionPerformed
-        
-        if (txtnombre.getText().isEmpty() || txtapellido.getText().isEmpty() || 
-    txtcorreo.getText().isEmpty() || txtusuario.getText().isEmpty() ||
-    String.valueOf(txtcontrasena.getPassword()).isEmpty() || 
-    String.valueOf(txtconfirmarcontrasena.getPassword()).isEmpty() ||
-    cbotipodeusuario.getSelectedItem() == null) {
 
-    JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-    return;
-}
+        if (txtnombre.getText().isEmpty() || txtapellido.getText().isEmpty()
+                || txtcorreo.getText().isEmpty() || txtusuario.getText().isEmpty()
+                || String.valueOf(txtcontrasena.getPassword()).isEmpty()
+                || String.valueOf(txtconfirmarcontrasena.getPassword()).isEmpty()) {
+
+            JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
 
 // Validar que las contraseñas coincidan
-String contrasena = new String(txtcontrasena.getPassword());
-String confirmarContrasena = new String(txtconfirmarcontrasena.getPassword());
+        String contrasena = new String(txtcontrasena.getPassword());
+        String confirmarContrasena = new String(txtconfirmarcontrasena.getPassword());
 
-if (!contrasena.equals(confirmarContrasena)) {
-    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-    txtcontrasena.setText("");
-    txtconfirmarcontrasena.setText("");
-    txtcontrasena.requestFocus();
-    return;
-}
+        if (!contrasena.equals(confirmarContrasena)) {
+            JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+            txtcontrasena.setText("");
+            txtconfirmarcontrasena.setText("");
+            txtcontrasena.requestFocus();
+            return;
+        }
 
 // Validar que la contraseña tenga al menos una letra mayúscula y un número
-String regex = "^(?=.*[A-Z])(?=.*[0-9]).+$";
-if (!contrasena.matches(regex)) {
-    JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos una letra mayúscula y un número.", "Contraseña inválida", JOptionPane.ERROR_MESSAGE);
-    txtcontrasena.setText("");
-    txtconfirmarcontrasena.setText("");
-    txtcontrasena.requestFocus();
-    return;
-}
+        String regex = "^(?=.*[A-Z])(?=.*[0-9]).+$";
+        if (!contrasena.matches(regex)) {
+            JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos una letra mayúscula y un número.", "Contraseña inválida", JOptionPane.ERROR_MESSAGE);
+            txtcontrasena.setText("");
+            txtconfirmarcontrasena.setText("");
+            txtcontrasena.requestFocus();
+            return;
+        }
 
 // Obtener datos
-String nombre = txtnombre.getText();
-String apellido = txtapellido.getText();
-String correo = txtcorreo.getText();
-String usuario = txtusuario.getText();
-String tipoUsuario = cbotipodeusuario.getSelectedItem().toString();
-
+        String nombre = txtnombre.getText();
+        String apellido = txtapellido.getText();
+        String correo = txtcorreo.getText();
+        String usuario = txtusuario.getText();
+       
 // Insertar en base de datos
-Connection con = null;
-PreparedStatement ps = null;
+        Connection con = null;
+        PreparedStatement ps = null;
 
-try {
-    con = Conexion.getConnection();
-    String sql = "INSERT INTO usuarios (nombre, apellido, correo, usuario, contrasena, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
-    ps = con.prepareStatement(sql);
-    ps.setString(1, nombre);
-    ps.setString(2, apellido);
-    ps.setString(3, correo);
-    ps.setString(4, usuario);
-    ps.setString(5, contrasena); // Se guarda sin encriptar
-    ps.setString(6, tipoUsuario);
-
-    ps.executeUpdate();
-    JOptionPane.showMessageDialog(this, "Cuenta creada satisfactoriamente.");
-
-    // Ir al login
-    jfLogin login = new jfLogin();
-    login.setVisible(true);
-    this.dispose();
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al crear cuenta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
-    } finally {
         try {
-            if (ps != null) ps.close();
-            if (con != null) con.close();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            con = Conexion.getConnection();
+            String sql = "INSERT INTO usuarios (nombre, apellido, correo, usuario, contrasena, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+            ps = con.prepareStatement(sql);
+            ps.setString(1, nombre);
+            ps.setString(2, apellido);
+            ps.setString(3, correo);
+            ps.setString(4, usuario);
+            ps.setString(5, contrasena); // Se guarda sin encriptar
+            ps.setString(6, "empleado");
+
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(this, "Cuenta creada satisfactoriamente.");
+
+            // Ir al login
+            jfLogin login = new jfLogin();
+            login.setVisible(true);
+            this.dispose();
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al crear cuenta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
+        } finally {
+            try {
+                if (ps != null) {
+                    ps.close();
+                }
+                if (con != null) {
+                    con.close();
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
-    }
     }//GEN-LAST:event_btncrearcuentaActionPerformed
 
     /**
@@ -327,14 +312,12 @@ try {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btncrearcuenta;
-    private javax.swing.JComboBox<String> cbotipodeusuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
     private javax.swing.JLabel jLabel14;
     private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
