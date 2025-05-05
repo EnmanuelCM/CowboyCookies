@@ -6,14 +6,14 @@ package jframes;
 
 /**
  *
- * @author juand
+ * @author enmac
  */
-public class jfControlInventario extends javax.swing.JFrame {
+public class jfInventario extends javax.swing.JFrame {
 
     /**
-     * Creates new form jfControlDeInventario
+     * Creates new form jfInventario
      */
-    public jfControlInventario() {
+    public jfInventario() {
         initComponents();
     }
 
@@ -59,21 +59,20 @@ public class jfControlInventario extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(jfControlInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(jfControlInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(jfControlInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(jfControlInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(jfInventario.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new jfControlInventario().setVisible(true);
+                new jfInventario().setVisible(true);
             }
         });
     }
