@@ -50,7 +50,7 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         jLabel16 = new javax.swing.JLabel();
         cbotipodeusuario = new javax.swing.JComboBox<>();
         btncrearcuenta = new javax.swing.JButton();
-        jLabel10 = new javax.swing.JLabel();
+        lblFondo = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -192,9 +192,8 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(80, 40, 480, 490));
 
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/coffeeeee.png"))); // NOI18N
-        jLabel10.setText("jLabel10");
-        jPanel2.add(jLabel10, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, 0, 670, 640));
+        lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Fondo cafe.png"))); // NOI18N
+        jPanel2.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -10, 670, 640));
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -206,9 +205,7 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(layout.createSequentialGroup()
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 571, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
 
         pack();
@@ -318,7 +315,6 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
     private javax.swing.JButton btncrearcuenta;
     private javax.swing.JComboBox<String> cbotipodeusuario;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel13;
@@ -328,6 +324,7 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JLabel lblFondo;
     private javax.swing.JTextField txtapellido;
     private javax.swing.JPasswordField txtconfirmarcontrasena;
     private javax.swing.JPasswordField txtcontrasena;
