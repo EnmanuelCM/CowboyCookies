@@ -214,52 +214,66 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
     private void btncrearcuentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btncrearcuentaActionPerformed
         
         if (txtnombre.getText().isEmpty() || txtapellido.getText().isEmpty() || 
-        txtcorreo.getText().isEmpty() || txtusuario.getText().isEmpty() ||
-        String.valueOf(txtcontrasena.getPassword()).isEmpty() || 
-        String.valueOf(txtconfirmarcontrasena.getPassword()).isEmpty() || // Validar campo confirmar contraseña
-        cbotipodeusuario.getSelectedItem() == null) {
-        JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
-        return;
-    }
+    txtcorreo.getText().isEmpty() || txtusuario.getText().isEmpty() ||
+    String.valueOf(txtcontrasena.getPassword()).isEmpty() || 
+    String.valueOf(txtconfirmarcontrasena.getPassword()).isEmpty() ||
+    cbotipodeusuario.getSelectedItem() == null) {
 
-    // Validar que las contraseñas coincidan
-    String contrasena = new String(txtcontrasena.getPassword());
-    String confirmarContrasena = new String(txtconfirmarcontrasena.getPassword());
+    JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+    return;
+}
 
-    if (!contrasena.equals(confirmarContrasena)) {
-        JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
+// Validar que las contraseñas coincidan
+String contrasena = new String(txtcontrasena.getPassword());
+String confirmarContrasena = new String(txtconfirmarcontrasena.getPassword());
 
-    // Obtener datos
-    String nombre = txtnombre.getText();
-    String apellido = txtapellido.getText();
-    String correo = txtcorreo.getText();
-    String usuario = txtusuario.getText();
-    String tipoUsuario = cbotipodeusuario.getSelectedItem().toString();
+if (!contrasena.equals(confirmarContrasena)) {
+    JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+    txtcontrasena.setText("");
+    txtconfirmarcontrasena.setText("");
+    txtcontrasena.requestFocus(); // Opcional: vuelve a enfocar en el campo de contraseña
+    return;
+}
 
-    // Insertar en base de datos
-    Connection con = null;
-    PreparedStatement ps = null;
+// Validar que la contraseña tenga al menos un número, una letra mayúscula y un carácter especial
+String regex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$";
+if (!contrasena.matches(regex)) {
+    JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos un número, una letra mayúscula y un carácter especial.", "Contraseña inválida", JOptionPane.ERROR_MESSAGE);
+    txtcontrasena.setText("");
+    txtconfirmarcontrasena.setText("");
+    txtcontrasena.requestFocus(); // Opcional: vuelve a enfocar en el campo de contraseña
+    return;
+}
 
-    try {
-        con = Conexion.getConnection();
-        String sql = "INSERT INTO usuarios (nombre, apellido, correo, usuario, contrasena, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
-        ps = con.prepareStatement(sql);
-        ps.setString(1, nombre);
-        ps.setString(2, apellido);
-        ps.setString(3, correo);
-        ps.setString(4, usuario);
-        ps.setString(5, contrasena); // Se guarda sin encriptar
-        ps.setString(6, tipoUsuario);
+// Obtener datos
+String nombre = txtnombre.getText();
+String apellido = txtapellido.getText();
+String correo = txtcorreo.getText();
+String usuario = txtusuario.getText();
+String tipoUsuario = cbotipodeusuario.getSelectedItem().toString();
 
-        ps.executeUpdate();
-        JOptionPane.showMessageDialog(this, "Cuenta creada satisfactoriamente.");
+// Insertar en base de datos
+Connection con = null;
+PreparedStatement ps = null;
 
-        // Ir al login
-        jfLogin login = new jfLogin();
-        login.setVisible(true);
-        this.dispose();
+try {
+    con = Conexion.getConnection();
+    String sql = "INSERT INTO usuarios (nombre, apellido, correo, usuario, contrasena, tipo_usuario) VALUES (?, ?, ?, ?, ?, ?)";
+    ps = con.prepareStatement(sql);
+    ps.setString(1, nombre);
+    ps.setString(2, apellido);
+    ps.setString(3, correo);
+    ps.setString(4, usuario);
+    ps.setString(5, contrasena); // Se guarda sin encriptar
+    ps.setString(6, tipoUsuario);
+
+    ps.executeUpdate();
+    JOptionPane.showMessageDialog(this, "Cuenta creada satisfactoriamente.");
+
+    // Ir al login
+    jfLogin login = new jfLogin();
+    login.setVisible(true);
+    this.dispose();
 
     } catch (SQLException e) {
         JOptionPane.showMessageDialog(this, "Error al crear cuenta: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
