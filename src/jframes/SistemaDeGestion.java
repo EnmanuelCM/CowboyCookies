@@ -57,6 +57,11 @@ public class SistemaDeGestion extends javax.swing.JFrame {
         btnRegistro.setForeground(new java.awt.Color(95, 47, 35));
         btnRegistro.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/shopping-cart.png"))); // NOI18N
         btnRegistro.setText("Registro de Ventas");
+        btnRegistro.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistroActionPerformed(evt);
+            }
+        });
 
         btnControl.setBackground(new java.awt.Color(254, 176, 200));
         btnControl.setFont(new java.awt.Font("Montserrat ExtraBold", 0, 14)); // NOI18N
@@ -128,6 +133,11 @@ public class SistemaDeGestion extends javax.swing.JFrame {
         login.setVisible(true);
         
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
+
+    private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
+        jfRegistroDeVentas registroVentas = new jfRegistroDeVentas(); // Crear instancia del nuevo frame
+    registroVentas.setVisible(true); 
+    }//GEN-LAST:event_btnRegistroActionPerformed
 
     /**
      * @param args the command line arguments

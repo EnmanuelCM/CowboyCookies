@@ -231,17 +231,17 @@ if (!contrasena.equals(confirmarContrasena)) {
     JOptionPane.showMessageDialog(this, "Las contraseñas no coinciden. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
     txtcontrasena.setText("");
     txtconfirmarcontrasena.setText("");
-    txtcontrasena.requestFocus(); // Opcional: vuelve a enfocar en el campo de contraseña
+    txtcontrasena.requestFocus();
     return;
 }
 
-// Validar que la contraseña tenga al menos un número, una letra mayúscula y un carácter especial
-String regex = "^(?=.*[0-9])(?=.*[A-Z])(?=.*[!@#$%^&*()_+\\-=\\[\\]{};':\"\\\\|,.<>\\/?]).+$";
+// Validar que la contraseña tenga al menos una letra mayúscula y un número
+String regex = "^(?=.*[A-Z])(?=.*[0-9]).+$";
 if (!contrasena.matches(regex)) {
-    JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos un número, una letra mayúscula y un carácter especial.", "Contraseña inválida", JOptionPane.ERROR_MESSAGE);
+    JOptionPane.showMessageDialog(this, "La contraseña debe contener al menos una letra mayúscula y un número.", "Contraseña inválida", JOptionPane.ERROR_MESSAGE);
     txtcontrasena.setText("");
     txtconfirmarcontrasena.setText("");
-    txtcontrasena.requestFocus(); // Opcional: vuelve a enfocar en el campo de contraseña
+    txtcontrasena.requestFocus();
     return;
 }
 
