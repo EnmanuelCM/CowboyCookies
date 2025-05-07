@@ -1,4 +1,3 @@
-
 package jframes;
 
 import conexion.Conexion;
@@ -63,10 +62,13 @@ public class jfLogin extends javax.swing.JFrame {
         lblpass.setForeground(new java.awt.Color(95, 47, 35));
         lblpass.setText("Contraseña");
 
+        txtUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
+
         btnIniciarsesion.setBackground(new java.awt.Color(95, 47, 35));
         btnIniciarsesion.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnIniciarsesion.setForeground(new java.awt.Color(255, 255, 255));
         btnIniciarsesion.setText("Iniciar Sesión");
+        btnIniciarsesion.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnIniciarsesion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnIniciarsesionActionPerformed(evt);
@@ -169,34 +171,50 @@ public class jfLogin extends javax.swing.JFrame {
 
     private void btnIniciarsesionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnIniciarsesionActionPerformed
         try {
-    Conexion cn = new Conexion();
-    Connection con = cn.getConexion();
-    SistemaDeGestion gestion = new SistemaDeGestion();
 
-    String user = txtUsuario.getText();
-    String password = String.valueOf(txtPassword.getPassword());
-    String query = "SELECT * FROM usuarios WHERE usuario='" + user + "'";
-    Statement st = con.createStatement();
-    ResultSet rs = st.executeQuery(query);
-    
-    if (rs.next()) { // El usuario existe
-        // Verificamos si la contraseña coincide
-        if (rs.getString("contrasena").equals(password)) {
-            JOptionPane.showMessageDialog(this, "Sesión iniciada correctamente");
-            this.dispose();
-            gestion.setVisible(true);
-        } else {
-            JOptionPane.showMessageDialog(this, "Contraseña incorrecta. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
-            // Limpiar el campo de la contraseña y poner el foco en él
-            txtPassword.setText(""); // Limpiar el campo
-            txtPassword.requestFocus(); // Enfocar el campo
+            //Validar que los campos no esten vacios
+            if (txtUsuario.getText().trim().isEmpty() && String.valueOf(txtPassword.getPassword()).trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, complete todos los campos.", "Campos vacíos", JOptionPane.WARNING_MESSAGE);
+                txtUsuario.requestFocus();
+                return;
+            } else if (txtUsuario.getText().trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese su nombre de usuario.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+                txtUsuario.requestFocus();
+                return;
+            } else if (String.valueOf(txtPassword.getPassword()).trim().isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Por favor, ingrese su contraseña.", "Campo vacío", JOptionPane.WARNING_MESSAGE);
+                txtPassword.requestFocus();
+                return;
+            }
+
+            Conexion cn = new Conexion();
+            Connection con = cn.getConexion();
+            FrmMenuPrincipal Menu = new FrmMenuPrincipal();
+
+            String user = txtUsuario.getText();
+            String password = String.valueOf(txtPassword.getPassword());
+            String query = "SELECT * FROM usuarios WHERE usuario='" + user + "'";
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(query);
+
+            if (rs.next()) { // El usuario existe
+                // Verificamos si la contraseña coincide
+                if (rs.getString("contrasena").equals(password)) {
+                    JOptionPane.showMessageDialog(this, "Sesión iniciada correctamente");
+                    this.dispose();
+                    Menu.setVisible(true);
+                } else {
+                    JOptionPane.showMessageDialog(this, "Contraseña incorrecta. Intenta nuevamente.", "Error", JOptionPane.ERROR_MESSAGE);
+                    // Limpiar el campo de la contraseña y poner el foco en él
+                    txtPassword.setText(""); // Limpiar el campo
+                    txtPassword.requestFocus(); // Enfocar el campo
+                }
+            } else { // El usuario no existe
+                JOptionPane.showMessageDialog(this, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(jfLogin.class.getName()).log(Level.SEVERE, null, ex);
         }
-    } else { // El usuario no existe
-        JOptionPane.showMessageDialog(this, "El usuario no existe.", "Error", JOptionPane.ERROR_MESSAGE);
-    }
-} catch (SQLException ex) {
-    Logger.getLogger(jfLogin.class.getName()).log(Level.SEVERE, null, ex);
-}
     }//GEN-LAST:event_btnIniciarsesionActionPerformed
 
     private void lblCrearCuentaMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearCuentaMouseClicked
@@ -211,7 +229,7 @@ public class jfLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_lblCrearCuentaMouseEntered
 
     private void lblCrearCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearCuentaMouseExited
-         lblCrearCuenta.setText("Crear cuenta");
+        lblCrearCuenta.setText("Crear cuenta");
         lblCrearCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
     }//GEN-LAST:event_lblCrearCuentaMouseExited
 
