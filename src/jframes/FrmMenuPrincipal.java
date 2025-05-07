@@ -1,5 +1,7 @@
 package jframes;
 
+import javax.swing.JDesktopPane;
+
 /**
  *
  * @author enmac
@@ -9,10 +11,21 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
+    
+    public  static JDesktopPane jDesktopPane_menu;
+    
     public FrmMenuPrincipal() {
         initComponents();
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setTitle("Menu Principal - Cowboy Cookies");
+        this.setLocationRelativeTo(null);
+        
+        this.setLayout(null);
+        jDesktopPane_menu = new JDesktopPane();
+        
+        int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
+        int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+         
     }
 
     /**
