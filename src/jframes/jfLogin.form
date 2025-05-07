@@ -51,8 +51,8 @@
             </Property>
             <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
               <Border info="org.netbeans.modules.form.compat2.border.LineBorderInfo">
-                <LineBorder roundedCorners="true" thickness="10">
-                  <Color PropertyName="color" blue="ff" green="d2" red="a2" type="rgb"/>
+                <LineBorder roundedCorners="true" thickness="6">
+                  <Color PropertyName="color" blue="23" green="2f" red="5f" type="rgb"/>
                 </LineBorder>
               </Border>
             </Property>
@@ -198,6 +198,8 @@
               </Properties>
               <Events>
                 <EventHandler event="mouseClicked" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCrearCuentaMouseClicked"/>
+                <EventHandler event="mouseEntered" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCrearCuentaMouseEntered"/>
+                <EventHandler event="mouseExited" listener="java.awt.event.MouseListener" parameters="java.awt.event.MouseEvent" handler="lblCrearCuentaMouseExited"/>
               </Events>
             </Component>
             <Component class="javax.swing.JLabel" name="lblpregunta">

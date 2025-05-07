@@ -51,7 +51,7 @@ public class jfLogin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(254, 176, 200));
-        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(162, 210, 255), 10, true));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(95, 47, 35), 6, true));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Logo de Cowboy Cookies (3).png"))); // NOI18N
 
@@ -83,6 +83,12 @@ public class jfLogin extends javax.swing.JFrame {
         lblCrearCuenta.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 lblCrearCuentaMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                lblCrearCuentaMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                lblCrearCuentaMouseExited(evt);
             }
         });
 
@@ -198,6 +204,16 @@ public class jfLogin extends javax.swing.JFrame {
         this.dispose();
         registro.setVisible(true);
     }//GEN-LAST:event_lblCrearCuentaMouseClicked
+
+    private void lblCrearCuentaMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearCuentaMouseEntered
+        lblCrearCuenta.setText("<html><u>Crear cuenta</u></html>");
+        lblCrearCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+    }//GEN-LAST:event_lblCrearCuentaMouseEntered
+
+    private void lblCrearCuentaMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_lblCrearCuentaMouseExited
+         lblCrearCuenta.setText("Crear cuenta");
+        lblCrearCuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+    }//GEN-LAST:event_lblCrearCuentaMouseExited
 
     /**
      * @param args the command line arguments

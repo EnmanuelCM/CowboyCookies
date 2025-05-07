@@ -135,7 +135,7 @@ public class SistemaDeGestion extends javax.swing.JFrame {
     }//GEN-LAST:event_btnCerrarSesionActionPerformed
 
     private void btnRegistroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistroActionPerformed
-        jfRegistroDeVentas registroVentas = new jfRegistroDeVentas(); // Crear instancia del nuevo frame
+        jfVentas registroVentas = new jfVentas(); // Crear instancia del nuevo frame
     registroVentas.setVisible(true); 
     }//GEN-LAST:event_btnRegistroActionPerformed
 
