@@ -51,6 +51,7 @@ public class jfLogin extends javax.swing.JFrame {
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel2.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(162, 210, 255), 10, true));
 
         lblLogo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Logo de Cowboy Cookies (3).png"))); // NOI18N
 
