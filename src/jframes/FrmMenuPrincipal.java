@@ -1,6 +1,8 @@
 package jframes;
 
+import java.awt.Dimension;
 import javax.swing.JDesktopPane;
+import javax.swing.plaf.DesktopPaneUI;
 
 /**
  *
@@ -16,6 +18,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     
     public FrmMenuPrincipal() {
         initComponents();
+        this.setSize (new Dimension (1200, 700));
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setTitle("Menu Principal - Cowboy Cookies");
         this.setLocationRelativeTo(null);
@@ -25,6 +28,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
+        this.jDesktopPane_menu.setBounds(0, 0, ancho, (alto - 110));
+        this.add(jDesktopPane_menu);
          
     }
 
@@ -70,6 +75,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_NuevaCat.setText("Nueva Categoria");
         jMenuItem_NuevaCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_NuevaCat.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_NuevaCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_NuevaCatActionPerformed(evt);
+            }
+        });
         MenuCategorias.add(jMenuItem_NuevaCat);
 
         jMenuItem_GestionarCat.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -146,7 +156,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_Reporteprod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/reporte1.png"))); // NOI18N
         jMenuItem_Reporteprod.setText("Reportes Productos");
         jMenuItem_Reporteprod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem_Reporteprod.setPreferredSize(new java.awt.Dimension(200, 30));
         MenuReportes.add(jMenuItem_Reporteprod);
 
         jMenuItem_ReportesVentas.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -221,6 +230,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private void jMenuItem_VerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_VerHistorialActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jMenuItem_VerHistorialActionPerformed
+
+    private void jMenuItem_NuevaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_NuevaCatActionPerformed
+        FrmNuevaCategoria FrmNuevaCategoria = new FrmNuevaCategoria();
+    jDesktopPane_menu.add(FrmNuevaCategoria);
+    FrmNuevaCategoria.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_NuevaCatActionPerformed
 
     /**
      * @param args the command line arguments

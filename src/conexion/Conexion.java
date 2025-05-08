@@ -9,6 +9,10 @@ import java.util.logging.Logger;
 
 public class Conexion {
 
+    public static Connection conectar() {
+        throw new UnsupportedOperationException("Not supported yet."); // Generated from nbfs://nbhost/SystemFileSystem/Templates/Classes/Code/GeneratedMethodBody
+    }
+
     private final String base = "cowboycookiesrd"; // nombre de tu base de datos
     private final String user = "root"; // tu usuario de base de datos
     private final String password = ""; // tu contraseña
