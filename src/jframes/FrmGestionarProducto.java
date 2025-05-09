@@ -8,12 +8,12 @@ package jframes;
  *
  * @author juand
  */
-public class FrmGestionarProductos extends javax.swing.JInternalFrame {
+public class FrmGestionarProducto extends javax.swing.JInternalFrame {
 
     /**
-     * Creates new form FrmGestionarProductos
+     * Creates new form FrmGestionarCategoria
      */
-    public FrmGestionarProductos() {
+    public FrmGestionarProducto() {
         initComponents();
     }
 
