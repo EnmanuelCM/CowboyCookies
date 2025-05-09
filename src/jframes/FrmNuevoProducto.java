@@ -4,17 +4,20 @@
  */
 package jframes;
 
+import java.awt.Dimension;
+
 /**
  *
  * @author juand
  */
 public class FrmNuevoProducto extends javax.swing.JInternalFrame {
-
-    /**
-     * Creates new form FrmNuevoProducto
-     */
+    
+    int obtenerIdCategoriaCombo = 0;
+     
     public FrmNuevoProducto() {
         initComponents();
+        this.setSize(new Dimension(500, 400));
+        this.setTitle("Nuevo Producto");
     }
 
     /**
@@ -26,21 +29,105 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
-        getContentPane().setLayout(layout);
-        layout.setHorizontalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 394, Short.MAX_VALUE)
-        );
-        layout.setVerticalGroup(
-            layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 274, Short.MAX_VALUE)
-        );
+        jLabel1 = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        txt_idproducto = new javax.swing.JTextField();
+        txt_nombre = new javax.swing.JTextField();
+        txt_descripcion = new javax.swing.JTextField();
+        txt_precio = new javax.swing.JTextField();
+        txt_stock = new javax.swing.JTextField();
+        cbo_categoria = new javax.swing.JComboBox<>();
+        jButton1 = new javax.swing.JButton();
+        jLabel_wallpaper = new javax.swing.JLabel();
+
+        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        jLabel1.setText("Nuevo Producto");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 10, -1, -1));
+
+        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel2.setText("Categoria:");
+        jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 290, 80, 30));
+
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel3.setText("Id_Producto:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 60, 110, 30));
+
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel4.setText("Precio:");
+        jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 80, 30));
+
+        jLabel5.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel5.setText("Stock:");
+        jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 80, 30));
+
+        jLabel6.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel6.setText("Nombre:");
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 80, 30));
+
+        jLabel7.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel7.setText("Descripción:");
+        jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, 30));
+
+        txt_idproducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txt_idproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 65, 170, -1));
+
+        txt_nombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 105, 170, -1));
+
+        txt_descripcion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 155, 170, -1));
+
+        txt_precio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 205, 170, -1));
+
+        txt_stock.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 255, 170, -1));
+
+        cbo_categoria.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        cbo_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria ", "Galletas", "Postres", "Sandwiches", "Bebidas", "Cafes" }));
+        getContentPane().add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 295, 170, -1));
+
+        jButton1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jButton1.setText("Guardar");
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 340, -1, -1));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 490, 360));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JComboBox<String> cbo_categoria;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel_wallpaper;
+    private javax.swing.JTextField txt_descripcion;
+    private javax.swing.JTextField txt_idproducto;
+    private javax.swing.JTextField txt_nombre;
+    private javax.swing.JTextField txt_precio;
+    private javax.swing.JTextField txt_stock;
     // End of variables declaration//GEN-END:variables
 }
