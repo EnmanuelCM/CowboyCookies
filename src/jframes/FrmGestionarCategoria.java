@@ -8,10 +8,16 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import conexion.Conexion;
+import controlador.ctrlCategoria;
 import java.awt.Dimension;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.sql.Connection;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
+import java.sql.PreparedStatement;
+import javax.swing.JOptionPane;
+import modelo.Categoria;
 
 
 public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
@@ -24,6 +30,8 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension(600, 400));
         this.setTitle("Gestionar Categorias");
+        
+        this.CargarTablaCategorias();
        
     }
 
@@ -39,8 +47,8 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_categoria = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnactualizar = new javax.swing.JButton();
+        btneliminar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
         txt_descripcion = new javax.swing.JTextField();
@@ -79,22 +87,27 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(162, 210, 255));
-        jButton1.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(95, 47, 35));
-        jButton1.setText("Actualizar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnactualizar.setBackground(new java.awt.Color(162, 210, 255));
+        btnactualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnactualizar.setForeground(new java.awt.Color(95, 47, 35));
+        btnactualizar.setText("Actualizar");
+        btnactualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnactualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, -1));
+        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, -1));
 
-        jButton2.setBackground(new java.awt.Color(254, 176, 200));
-        jButton2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(95, 47, 35));
-        jButton2.setText("Eliminar");
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 90, -1));
+        btneliminar.setBackground(new java.awt.Color(254, 176, 200));
+        btneliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btneliminar.setForeground(new java.awt.Color(95, 47, 35));
+        btneliminar.setText("Eliminar");
+        btneliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btneliminarActionPerformed(evt);
+            }
+        });
+        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 90, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 150, 90));
 
@@ -116,14 +129,46 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
+        if (!txt_descripcion.getText().isEmpty()) {
+            Categoria categoria = new Categoria();
+            ctrlCategoria controlCategoria = new ctrlCategoria();
+
+            categoria.setDescripcion(txt_descripcion.getText().trim());
+            if (controlCategoria.actualizar(categoria, id_categoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Actulizada");
+                txt_descripcion.setText("");
+                this.CargarTablaCategorias();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar Categoria");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        }
+    }//GEN-LAST:event_btnactualizarActionPerformed
+
+    private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
+        if (!txt_descripcion.getText().isEmpty()) {
+            Categoria categoria = new Categoria();
+            ctrlCategoria controlCategoria = new ctrlCategoria();
+
+            categoria.setDescripcion(txt_descripcion.getText().trim());
+            if (!controlCategoria.eliminar(id_categoria)) {
+                JOptionPane.showMessageDialog(null, "Categoria Eliminada");
+                txt_descripcion.setText("");
+                this.CargarTablaCategorias();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al Eliminar Categoria");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+        }
+    }//GEN-LAST:event_btneliminarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnactualizar;
+    private javax.swing.JButton btneliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_walpaper;
@@ -136,7 +181,8 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     private void CargarTablaCategorias() {
-        Connection con = Conexion.conectar();
+        Conexion cn = new Conexion();
+        Connection con = cn.getConexion();
         DefaultTableModel model = new DefaultTableModel();
         String sql = "select id_categoria, nombre_categoria, descripcion from categorias";
         Statement st;
@@ -161,9 +207,44 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         } catch (SQLException e) {
             System.out.println("Error al llenar la tabla categorias: " + e);
         }
+        
+        jTable_categoria.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+                int fila_point = jTable_categoria.rowAtPoint(e.getPoint());
+                int columna_point = 0;
 
+                if (fila_point > -1) {
+                    id_categoria = (int) model.getValueAt(fila_point, columna_point);
+                    EnviarDatosCategoriaSeleccionada(id_categoria);
+                    
+                    }
+            }
+        });
+    }
+    
+    private void EnviarDatosCategoriaSeleccionada(int id_categoria) {
+        try {
+            Conexion cn = new Conexion();
+        Connection con = cn.getConexion();
+            PreparedStatement pst = con.prepareStatement(
+                    "select * from categorias where id_categoria = '" + id_categoria + "'");
+            ResultSet rs = pst.executeQuery();
+            if (rs.next()) {
+                txt_descripcion.setText(rs.getString("descripcion"));
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al seleccionar categoria: " + e);
+            
+             }
+    }
 }
-}
+                    
+                                
+
+
+
 
 
     

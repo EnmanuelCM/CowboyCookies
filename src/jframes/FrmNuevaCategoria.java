@@ -76,21 +76,7 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_txt_descripcionActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-         Categoria categoria = new Categoria();
-ctrlCategoria controlCategoria = new ctrlCategoria();
-
-//validamos campos vacíos
-if (txt_descripcion.getText().isEmpty()) {
-    JOptionPane.showMessageDialog(null, "Complete todos los campos");
-} else {
-    categoria.setDescripcion(txt_descripcion.getText().trim());
-    categoria.setEstado(1);
-    if (controlCategoria.guardar(categoria)) {
-        JOptionPane.showMessageDialog(null, "Registro Guardado");
-    } else {
-        JOptionPane.showMessageDialog(null, "Error al Guardar");
-    }
-}
+  
 
 //limpiar campo
 txt_descripcion.setText("");
