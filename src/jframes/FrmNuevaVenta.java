@@ -20,16 +20,144 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel3 = new javax.swing.JLabel();
+        lblEmpleado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox<>();
+        jLabel4 = new javax.swing.JLabel();
+        txtCantidad = new javax.swing.JTextField();
+        btnAgregarProd = new javax.swing.JButton();
+        jPanel1 = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable_Productos = new javax.swing.JTable();
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        txtEfectivo = new javax.swing.JTextField();
+        txtSubtotal = new javax.swing.JTextField();
+        txtITBIS = new javax.swing.JTextField();
+        txtCambio = new javax.swing.JTextField();
+        txtTotal = new javax.swing.JTextField();
+        btnCalcularCambio = new javax.swing.JButton();
+        btnRegistrarVenta = new javax.swing.JButton();
         lbl_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jLabel3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(95, 47, 35));
+        jLabel3.setText("Cantidad:");
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
+
+        lblEmpleado.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        lblEmpleado.setForeground(new java.awt.Color(95, 47, 35));
+        lblEmpleado.setText("Empleado");
+        getContentPane().add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
+
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
-        jLabel1.setText("Facturacion");
+        jLabel1.setForeground(new java.awt.Color(95, 47, 35));
+        jLabel1.setText("Facturación");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
+
+        jComboBox1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Producto" }));
+        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 180, -1));
+
+        jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(95, 47, 35));
+        jLabel4.setText("Producto:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
+
+        txtCantidad.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
+
+        btnAgregarProd.setBackground(new java.awt.Color(95, 47, 35));
+        btnAgregarProd.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        btnAgregarProd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarProd.setText("Agregar Producto");
+        getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jTable_Productos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable_Productos);
+
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 740, 190));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 130, 760, 210));
+
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setForeground(new java.awt.Color(255, 255, 255));
+        jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel5.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLabel5.setText("ITBIS:");
+        jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
+
+        jLabel6.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLabel6.setText("Total a pagar:");
+        jPanel2.add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 100, -1, -1));
+
+        jLabel7.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLabel7.setText("Efectivo:");
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 150, -1, -1));
+
+        jLabel8.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLabel8.setText("Cambio:");
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 180, -1, -1));
+
+        jLabel9.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jLabel9.setText("Subtotal:");
+        jPanel2.add(jLabel9, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 30, -1, -1));
+
+        txtEfectivo.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel2.add(txtEfectivo, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 150, 100, -1));
+
+        txtSubtotal.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtSubtotal.setEnabled(false);
+        jPanel2.add(txtSubtotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 30, 100, -1));
+
+        txtITBIS.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtITBIS.setEnabled(false);
+        jPanel2.add(txtITBIS, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 60, 100, -1));
+
+        txtCambio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtCambio.setEnabled(false);
+        jPanel2.add(txtCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 180, 100, -1));
+
+        txtTotal.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txtTotal.setEnabled(false);
+        jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 100, -1));
+
+        btnCalcularCambio.setBackground(new java.awt.Color(95, 47, 35));
+        btnCalcularCambio.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnCalcularCambio.setForeground(new java.awt.Color(255, 255, 255));
+        btnCalcularCambio.setText("Calcular Cambio");
+        jPanel2.add(btnCalcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 140, 50));
+
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 340, 420, 220));
+
+        btnRegistrarVenta.setBackground(new java.awt.Color(95, 47, 35));
+        btnRegistrarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnRegistrarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarVenta.setText("Registrar Venta");
+        getContentPane().add(btnRegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 150, 60));
 
         lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/FondoCB 800x601.jpg"))); // NOI18N
         getContentPane().add(lbl_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 790, 570));
@@ -39,7 +167,29 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton btnAgregarProd;
+    private javax.swing.JButton btnCalcularCambio;
+    private javax.swing.JButton btnRegistrarVenta;
+    private javax.swing.JComboBox<String> jComboBox1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTable jTable_Productos;
+    private javax.swing.JLabel lblEmpleado;
     private javax.swing.JLabel lbl_wallpaper;
+    private javax.swing.JTextField txtCambio;
+    private javax.swing.JTextField txtCantidad;
+    private javax.swing.JTextField txtEfectivo;
+    private javax.swing.JTextField txtITBIS;
+    private javax.swing.JTextField txtSubtotal;
+    private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 }
