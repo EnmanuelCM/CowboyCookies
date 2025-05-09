@@ -4,10 +4,19 @@
  */
 package jframes;
 
+import java.sql.Statement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import conexion.Conexion;
 import java.awt.Dimension;
+import java.sql.Connection;
+import javax.swing.JTable;
+import javax.swing.table.DefaultTableModel;
 
 
 public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
+    
+    private int id_categoria;
 
     
     public FrmGestionarCategoria() {
@@ -44,7 +53,7 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 176, 200));
-        jLabel1.setText("Adiministar categorias");
+        jLabel1.setText("Administar categorias");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
@@ -121,8 +130,41 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTable_categoria;
+    public static javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JTable jTable_categoria;
     private javax.swing.JTextField txt_descripcion;
     // End of variables declaration//GEN-END:variables
+
+    private void CargarTablaCategorias() {
+        Connection con = Conexion.conectar();
+        DefaultTableModel model = new DefaultTableModel();
+        String sql = "select id_categoria, nombre_categoria, descripcion from categorias";
+        Statement st;
+        try {
+            st = (Statement) con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            FrmGestionarCategoria.jTable_categoria = new JTable(model);
+            FrmGestionarCategoria.jScrollPane1.setViewportView(FrmGestionarCategoria.jTable_categoria);
+
+            model.addColumn("id_categoria");
+            model.addColumn("nombre_categoria");
+            model.addColumn("descripcion");
+
+            while (rs.next()) {
+                Object fila[] = new Object[3];
+                for (int i = 0; i < 3; i++) {
+                    fila[i] = rs.getObject(i + 1);
+                }
+                model.addRow(fila);
+            }
+            con.close();
+        } catch (SQLException e) {
+            System.out.println("Error al llenar la tabla categorias: " + e);
+        }
+
 }
+}
+
+
+    
+

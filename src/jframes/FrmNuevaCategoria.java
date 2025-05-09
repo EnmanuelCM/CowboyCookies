@@ -1,7 +1,10 @@
 
 package jframes;
 
+import controlador.ctrlCategoria;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
+import modelo.Categoria;
 
 /**
  *
@@ -27,7 +30,7 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
         txt_descripcion = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnguardar = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -52,15 +55,15 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         });
         getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 190, 20));
 
-        jButton1.setBackground(new java.awt.Color(0, 204, 204));
-        jButton1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnguardar.setBackground(new java.awt.Color(0, 204, 204));
+        btnguardar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnguardar.setText("Guardar");
+        btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnguardarActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
+        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/fondo3.jpg"))); // NOI18N
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 376, 172));
@@ -72,13 +75,30 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txt_descripcionActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton1ActionPerformed
+    private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
+         Categoria categoria = new Categoria();
+ctrlCategoria controlCategoria = new ctrlCategoria();
+
+//validamos campos vacíos
+if (txt_descripcion.getText().isEmpty()) {
+    JOptionPane.showMessageDialog(null, "Complete todos los campos");
+} else {
+    categoria.setDescripcion(txt_descripcion.getText().trim());
+    categoria.setEstado(1);
+    if (controlCategoria.guardar(categoria)) {
+        JOptionPane.showMessageDialog(null, "Registro Guardado");
+    } else {
+        JOptionPane.showMessageDialog(null, "Error al Guardar");
+    }
+}
+
+//limpiar campo
+txt_descripcion.setText("");
+    }//GEN-LAST:event_btnguardarActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JButton btnguardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel_wallpaper;

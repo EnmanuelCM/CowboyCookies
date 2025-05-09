@@ -21,7 +21,7 @@ public class ctrlCategoria {
         boolean respuesta = false;
         Connection cn = conexion.Conexion.conectar();
         try {
-            PreparedStatement consulta = cn.prepareStatement("insert into tb_categoria values(?,?,?)");
+            PreparedStatement consulta = cn.prepareStatement("insert into categorias values(?,?,?)");
             consulta.setInt(1, 0);
             consulta.setString(2, objeto.getDescripcion());
             consulta.setInt(3, objeto.getEstado());

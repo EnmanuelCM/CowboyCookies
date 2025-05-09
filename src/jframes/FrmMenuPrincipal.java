@@ -13,24 +13,23 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     /**
      * Creates new form MenuPrincipal
      */
-    
-    public  static JDesktopPane jDesktopPane_menu;
-    
+    public static JDesktopPane jDesktopPane_menu;
+
     public FrmMenuPrincipal() {
         initComponents();
-        this.setSize (new Dimension (1200, 700));
+        this.setSize(new Dimension(1200, 700));
         this.setExtendedState(this.MAXIMIZED_BOTH);
         this.setTitle("Menu Principal - Cowboy Cookies");
         this.setLocationRelativeTo(null);
-        
+
         this.setLayout(null);
         jDesktopPane_menu = new JDesktopPane();
-        
+
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
         this.jDesktopPane_menu.setBounds(0, 0, ancho, (alto - 110));
         this.add(jDesktopPane_menu);
-         
+
     }
 
     /**
@@ -87,6 +86,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_GestionarCat.setText("Gestionar Categorias");
         jMenuItem_GestionarCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_GestionarCat.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_GestionarCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_GestionarCatActionPerformed(evt);
+            }
+        });
         MenuCategorias.add(jMenuItem_GestionarCat);
 
         jMenuBar1.add(MenuCategorias);
@@ -101,6 +105,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_NuevoProducto.setText("Nuevo Producto");
         jMenuItem_NuevoProducto.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_NuevoProducto.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_NuevoProducto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_NuevoProductoActionPerformed(evt);
+            }
+        });
         MenuProductos.add(jMenuItem_NuevoProducto);
 
         jMenuItem_GestionarProd.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -108,6 +117,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_GestionarProd.setText("Gestionar Productos");
         jMenuItem_GestionarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_GestionarProd.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_GestionarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_GestionarProdActionPerformed(evt);
+            }
+        });
         MenuProductos.add(jMenuItem_GestionarProd);
 
         jMenuItem_ActStock.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -115,6 +129,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_ActStock.setText("Actualizar Stock");
         jMenuItem_ActStock.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_ActStock.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_ActStock.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ActStockActionPerformed(evt);
+            }
+        });
         MenuProductos.add(jMenuItem_ActStock);
 
         jMenuBar1.add(MenuProductos);
@@ -129,6 +148,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_nuevaVenta.setText("Nueva Venta");
         jMenuItem_nuevaVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_nuevaVenta.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_nuevaVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_nuevaVentaActionPerformed(evt);
+            }
+        });
         MenuFacturar.add(jMenuItem_nuevaVenta);
 
         jMenuItem_GestionarVenta.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -136,6 +160,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_GestionarVenta.setText("Gestionar Ventas");
         jMenuItem_GestionarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_GestionarVenta.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_GestionarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_GestionarVentaActionPerformed(evt);
+            }
+        });
         MenuFacturar.add(jMenuItem_GestionarVenta);
 
         jMenuBar1.add(MenuFacturar);
@@ -150,6 +179,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_ReporteCat.setText("Reportes Categorias");
         jMenuItem_ReporteCat.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_ReporteCat.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_ReporteCat.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ReporteCatActionPerformed(evt);
+            }
+        });
         MenuReportes.add(jMenuItem_ReporteCat);
 
         jMenuItem_Reporteprod.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -233,9 +267,49 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
     private void jMenuItem_NuevaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_NuevaCatActionPerformed
         FrmNuevaCategoria FrmNuevaCategoria = new FrmNuevaCategoria();
-    jDesktopPane_menu.add(FrmNuevaCategoria);
-    FrmNuevaCategoria.setVisible(true);
+        jDesktopPane_menu.add(FrmNuevaCategoria);
+        FrmNuevaCategoria.setVisible(true);
     }//GEN-LAST:event_jMenuItem_NuevaCatActionPerformed
+
+    private void jMenuItem_GestionarCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarCatActionPerformed
+        FrmGestionarCategoria FrmGestionarCategoria = new FrmGestionarCategoria();
+        jDesktopPane_menu.add(FrmGestionarCategoria);
+        FrmGestionarCategoria.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_GestionarCatActionPerformed
+
+    private void jMenuItem_NuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_NuevoProductoActionPerformed
+        FrmNuevoProducto FrmNuevoProducto = new FrmNuevoProducto();
+        jDesktopPane_menu.add(FrmNuevoProducto);
+        FrmNuevoProducto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_NuevoProductoActionPerformed
+
+    private void jMenuItem_GestionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarProdActionPerformed
+         FrmGestionarProducto FrmGestionarProducto = new FrmGestionarProducto();
+        jDesktopPane_menu.add(FrmGestionarProducto);
+        FrmGestionarProducto.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_GestionarProdActionPerformed
+
+    private void jMenuItem_ActStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ActStockActionPerformed
+         FrmActualizarStock FrmActualizarStock = new FrmActualizarStock();
+        jDesktopPane_menu.add(FrmActualizarStock);
+        FrmActualizarStock.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_ActStockActionPerformed
+
+    private void jMenuItem_nuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevaVentaActionPerformed
+         FrmNuevaVenta FrmNuevaVenta = new FrmNuevaVenta();
+        jDesktopPane_menu.add(FrmNuevaVenta);
+        FrmNuevaVenta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_nuevaVentaActionPerformed
+
+    private void jMenuItem_GestionarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarVentaActionPerformed
+         FrmGestionarVentas FrmGestionarventa = new FrmGestionarVentas();
+        jDesktopPane_menu.add(FrmGestionarventa);
+        FrmGestionarventa.setVisible(true);
+    }//GEN-LAST:event_jMenuItem_GestionarVentaActionPerformed
+
+    private void jMenuItem_ReporteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ReporteCatActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jMenuItem_ReporteCatActionPerformed
 
     /**
      * @param args the command line arguments
