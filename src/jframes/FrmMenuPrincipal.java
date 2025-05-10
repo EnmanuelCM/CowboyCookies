@@ -41,6 +41,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuCategorias = new javax.swing.JMenu();
         jMenuItem_NuevaCat = new javax.swing.JMenuItem();
@@ -245,11 +246,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 1200, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 659, Short.MAX_VALUE)
+            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         pack();
@@ -284,25 +285,25 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_NuevoProductoActionPerformed
 
     private void jMenuItem_GestionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarProdActionPerformed
-         FrmGestionarProducto FrmGestionarProducto = new FrmGestionarProducto();
+        FrmGestionarProducto FrmGestionarProducto = new FrmGestionarProducto();
         jDesktopPane_menu.add(FrmGestionarProducto);
         FrmGestionarProducto.setVisible(true);
     }//GEN-LAST:event_jMenuItem_GestionarProdActionPerformed
 
     private void jMenuItem_ActStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ActStockActionPerformed
-         FrmActualizarStock FrmActualizarStock = new FrmActualizarStock();
+        FrmActualizarStock FrmActualizarStock = new FrmActualizarStock();
         jDesktopPane_menu.add(FrmActualizarStock);
         FrmActualizarStock.setVisible(true);
     }//GEN-LAST:event_jMenuItem_ActStockActionPerformed
 
     private void jMenuItem_nuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevaVentaActionPerformed
-         FrmNuevaVenta FrmNuevaVenta = new FrmNuevaVenta();
+        FrmNuevaVenta FrmNuevaVenta = new FrmNuevaVenta();
         jDesktopPane_menu.add(FrmNuevaVenta);
         FrmNuevaVenta.setVisible(true);
     }//GEN-LAST:event_jMenuItem_nuevaVentaActionPerformed
 
     private void jMenuItem_GestionarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarVentaActionPerformed
-         FrmGestionarVentas FrmGestionarventa = new FrmGestionarVentas();
+        FrmGestionarVentas FrmGestionarventa = new FrmGestionarVentas();
         jDesktopPane_menu.add(FrmGestionarventa);
         FrmGestionarventa.setVisible(true);
     }//GEN-LAST:event_jMenuItem_GestionarVentaActionPerformed
@@ -354,6 +355,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuLogout;
     private javax.swing.JMenu MenuProductos;
     private javax.swing.JMenu MenuReportes;
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem_ActStock;
     private javax.swing.JMenuItem jMenuItem_Cerrarsesion;

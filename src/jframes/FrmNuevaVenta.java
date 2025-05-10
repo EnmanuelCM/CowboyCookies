@@ -1,7 +1,12 @@
 
 package jframes;
 
+import conexion.Conexion;
+import java.sql.Connection;
+import java.sql.Statement;
+import java.sql.ResultSet;
 import java.awt.Dimension;
+import java.sql.SQLException;
 
 public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
@@ -9,6 +14,8 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension (800,600));
         this.setTitle("Facturacion");
+        
+        this.CargarComboProductos();
     }
 
     /**
@@ -23,7 +30,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         jLabel3 = new javax.swing.JLabel();
         lblEmpleado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
-        jComboBox1 = new javax.swing.JComboBox<>();
+        cbxProductos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
         txtCantidad = new javax.swing.JTextField();
         btnAgregarProd = new javax.swing.JButton();
@@ -64,9 +71,9 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         jLabel1.setText("Facturación");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
-        jComboBox1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Producto" }));
-        getContentPane().add(jComboBox1, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 180, -1));
+        cbxProductos.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        cbxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Producto" }));
+        getContentPane().add(cbxProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 180, -1));
 
         jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 47, 35));
@@ -77,7 +84,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
         btnAgregarProd.setBackground(new java.awt.Color(95, 47, 35));
-        btnAgregarProd.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        btnAgregarProd.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnAgregarProd.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProd.setText("Agregar Producto");
         getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
@@ -170,7 +177,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JButton btnAgregarProd;
     private javax.swing.JButton btnCalcularCambio;
     private javax.swing.JButton btnRegistrarVenta;
-    private javax.swing.JComboBox<String> jComboBox1;
+    private javax.swing.JComboBox<String> cbxProductos;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -192,4 +199,31 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtSubtotal;
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
+
+
+//combobox Productos
+    
+    private void CargarComboProductos(){
+        Conexion con = new Conexion();
+        Connection cn = con.getConnection();
+        String sql = "select * from productos";
+        Statement st;
+        
+        try {
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            cbxProductos.removeAllItems();
+            cbxProductos.addItem("Seleccione productos:");
+            while(rs.next()){
+                cbxProductos.addItem(rs.getString("nombre"));
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al cargar productos" + e);
+        }
+    }
+
 }
+
+
+

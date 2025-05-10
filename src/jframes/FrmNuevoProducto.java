@@ -47,6 +47,8 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
         jButton1 = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
