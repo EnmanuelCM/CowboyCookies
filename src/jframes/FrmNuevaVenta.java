@@ -1,4 +1,3 @@
-
 package jframes;
 
 import conexion.Conexion;
@@ -7,15 +6,38 @@ import java.sql.Statement;
 import java.sql.ResultSet;
 import java.awt.Dimension;
 import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
+    //Modelo de los datos
+    private DefaultTableModel modeloDatosProductos;
+
     public FrmNuevaVenta() {
         initComponents();
-        this.setSize(new Dimension (800,600));
+        this.setSize(new Dimension(800, 600));
         this.setTitle("Facturacion");
-        
+
         this.CargarComboProductos();
+        this.InicializarTablaProducto();
+    }
+
+    private void InicializarTablaProducto() {
+        modeloDatosProductos = new DefaultTableModel();
+        //agregar columnas
+        modeloDatosProductos.addColumn("N");
+        modeloDatosProductos.addColumn("Nombre");
+        modeloDatosProductos.addColumn("Cantidad");
+        modeloDatosProductos.addColumn("P. Unitario");
+        modeloDatosProductos.addColumn("Subtotal");
+        modeloDatosProductos.addColumn("Descuento");
+        modeloDatosProductos.addColumn("ITBS");
+        modeloDatosProductos.addColumn("Total Pagar");
+        modeloDatosProductos.addColumn("Accion");
+
+        //Agregar los datos del modelo a la tabla
+        this.jTable_Productos.setModel(modeloDatosProductos);
     }
 
     /**
@@ -87,6 +109,11 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnAgregarProd.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnAgregarProd.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProd.setText("Agregar Producto");
+        btnAgregarProd.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnAgregarProdActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -172,6 +199,39 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnAgregarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProdActionPerformed
+
+        String combo = this.cbxProductos.getSelectedItem().toString();
+        
+        //Validar que seleccione un producto
+        if (combo.equalsIgnoreCase("Seleccione producto:")) {
+            JOptionPane.showMessageDialog(null, "Seleccione un producto");
+        } else {
+            
+            //Validar que ingrese una Cantidad
+            if (txtCantidad.getText().isEmpty()) {
+                
+                //Vaildar que el usuario no ingrese datos no numericos
+                boolean validacion = validar(txtCantidad.getText());
+                if (validacion == true) {
+                    //Validar que la cantidad sea mayor a 0
+                    if (Integer.parseInt(txtCantidad.getText()) > 0) {
+                        
+                    } else {
+                        JOptionPane.showMessageDialog(null, "la cantidad no puede ser cero (0), ni negativa");
+                    }
+                } else {
+                    JOptionPane.showMessageDialog(null, "En la cantidad no se admiten datos no numericos");
+                }
+                
+            } else {
+                JOptionPane.showMessageDialog(null, "Ingresa la cantidad de productos");
+            }
+        }
+
+
+    }//GEN-LAST:event_btnAgregarProdActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProd;
@@ -200,21 +260,19 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 
-
 //combobox Productos
-    
-    private void CargarComboProductos(){
+    private void CargarComboProductos() {
         Conexion con = new Conexion();
         Connection cn = con.getConnection();
         String sql = "select * from productos";
         Statement st;
-        
+
         try {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             cbxProductos.removeAllItems();
             cbxProductos.addItem("Seleccione productos:");
-            while(rs.next()){
+            while (rs.next()) {
                 cbxProductos.addItem(rs.getString("nombre"));
             }
             cn.close();
@@ -222,8 +280,15 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
             System.out.println("Error al cargar productos" + e);
         }
     }
+    
+    //Metodo para que el usuario no ingrese datos no numericos
+    private boolean validar(String valor){
+        try {
+            int num = Integer.parseInt(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
 
 }
-
-
-
