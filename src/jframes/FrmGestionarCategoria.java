@@ -1,7 +1,4 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
- */
+
 package jframes;
 
 import java.sql.Statement;
@@ -46,6 +43,9 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_categoria = new javax.swing.JTable();
+        jPanel4 = new javax.swing.JPanel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_nombrecategoria = new javax.swing.JTextField();
         jPanel2 = new javax.swing.JPanel();
         btnactualizar = new javax.swing.JButton();
         btneliminar = new javax.swing.JButton();
@@ -59,10 +59,10 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         setResizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(254, 176, 200));
         jLabel1.setText("Administar categorias");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -80,15 +80,27 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable_categoria);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 17, 310, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 310, 220));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 350, 250));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 350, 280));
+
+        jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(95, 47, 35));
+        jLabel4.setText("Nombre Categoría:");
+        jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
+
+        txt_nombrecategoria.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jPanel4.add(txt_nombrecategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
+
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 180, 80));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         btnactualizar.setBackground(new java.awt.Color(162, 210, 255));
-        btnactualizar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btnactualizar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnactualizar.setForeground(new java.awt.Color(95, 47, 35));
         btnactualizar.setText("Actualizar");
         btnactualizar.addActionListener(new java.awt.event.ActionListener() {
@@ -96,10 +108,10 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
                 btnactualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 90, -1));
+        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 100, -1));
 
         btneliminar.setBackground(new java.awt.Color(254, 176, 200));
-        btneliminar.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        btneliminar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btneliminar.setForeground(new java.awt.Color(95, 47, 35));
         btneliminar.setText("Eliminar");
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
@@ -107,21 +119,21 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 90, -1));
+        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 60, 150, 90));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 160, 90));
 
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 47, 35));
         jLabel2.setText("Descripción:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        txt_descripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, 140, -1));
+        txt_descripcion.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 190, 180, 80));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 180, 80));
 
         jLabel_walpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/image.png"))); // NOI18N
         getContentPane().add(jLabel_walpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
@@ -130,39 +142,46 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void btnactualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnactualizarActionPerformed
-        if (!txt_descripcion.getText().isEmpty()) {
-            Categoria categoria = new Categoria();
-            ctrlCategoria controlCategoria = new ctrlCategoria();
+        if (!txt_nombrecategoria.getText().isEmpty() && !txt_descripcion.getText().isEmpty()) {
+        Categoria categoria = new Categoria();
+        ctrlCategoria controlCategoria = new ctrlCategoria();
 
-            categoria.setDescripcion(txt_descripcion.getText().trim());
-            if (controlCategoria.actualizar(categoria, id_categoria)) {
-                JOptionPane.showMessageDialog(null, "Categoria Actulizada");
-                txt_descripcion.setText("");
-                this.CargarTablaCategorias();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al actualizar Categoria");
-            }
+        categoria.setNombre_categoria(txt_nombrecategoria.getText().trim());
+        categoria.setDescripcion(txt_descripcion.getText().trim());
+
+        if (controlCategoria.actualizar(categoria, id_categoria)) {
+            JOptionPane.showMessageDialog(null, "Categoría actualizada exitosamente");
+            txt_nombrecategoria.setText("");
+            txt_descripcion.setText("");
+            this.CargarTablaCategorias();
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+            JOptionPane.showMessageDialog(null, "Error al actualizar la categoría");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Debe seleccionar una categoría");
+    }
     }//GEN-LAST:event_btnactualizarActionPerformed
 
     private void btneliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btneliminarActionPerformed
-        if (!txt_descripcion.getText().isEmpty()) {
-            Categoria categoria = new Categoria();
-            ctrlCategoria controlCategoria = new ctrlCategoria();
+        if (!txt_nombrecategoria.getText().isEmpty()) {
+        Categoria categoria = new Categoria();
+        ctrlCategoria controlCategoria = new ctrlCategoria();
 
-            categoria.setDescripcion(txt_descripcion.getText().trim());
-            if (!controlCategoria.eliminar(id_categoria)) {
-                JOptionPane.showMessageDialog(null, "Categoria Eliminada");
-                txt_descripcion.setText("");
-                this.CargarTablaCategorias();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al Eliminar Categoria");
-            }
+        categoria.setDescripcion(txt_descripcion.getText().trim());
+        String nombreCategoria = txt_nombrecategoria.getText().trim(); // Agregamos el nombre
+
+        // Ahora llamamos al método eliminar pasando el id y el nombre
+        if (controlCategoria.eliminar(id_categoria, nombreCategoria)) {
+            JOptionPane.showMessageDialog(null, "Categoria Eliminada");
+            txt_nombrecategoria.setText("");
+            txt_descripcion.setText("");
+            this.CargarTablaCategorias();
         } else {
-            JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+            JOptionPane.showMessageDialog(null, "Error al Eliminar Categoria");
         }
+    } else {
+        JOptionPane.showMessageDialog(null, "Seleccione una categoria");
+    }
     }//GEN-LAST:event_btneliminarActionPerformed
 
 
@@ -171,13 +190,16 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JButton btneliminar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_walpaper;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JPanel jPanel4;
     public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable_categoria;
     private javax.swing.JTextField txt_descripcion;
+    private javax.swing.JTextField txt_nombrecategoria;
     // End of variables declaration//GEN-END:variables
 
     private void CargarTablaCategorias() {
@@ -225,21 +247,23 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
     
     private void EnviarDatosCategoriaSeleccionada(int id_categoria) {
         try {
-            Conexion cn = new Conexion();
+        Conexion cn = new Conexion();
         Connection con = cn.getConexion();
-            PreparedStatement pst = con.prepareStatement(
-                    "select * from categorias where id_categoria = '" + id_categoria + "'");
-            ResultSet rs = pst.executeQuery();
-            if (rs.next()) {
-                txt_descripcion.setText(rs.getString("descripcion"));
-            }
-            con.close();
-        } catch (SQLException e) {
-            System.out.println("Error al seleccionar categoria: " + e);
-            
-             }
+        PreparedStatement pst = con.prepareStatement(
+            "select * from categorias where id_categoria = ?");
+        pst.setInt(1, id_categoria);
+        ResultSet rs = pst.executeQuery();
+        if (rs.next()) {
+            txt_nombrecategoria.setText(rs.getString("nombre_categoria")); // <- Nombre de la categoría
+            txt_descripcion.setText(rs.getString("descripcion")); // <- Descripción
+        }
+        con.close();
+    } catch (SQLException e) {
+        System.out.println("Error al seleccionar categoria: " + e);
     }
 }
+    }
+    
                     
                                 
 

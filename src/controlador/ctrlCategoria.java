@@ -12,16 +12,14 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.sql.ResultSet;
 
-
-
 /**
  *
  * @author juand
  */
 public class ctrlCategoria {
 
-    private String id_categorias;
     
+
     public boolean guardar(Categoria objeto) {
         boolean respuesta = false;
         Connection cn = Conexion.getConnection();
@@ -42,7 +40,7 @@ public class ctrlCategoria {
 
         return respuesta;
     }
-    
+
     public boolean existeCategoria(String categoria) {
         boolean respuesta = false;
         String sql = "select descripcion from categorias where descripcion = '" + categoria + "';";
@@ -61,46 +59,50 @@ public class ctrlCategoria {
         }
         return respuesta;
     }
-    
+
     public boolean actualizar(Categoria objeto, int id_categoria) {
         boolean respuesta = false;
         Connection cn = conexion.Conexion.getConnection();
         try {
-            PreparedStatement consulta = cn.prepareStatement("update categorias set descripcion=? where id_categoria ='" + id_categoria + "'");
-            consulta.setString(1, objeto.getDescripcion());
-
-            if (consulta.executeUpdate() > 0) {
-                respuesta = true;
-            }
-
-            cn.close();
-        } catch (SQLException e) {
-            System.out.println("Error al guardar categoria: " + e);
-        }
-
-        return respuesta;
-    }
-    
-    public boolean eliminar(int id_categoria) {
-        boolean respuesta = false;
-        Connection cn = Conexion.getConnection();
-        try {
-
             PreparedStatement consulta = cn.prepareStatement(
-                    "delete from categorias where id_categoria ='" + id_categoria + "'");
-            consulta.executeUpdate();
-           
+                    "UPDATE categorias SET nombre_categoria = ?, descripcion = ? WHERE id_categoria = ?"
+            );
+            consulta.setString(1, objeto.getNombre_categoria());
+            consulta.setString(2, objeto.getDescripcion());
+            consulta.setInt(3, id_categoria);
+
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
             }
 
             cn.close();
-
         } catch (SQLException e) {
-            System.out.println("Error al eliminar cartegoria: " + e);
+            System.out.println("Error al actualizar categoria: " + e);
         }
 
         return respuesta;
     }
-    
+
+    public boolean eliminar(int id_categoria, String nombre_categoria) {
+        boolean respuesta = false;
+    Connection cn = Conexion.getConnection();
+    try {
+       
+        PreparedStatement consulta = cn.prepareStatement(
+            "delete from categorias where id_categoria = ? and nombre_categoria = ?");
+        consulta.setInt(1, id_categoria); // Establecemos el ID
+        consulta.setString(2, nombre_categoria); 
+
+        if (consulta.executeUpdate() > 0) {
+            respuesta = true;
+        }
+
+        cn.close();
+    } catch (SQLException e) {
+        System.out.println("Error al eliminar categoria: " + e);
+    }
+
+    return respuesta;
+    }
+
 }
