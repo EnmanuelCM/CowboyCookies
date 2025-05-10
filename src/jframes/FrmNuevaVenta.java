@@ -10,6 +10,7 @@ import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableColumnModel;
 import modelo.DetalleVenta;
 
 public class FrmNuevaVenta extends javax.swing.JInternalFrame {
@@ -31,15 +32,28 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private double ITBIS = 0.0;
     private double totalPagar = 0.0;
 
+    //Variables para calculos globales
+    private double subtotalGeneral = 0.0;
+    private double ITBISGeneral = 0.0;
+    private double totalPagarGeneral = 0.0;
+    //Fin de las variables para calculos globales
+
     private int auxIdDetalle = 1;
 
     public FrmNuevaVenta() {
         initComponents();
-        this.setSize(new Dimension(800, 600));
+        this.setSize(new Dimension(1000, 600));
         this.setTitle("Facturacion");
 
         this.CargarComboProductos();
         this.InicializarTablaProducto();
+
+        txtEfectivo.setEnabled(false);
+        btnCalcularCambio.setEnabled(false);
+
+        txtSubtotal.setText("0.0");
+        txtITBIS.setText("0.0");
+        txtTotal.setText("0.0");
     }
 
     private void InicializarTablaProducto() {
@@ -56,12 +70,24 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
         //Agregar los datos del modelo a la tabla
         this.jTable_Productos.setModel(modeloDatosProductos);
+
+        // Ajustar anchos de columna
+        TableColumnModel columnModel = jTable_Productos.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(30);  // "N"
+        columnModel.getColumn(1).setPreferredWidth(200); // "Nombre" más ancha
+        columnModel.getColumn(2).setPreferredWidth(70);  // "Cantidad"
+        columnModel.getColumn(3).setPreferredWidth(90);  // "P. Unitario"
+        columnModel.getColumn(4).setPreferredWidth(90);  // "Subtotal"
+        columnModel.getColumn(5).setPreferredWidth(70);  // "ITBIS"
+        columnModel.getColumn(6).setPreferredWidth(100); // "Total Pagar"
+        columnModel.getColumn(7).setPreferredWidth(60);  // "Accion"
+
     }
-    
+
     //Metodo para presentar la informacion de la tabla DetalleVenta
-    private void ListaTablaProductos(){
+    private void ListaTablaProductos() {
         this.modeloDatosProductos.setRowCount(listaProductos.size());
-        for(int i = 0; i < listaProductos.size(); i++){
+        for (int i = 0; i < listaProductos.size(); i++) {
             this.modeloDatosProductos.setValueAt(i + 1, i, 0);
             this.modeloDatosProductos.setValueAt(listaProductos.get(i).getNombre(), i, 1);
             this.modeloDatosProductos.setValueAt(listaProductos.get(i).getCantidad(), i, 2);
@@ -111,6 +137,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
         setClosable(true);
         setIconifiable(true);
+        setPreferredSize(new java.awt.Dimension(1000, 602));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         txtCantidad.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -151,6 +178,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         });
         getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
 
+        jPanel1.setBackground(new java.awt.Color(162, 210, 255));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
@@ -166,12 +194,18 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
+        jTable_Productos.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_ProductosMouseClicked(evt);
+            }
+        });
         jScrollPane1.setViewportView(jTable_Productos);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 740, 190));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 930, 190));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 130, 760, 210));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 130, 960, 210));
 
+        jPanel2.setBackground(new java.awt.Color(162, 210, 255));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -219,18 +253,23 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnCalcularCambio.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnCalcularCambio.setForeground(new java.awt.Color(255, 255, 255));
         btnCalcularCambio.setText("Calcular Cambio");
+        btnCalcularCambio.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnCalcularCambioActionPerformed(evt);
+            }
+        });
         jPanel2.add(btnCalcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 140, 50));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(355, 340, 420, 220));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 420, 220));
 
         btnRegistrarVenta.setBackground(new java.awt.Color(95, 47, 35));
         btnRegistrarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnRegistrarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarVenta.setText("Registrar Venta");
-        getContentPane().add(btnRegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 370, 150, 60));
+        getContentPane().add(btnRegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 150, 60));
 
-        lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/FondoCB 800x601.jpg"))); // NOI18N
-        getContentPane().add(lbl_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 790, 570));
+        lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Fondocow facturacion.jpg"))); // NOI18N
+        getContentPane().add(lbl_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 990, 570));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
@@ -276,7 +315,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                                     precioUnitario,
                                     subtotal,
                                     ITBIS,
-                                    totalPagar                                   
+                                    totalPagar
                             );
                             //Agregar a la lista
                             listaProductos.add(producto);
@@ -284,6 +323,9 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                             txtCantidad.setText("");//Limpiar campo
                             //Volver a cargar combo productos
                             this.CargarComboProductos();
+                            this.CalcularTotalPagar();
+                            txtEfectivo.setEnabled(true);
+                            btnCalcularCambio.setEnabled(true);
 
                         } else {
                             JOptionPane.showMessageDialog(null, "la cantidad supera el Stock");
@@ -300,6 +342,53 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         //Llamar al metodo
         this.ListaTablaProductos();
     }//GEN-LAST:event_btnAgregarProdActionPerformed
+
+    private void btnCalcularCambioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCalcularCambioActionPerformed
+        if (!txtEfectivo.getText().isEmpty()) {
+            //validamos que el usuario no ingrese otros caracteres no numericos 
+            boolean validacion = validarDouble(txtEfectivo.getText());
+            if (validacion == true) {
+                //validar que el efectivo sea mayor a cero
+                double efc = Double.parseDouble(txtEfectivo.getText().trim());
+                double top = Double.parseDouble(txtTotal.getText().trim());
+
+                if (efc < top) {
+                    JOptionPane.showMessageDialog(null, "El Dinero en efectivo no es suficiente");
+                } else {
+                    double cambio = (efc - top);
+                    double cambi = (double) Math.round(cambio * 100d) / 100;
+                    String camb = String.valueOf(cambi);
+                    txtCambio.setText(camb);
+                }
+            } else {
+                JOptionPane.showMessageDialog(null, "No de admiten caracteres no numericos");
+            }
+
+        } else {
+            JOptionPane.showMessageDialog(null, "Ingrese el dinero en efectivo para calcular cambio");
+        }
+    }//GEN-LAST:event_btnCalcularCambioActionPerformed
+    int idArrayList = 0;
+    private void jTable_ProductosMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jTable_ProductosMouseClicked
+        int fila_point = jTable_Productos.rowAtPoint(evt.getPoint());
+        int columna_point = 0;
+        if (fila_point > -1) {
+            idArrayList = (int) modeloDatosProductos.getValueAt(fila_point, columna_point);
+        }
+        int opcion = JOptionPane.showConfirmDialog(null, "¿Eliminar Producto?");
+        //opciones de confir dialog - (si = 0; no = 1; cancel = 2; close = -1)
+        switch (opcion) {
+            case 0: //presione si
+                listaProductos.remove(idArrayList - 1);
+                this.CalcularTotalPagar();
+                this.ListaTablaProductos();
+                break;
+            case 1: //presione no
+                break;
+            default://sea que presione cancel (2) o close (-1)
+                break;
+        }
+    }//GEN-LAST:event_jTable_ProductosMouseClicked
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -360,6 +449,16 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         }
     }
 
+    //Metodo para que el usuario no ingrese datos no numericos
+    private boolean validarDouble(String valor) {
+        try {
+            double num = Double.parseDouble(valor);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
     //Metodo para mostrar los datos del producto seleccionado
     private void DatosDelProducto() {
         try {
@@ -405,6 +504,29 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                 break;
         }
         return ITBIS;
+    }
+
+    //Metodo para calcular el total a pagar de todos los productos
+    private void CalcularTotalPagar() {
+        subtotalGeneral = 0;
+        ITBISGeneral = 0;
+        totalPagarGeneral = 0;
+
+        for (DetalleVenta elemento : listaProductos) {
+            subtotalGeneral += elemento.getSubtotal();
+            ITBISGeneral += elemento.getItbis();
+            totalPagarGeneral += elemento.getTotal();
+        }
+        //Redondear decimales
+        subtotalGeneral = (double) Math.round(subtotalGeneral * 100) / 100;
+        ITBISGeneral = (double) Math.round(ITBISGeneral * 100) / 100;
+        totalPagarGeneral = (double) Math.round(totalPagarGeneral * 100) / 100;
+
+        //Enviar a la vista
+        txtSubtotal.setText(String.valueOf(subtotalGeneral));
+        txtITBIS.setText(String.valueOf(ITBISGeneral));
+        txtTotal.setText(String.valueOf(totalPagarGeneral));
+
     }
 
 }
