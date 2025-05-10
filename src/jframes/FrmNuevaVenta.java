@@ -4,15 +4,34 @@ import conexion.Conexion;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
 import java.awt.Dimension;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
+import modelo.DetalleVenta;
 
 public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
     //Modelo de los datos
     private DefaultTableModel modeloDatosProductos;
+    //Lista para ver el detalle de venta de los productos
+    ArrayList<DetalleVenta> listaProductos = new ArrayList<>();
+    private DetalleVenta producto;
+
+    private int id_producto = 0;
+    private String nombre = "";
+    private int cantidadProductoBBDD = 0;
+    private double precioUnitario = 0.0;
+    private int porcentajeITBIS = 0;
+
+    private int cantidad = 0;//Cantidad de productos a comprar
+    private double subtotal = 0.0;//Cantidad por precio
+    private double ITBIS = 0.0;
+    private double totalPagar = 0.0;
+
+    private int auxIdDetalle = 1;
 
     public FrmNuevaVenta() {
         initComponents();
@@ -31,13 +50,29 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         modeloDatosProductos.addColumn("Cantidad");
         modeloDatosProductos.addColumn("P. Unitario");
         modeloDatosProductos.addColumn("Subtotal");
-        modeloDatosProductos.addColumn("Descuento");
-        modeloDatosProductos.addColumn("ITBS");
+        modeloDatosProductos.addColumn("ITBIS");
         modeloDatosProductos.addColumn("Total Pagar");
         modeloDatosProductos.addColumn("Accion");
 
         //Agregar los datos del modelo a la tabla
         this.jTable_Productos.setModel(modeloDatosProductos);
+    }
+    
+    //Metodo para presentar la informacion de la tabla DetalleVenta
+    private void ListaTablaProductos(){
+        this.modeloDatosProductos.setRowCount(listaProductos.size());
+        for(int i = 0; i < listaProductos.size(); i++){
+            this.modeloDatosProductos.setValueAt(i + 1, i, 0);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getNombre(), i, 1);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getCantidad(), i, 2);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getPrecio_unitario(), i, 3);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getSubtotal(), i, 4);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getItbis(), i, 5);
+            this.modeloDatosProductos.setValueAt(listaProductos.get(i).getTotal(), i, 6);
+            this.modeloDatosProductos.setValueAt("Eliminar", i, 7);
+        }
+        //Agregar al JTable
+        jTable_Productos.setModel(modeloDatosProductos);
     }
 
     /**
@@ -49,12 +84,12 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        txtCantidad = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lblEmpleado = new javax.swing.JLabel();
         jLabel1 = new javax.swing.JLabel();
         cbxProductos = new javax.swing.JComboBox<>();
         jLabel4 = new javax.swing.JLabel();
-        txtCantidad = new javax.swing.JTextField();
         btnAgregarProd = new javax.swing.JButton();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
@@ -78,10 +113,13 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        txtCantidad.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 70, -1));
+
         jLabel3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 47, 35));
         jLabel3.setText("Cantidad:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 90, -1, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
 
         lblEmpleado.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         lblEmpleado.setForeground(new java.awt.Color(95, 47, 35));
@@ -94,16 +132,13 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(310, 10, -1, -1));
 
         cbxProductos.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        cbxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione el Producto" }));
-        getContentPane().add(cbxProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 180, -1));
+        cbxProductos.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Producto:" }));
+        getContentPane().add(cbxProductos, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 270, -1));
 
         jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 47, 35));
         jLabel4.setText("Producto:");
         getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, -1, -1));
-
-        txtCantidad.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(420, 90, -1, -1));
 
         btnAgregarProd.setBackground(new java.awt.Color(95, 47, 35));
         btnAgregarProd.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -114,11 +149,12 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                 btnAgregarProdActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(490, 90, -1, -1));
+        getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
 
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jTable_Productos.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jTable_Productos.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -202,34 +238,67 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private void btnAgregarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarProdActionPerformed
 
         String combo = this.cbxProductos.getSelectedItem().toString();
-        
+
         //Validar que seleccione un producto
         if (combo.equalsIgnoreCase("Seleccione producto:")) {
             JOptionPane.showMessageDialog(null, "Seleccione un producto");
         } else {
-            
+
             //Validar que ingrese una Cantidad
             if (txtCantidad.getText().isEmpty()) {
-                
+                JOptionPane.showMessageDialog(null, "Ingresa la cantidad de productos");
+            } else {
                 //Vaildar que el usuario no ingrese datos no numericos
                 boolean validacion = validar(txtCantidad.getText());
                 if (validacion == true) {
                     //Validar que la cantidad sea mayor a 0
                     if (Integer.parseInt(txtCantidad.getText()) > 0) {
-                        
+                        cantidad = Integer.parseInt(txtCantidad.getText());
+                        //Ejecutar metodo para mostrar los productos
+                        this.DatosDelProducto();
+                        //Validar que la cantidad de productos seleccionados no sea mayor al Stock
+                        if (cantidad <= cantidadProductoBBDD) {
+
+                            subtotal = precioUnitario * cantidad;
+                            totalPagar = subtotal + ITBIS;
+
+                            //Redondear decimales
+                            subtotal = (double) Math.round(subtotal * 100) / 100;
+                            ITBIS = (double) Math.round(ITBIS * 100) / 100;
+                            totalPagar = (double) Math.round(totalPagar * 100) / 100;
+
+                            //Se crea un nuevo producto
+                            producto = new DetalleVenta(auxIdDetalle,
+                                    1,//idCabecera
+                                    id_producto,
+                                    nombre,
+                                    Integer.parseInt(txtCantidad.getText()),
+                                    precioUnitario,
+                                    subtotal,
+                                    ITBIS,
+                                    totalPagar                                   
+                            );
+                            //Agregar a la lista
+                            listaProductos.add(producto);
+                            auxIdDetalle++;
+                            txtCantidad.setText("");//Limpiar campo
+                            //Volver a cargar combo productos
+                            this.CargarComboProductos();
+
+                        } else {
+                            JOptionPane.showMessageDialog(null, "la cantidad supera el Stock");
+                        }
+
                     } else {
                         JOptionPane.showMessageDialog(null, "la cantidad no puede ser cero (0), ni negativa");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "En la cantidad no se admiten datos no numericos");
                 }
-                
-            } else {
-                JOptionPane.showMessageDialog(null, "Ingresa la cantidad de productos");
             }
         }
-
-
+        //Llamar al metodo
+        this.ListaTablaProductos();
     }//GEN-LAST:event_btnAgregarProdActionPerformed
 
 
@@ -271,7 +340,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             cbxProductos.removeAllItems();
-            cbxProductos.addItem("Seleccione productos:");
+            cbxProductos.addItem("Seleccione producto:");
             while (rs.next()) {
                 cbxProductos.addItem(rs.getString("nombre"));
             }
@@ -280,15 +349,62 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
             System.out.println("Error al cargar productos" + e);
         }
     }
-    
+
     //Metodo para que el usuario no ingrese datos no numericos
-    private boolean validar(String valor){
+    private boolean validar(String valor) {
         try {
             int num = Integer.parseInt(valor);
             return true;
         } catch (NumberFormatException e) {
             return false;
         }
+    }
+
+    //Metodo para mostrar los datos del producto seleccionado
+    private void DatosDelProducto() {
+        try {
+            String sql = "select * from productos where nombre = '" + this.cbxProductos.getSelectedItem() + "'";
+            Connection cn = Conexion.getConnection();
+            Statement st;
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                id_producto = rs.getInt("id_producto");
+                nombre = rs.getString("nombre");
+                cantidadProductoBBDD = rs.getInt("stock");
+                precioUnitario = rs.getDouble("precio");
+                porcentajeITBIS = rs.getInt("porcentajeitbis");
+                this.CalcularITBIS(precioUnitario, porcentajeITBIS);
+            }
+
+        } catch (SQLException e) {
+
+        }
+    }
+
+    //Metodo para calcular itbis
+    private double CalcularITBIS(double precio, int porcentajeITBIS) {
+        int p_itbis = porcentajeITBIS;
+
+        switch (p_itbis) {
+
+            case 0:
+                ITBIS = 0.0;
+                break;
+            case 8:
+                ITBIS = (precio * cantidad) * 0.8;
+                break;
+            case 10:
+                ITBIS = (precio * cantidad) * 0.10;
+                break;
+            case 16:
+                ITBIS = (precio * cantidad) * 0.16;
+                break;
+            case 18:
+                ITBIS = (precio * cantidad) * 0.18;
+                break;
+        }
+        return ITBIS;
     }
 
 }

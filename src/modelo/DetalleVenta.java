@@ -5,6 +5,8 @@ public class DetalleVenta {
     private int id_detalle;
     private int id_venta;
     private int id_producto;
+    
+    private String nombre;
     private int cantidad;
     private double precio_unitario;
     private double subtotal;
@@ -16,6 +18,7 @@ public class DetalleVenta {
         this.id_detalle = 0;
         this.id_venta = 0;
         this.id_producto = 0;
+        this.nombre = "";
         this.cantidad = 0;
         this.precio_unitario = 0.0;
         this.subtotal = 0.0;
@@ -26,17 +29,19 @@ public class DetalleVenta {
     
     //Constructor Sobrecargado
 
-    public DetalleVenta(int id_detalle, int id_venta, int id_producto, int cantidad, double precio_unitario, double subtotal, double itbis, double total) {
+    public DetalleVenta(int id_detalle, int id_venta, int id_producto, String nombre, int cantidad, double precio_unitario, double subtotal, double itbis, double total) {
         this.id_detalle = id_detalle;
         this.id_venta = id_venta;
         this.id_producto = id_producto;
+        this.nombre = nombre;
         this.cantidad = cantidad;
         this.precio_unitario = precio_unitario;
         this.subtotal = subtotal;
         this.itbis = itbis;
         this.total = total;
     }
-    
+
+
     //Setter y Getter
 
     public int getId_detalle() {
@@ -102,13 +107,22 @@ public class DetalleVenta {
     public void setTotal(double total) {
         this.total = total;
     }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+    
     
     
     //toString
 
     @Override
     public String toString() {
-        return "DetalleVenta{" + "id_detalle=" + id_detalle + ", id_venta=" + id_venta + ", id_producto=" + id_producto + ", cantidad=" + cantidad + ", precio_unitario=" + precio_unitario + ", subtotal=" + subtotal + ", itbis=" + itbis + ", total=" + total + '}';
+        return "DetalleVenta{" + "id_detalle=" + id_detalle + ", id_venta=" + id_venta + ", id_producto=" + id_producto + ", nombre=" + nombre + ", cantidad=" + cantidad + ", precio_unitario=" + precio_unitario + ", subtotal=" + subtotal + ", itbis=" + itbis + ", total=" + total + '}';
     }
     
 
