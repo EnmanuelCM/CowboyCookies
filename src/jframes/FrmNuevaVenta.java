@@ -49,7 +49,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         this.setSize(new Dimension(1000, 600));
         this.setTitle("Facturacion");
 
-        lblEmpleado.setText("Empleado: " + UsuarioActual.getNombreUsuario());
+        lblEmpleado.setText( UsuarioActual.getNombreUsuario());
 
         this.CargarComboProductos();
         this.InicializarTablaProducto();
@@ -154,7 +154,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         jLabel3.setText("Cantidad:");
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 90, -1, -1));
 
-        lblEmpleado.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
+        lblEmpleado.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
         lblEmpleado.setForeground(new java.awt.Color(95, 47, 35));
         lblEmpleado.setText("Usuario:");
         getContentPane().add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
@@ -410,8 +410,8 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         if (listaProductos.size() > 0) {
 
             // registrar cabecera
-            cabeceraVenta.setId_venta(0);
-            cabeceraVenta.setId_usuario(0);
+            cabeceraVenta.setId_usuario(UsuarioActual.getIdUsuario());
+            cabeceraVenta.setFecha_hora(getFechaHoraActual());
             cabeceraVenta.setTotal(Double.parseDouble(txtTotal.getText()));
 
             if (controlVenta.guardar(cabeceraVenta)) {
@@ -600,12 +600,12 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         int cantidadProductosBaseDeDatos = 0;
         try {
             Connection cn = Conexion.getConnection();
-            String sql = "select idProducto, cantidad from tb_producto where idProducto = '" + idProducto + "'";
+            String sql = "select id_producto, stock from productos where id_producto = '" + idProducto + "'";
             Statement st;
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             while (rs.next()) {
-                cantidadProductosBaseDeDatos = rs.getInt("cantidad");
+                cantidadProductosBaseDeDatos = rs.getInt("stock");
             }
             cn.close();
         } catch (SQLException e) {
@@ -614,7 +614,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
         try {
             Connection cn = Conexion.getConnection();
-            PreparedStatement consulta = cn.prepareStatement("update tb_producto set cantidad=? where idProducto = '" + idProducto + "'");
+            PreparedStatement consulta = cn.prepareStatement("update productos set stock=? where id_producto = '" + idProducto + "'");
             int cantidadNueva = cantidadProductosBaseDeDatos - cantidad;
             consulta.setInt(1, cantidadNueva);
             if(consulta.executeUpdate() > 0){
@@ -625,5 +625,13 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
             System.out.println("Error al restar cantidad 2, " + e);
         }
     }
+    
+    
+    public String getFechaHoraActual() {
+        java.util.Date fecha = new java.util.Date();
+        java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        return formato.format(fecha);
+    }
+
 
 }

@@ -24,12 +24,13 @@ public class ctrl_RegistrarVenta {
         boolean respuesta = false;
         Connection cn = Conexion.getConnection();
         try {
-            PreparedStatement consulta = cn.prepareStatement("insert into ventas values(?,?,?,?)",
-                    Statement.RETURN_GENERATED_KEYS);
-            consulta.setInt(1, 0);//id
-            consulta.setInt(2, objeto.getId_usuario());
-            consulta.setString(3, objeto.getFecha_hora());
-            consulta.setDouble(5, objeto.getTotal());
+            PreparedStatement consulta = cn.prepareStatement(
+                    "INSERT INTO ventas (id_usuario, fecha_hora, total) VALUES (?, ?, ?)",
+                    Statement.RETURN_GENERATED_KEYS
+            );
+            consulta.setInt(1, objeto.getId_usuario());
+            consulta.setString(2, objeto.getFecha_hora());
+            consulta.setDouble(3, objeto.getTotal());
 
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
@@ -57,17 +58,18 @@ public class ctrl_RegistrarVenta {
         boolean respuesta = false;
         Connection cn = Conexion.getConnection();
         try {
-            PreparedStatement consulta = cn.prepareStatement("insert into detalleventa values(?,?,?,?,?,?,?,?,?,?)");
-            consulta.setInt(1, 0);//id
+            PreparedStatement consulta = cn.prepareStatement(
+                    "INSERT INTO detalleventa (id_detalle, id_venta, id_producto, nombre, cantidad, precio_unitario, itbis, total) VALUES (?,?,?,?,?,?,?,?)"
+            );
+
+            consulta.setInt(1, 0);
             consulta.setInt(2, idCabeceraRegistrada);
-            consulta.setInt(3, objeto.getId_venta());
-            consulta.setInt(4, objeto.getId_producto());
-            consulta.setString(5, objeto.getNombre());
-            consulta.setInt(6, objeto.getCantidad());
-            consulta.setDouble(7, objeto.getPrecio_unitario());
-            consulta.setDouble(8, objeto.getSubtotal());
-            consulta.setDouble(9, objeto.getItbis());
-            consulta.setDouble(10, objeto.getTotal());
+            consulta.setInt(3, objeto.getId_producto());
+            consulta.setString(4, objeto.getNombre());
+            consulta.setInt(5, objeto.getCantidad());
+            consulta.setDouble(6, objeto.getPrecio_unitario());
+            consulta.setDouble(7, objeto.getItbis());
+            consulta.setDouble(8, objeto.getTotal());
 
             if (consulta.executeUpdate() > 0) {
                 respuesta = true;
