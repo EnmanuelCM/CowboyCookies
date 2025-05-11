@@ -29,8 +29,12 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        txt_descripcion = new javax.swing.JTextField();
+        txt_id = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
+        jLabel3 = new javax.swing.JLabel();
+        jLabel4 = new javax.swing.JLabel();
+        txt_nombre = new javax.swing.JTextField();
+        txt_descripcion = new javax.swing.JTextField();
         jLabel_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -45,15 +49,15 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Descripción Categoría:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
+        jLabel2.setText("Id_categoria:");
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
 
-        txt_descripcion.addActionListener(new java.awt.event.ActionListener() {
+        txt_id.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_descripcionActionPerformed(evt);
+                txt_idActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 60, 190, 20));
+        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 190, 20));
 
         btnguardar.setBackground(new java.awt.Color(0, 204, 204));
         btnguardar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -63,31 +67,78 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
                 btnguardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 100, -1, -1));
+        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
+
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setText("Nombre_categoria:");
+        jLabel3.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
+            public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
+                jLabel3AncestorMoved(evt);
+            }
+            public void ancestorResized(java.awt.event.HierarchyEvent evt) {
+            }
+        });
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 20));
+
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setText("Descripción Categoría:");
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 190, 20));
+
+        txt_descripcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_descripcionActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 190, 20));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(6, 0, 376, 172));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 260));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descripcionActionPerformed
+    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txt_descripcionActionPerformed
+    }//GEN-LAST:event_txt_idActionPerformed
 
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
   
 
 //limpiar campo
-txt_descripcion.setText("");
+txt_id.setText("");
     }//GEN-LAST:event_btnguardarActionPerformed
+
+    private void jLabel3AncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jLabel3AncestorMoved
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jLabel3AncestorMoved
+
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
+
+    private void txt_descripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_descripcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_descripcionActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnguardar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JTextField txt_descripcion;
+    private javax.swing.JTextField txt_id;
+    private javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }
