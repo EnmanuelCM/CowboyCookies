@@ -1,16 +1,20 @@
 package jframes;
 
 import conexion.Conexion;
+import controlador.ctrl_RegistrarVenta;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.awt.Dimension;
+import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
+import modelo.UsuarioActual;
+import modelo.CabeceraVenta;
 import modelo.DetalleVenta;
 
 public class FrmNuevaVenta extends javax.swing.JInternalFrame {
@@ -44,6 +48,8 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         initComponents();
         this.setSize(new Dimension(1000, 600));
         this.setTitle("Facturacion");
+
+        lblEmpleado.setText("Empleado: " + UsuarioActual.getNombreUsuario());
 
         this.CargarComboProductos();
         this.InicializarTablaProducto();
@@ -150,7 +156,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
         lblEmpleado.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         lblEmpleado.setForeground(new java.awt.Color(95, 47, 35));
-        lblEmpleado.setText("Empleado");
+        lblEmpleado.setText("Usuario:");
         getContentPane().add(lblEmpleado, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 50, -1, -1));
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
@@ -266,6 +272,11 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnRegistrarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnRegistrarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarVenta.setText("Registrar Venta");
+        btnRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btnRegistrarVentaActionPerformed(evt);
+            }
+        });
         getContentPane().add(btnRegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 150, 60));
 
         lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Fondocow facturacion.jpg"))); // NOI18N
@@ -389,6 +400,62 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                 break;
         }
     }//GEN-LAST:event_jTable_ProductosMouseClicked
+
+    private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
+        CabeceraVenta cabeceraVenta = new CabeceraVenta();
+        DetalleVenta detalleVenta = new DetalleVenta();
+        ctrl_RegistrarVenta controlVenta = new ctrl_RegistrarVenta();
+
+
+        if (listaProductos.size() > 0) {
+
+            // registrar cabecera
+            cabeceraVenta.setId_venta(0);
+            cabeceraVenta.setId_usuario(0);
+            cabeceraVenta.setTotal(Double.parseDouble(txtTotal.getText()));
+
+            if (controlVenta.guardar(cabeceraVenta)) {
+                JOptionPane.showMessageDialog(null, "¡Venta Registrada!");
+
+                //guardar detalle
+                for (DetalleVenta elemento : listaProductos) {
+                    detalleVenta.setId_detalle(0);
+                    detalleVenta.setId_venta(0);
+                    detalleVenta.setId_producto(elemento.getId_producto());
+                    detalleVenta.setCantidad(elemento.getCantidad());
+                    detalleVenta.setPrecio_unitario(elemento.getPrecio_unitario());
+                    detalleVenta.setSubtotal(elemento.getSubtotal());
+                    detalleVenta.setItbis(elemento.getItbis());
+                    detalleVenta.setTotal(elemento.getTotal());
+
+                    if (controlVenta.guardarDetalle(detalleVenta)) {
+                        //System.out.println("Detalle de Venta Registrado");
+
+                        txtSubtotal.setText("0.0");
+                        txtITBIS.setText("0.0");
+                        txtTotal.setText("0.0");
+                        txtEfectivo.setText("");
+                        txtCambio.setText("0.0");
+                        auxIdDetalle = 1;
+
+                        this.RestarStockProductos(elemento.getId_producto(), elemento.getCantidad());
+
+                    } else {
+                        JOptionPane.showMessageDialog(null, "¡Error al guardar detalle de venta!");
+                    }
+                }
+                //vaciamos la lista
+                listaProductos.clear();
+                ListaTablaProductos();
+
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Error al guardar cabecera de venta!");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "¡Seleccione un producto!");
+        }
+
+    }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -527,6 +594,36 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         txtITBIS.setText(String.valueOf(ITBISGeneral));
         txtTotal.setText(String.valueOf(totalPagarGeneral));
 
+    }
+   //metodo para restar la cantidad (stock) de los productos vendidos
+    private void RestarStockProductos(int idProducto, int cantidad) {
+        int cantidadProductosBaseDeDatos = 0;
+        try {
+            Connection cn = Conexion.getConnection();
+            String sql = "select idProducto, cantidad from tb_producto where idProducto = '" + idProducto + "'";
+            Statement st;
+            st = cn.createStatement();
+            ResultSet rs = st.executeQuery(sql);
+            while (rs.next()) {
+                cantidadProductosBaseDeDatos = rs.getInt("cantidad");
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al restar cantidad 1, " + e);
+        }
+
+        try {
+            Connection cn = Conexion.getConnection();
+            PreparedStatement consulta = cn.prepareStatement("update tb_producto set cantidad=? where idProducto = '" + idProducto + "'");
+            int cantidadNueva = cantidadProductosBaseDeDatos - cantidad;
+            consulta.setInt(1, cantidadNueva);
+            if(consulta.executeUpdate() > 0){
+                //System.out.println("Todo bien");
+            }
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al restar cantidad 2, " + e);
+        }
     }
 
 }

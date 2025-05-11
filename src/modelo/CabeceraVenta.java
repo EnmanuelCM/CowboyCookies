@@ -65,6 +65,6 @@ public class CabeceraVenta {
     public String toString() {
         return "CabeceraVenta{" + "id_venta=" + id_venta + ", id_usuario=" + id_usuario + ", fecha_hora=" + fecha_hora + ", total=" + total + '}';
     }
-    
+
     
 }

@@ -8,6 +8,7 @@ import java.sql.Statement;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
+import modelo.UsuarioActual;
 
 /**
  *
@@ -20,6 +21,7 @@ public class jfLogin extends javax.swing.JFrame {
      */
     public jfLogin() {
         initComponents();
+
     }
 
     /**
@@ -200,6 +202,10 @@ public class jfLogin extends javax.swing.JFrame {
             if (rs.next()) { // El usuario existe
                 // Verificamos si la contraseña coincide
                 if (rs.getString("contrasena").equals(password)) {
+
+                    UsuarioActual.setNombreUsuario(rs.getString("usuario"));
+                    UsuarioActual.setIdUsuario(rs.getInt("id_usuario"));
+
                     JOptionPane.showMessageDialog(this, "Sesión iniciada correctamente");
                     this.dispose();
                     Menu.setVisible(true);
