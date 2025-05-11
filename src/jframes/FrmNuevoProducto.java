@@ -4,7 +4,10 @@
  */
 package jframes;
 
+import controlador.ctrlProducto;
 import java.awt.Dimension;
+import javax.swing.JOptionPane;
+import modelo.Producto;
 
 /**
  *
@@ -12,11 +15,10 @@ import java.awt.Dimension;
  */
 public class FrmNuevoProducto extends javax.swing.JInternalFrame {
     
-    int obtenerIdCategoriaCombo = 0;
      
     public FrmNuevoProducto() {
         initComponents();
-        this.setSize(new Dimension(500, 400));
+        this.setSize(new Dimension(500, 369));
         this.setTitle("Nuevo Producto");
     }
 
@@ -31,19 +33,17 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        txt_idproducto = new javax.swing.JTextField();
         txt_nombre = new javax.swing.JTextField();
         txt_descripcion = new javax.swing.JTextField();
         txt_precio = new javax.swing.JTextField();
         txt_stock = new javax.swing.JTextField();
         cbo_categoria = new javax.swing.JComboBox<>();
-        jTextField1 = new javax.swing.JTextField();
+        txt_itbis = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
         jLabel_wallpaper = new javax.swing.JLabel();
 
@@ -59,63 +59,60 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("ITBIS:");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 280, 80, 30));
-
-        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel3.setText("Id_Producto:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(40, 40, 110, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Precio:");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 160, 80, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Stock:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 200, 80, 30));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 80, 30));
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Nombre:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 80, 80, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 30));
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Descripción:");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 120, 100, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 100, 30));
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Categoria:");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 240, 80, 30));
-
-        txt_idproducto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_idproducto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 45, 170, -1));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 80, 30));
 
         txt_nombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 85, 170, -1));
+        txt_nombre.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txt_nombreActionPerformed(evt);
+            }
+        });
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 170, -1));
 
         txt_descripcion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 125, 170, -1));
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 170, -1));
 
         txt_precio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 165, 170, -1));
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 170, -1));
 
         txt_stock.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 205, 170, -1));
+        getContentPane().add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 170, -1));
 
         cbo_categoria.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         cbo_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria ", "Galletas", "Postres", "Sandwiches", "Bebidas", "Cafes" }));
-        getContentPane().add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 245, 170, -1));
+        getContentPane().add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 170, -1));
 
-        jTextField1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(jTextField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 285, 170, -1));
+        txt_itbis.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        getContentPane().add(txt_itbis, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 170, -1));
 
         jButton1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
         jButton1.setText("Guardar");
@@ -124,7 +121,7 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 330, -1, -1));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 490, 380));
 
         pack();
@@ -132,8 +129,57 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
       
+        // Verificar si algún campo está vacío
+if (txt_nombre.getText().trim().isEmpty() ||
+    txt_descripcion.getText().trim().isEmpty() ||
+    txt_precio.getText().trim().isEmpty() ||
+    txt_stock.getText().trim().isEmpty() ||
+    txt_itbis.getText().trim().isEmpty()) {
+
+    JOptionPane.showMessageDialog(this, "Complete todos los campos");
+    return;
+}
+
+// Verificar si no se ha seleccionado una categoría
+if (cbo_categoria.getSelectedIndex() == 0) {
+    JOptionPane.showMessageDialog(this, "Seleccione una categoría");
+    return;
+}
+
+// Crear objeto producto y asignar los valores
+Producto producto = new Producto();
+producto.setNombre(txt_nombre.getText().trim());
+producto.setDescripcion(txt_descripcion.getText().trim());
+producto.setPrecio(Double.parseDouble(txt_precio.getText().trim()));
+producto.setStock(Integer.parseInt(txt_stock.getText().trim()));
+producto.setCategoria(cbo_categoria.getSelectedItem().toString());
+producto.setPorcentajeitbis(Integer.parseInt(txt_itbis.getText().trim())); // ← Aquí corregido
+
+// Guardar en base de datos
+ctrlProducto control = new ctrlProducto();
+if (control.guardar(producto)) {
+    JOptionPane.showMessageDialog(this, "Producto agregado correctamente");
+    limpiarCampos();
+} else {
+    JOptionPane.showMessageDialog(this, "Error al guardar el producto");
+}
+}
+
+// Método para limpiar los campos
+private void limpiarCampos() {
+    
+    txt_nombre.setText("");
+    txt_descripcion.setText("");
+    txt_precio.setText("");
+    txt_stock.setText("");
+    cbo_categoria.setSelectedIndex(0);
+    txt_itbis.setText("");
   
     }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void txt_nombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_nombreActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_nombreActionPerformed
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -141,16 +187,14 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel_wallpaper;
-    private javax.swing.JTextField jTextField1;
     private javax.swing.JTextField txt_descripcion;
-    private javax.swing.JTextField txt_idproducto;
+    private javax.swing.JTextField txt_itbis;
     private javax.swing.JTextField txt_nombre;
     private javax.swing.JTextField txt_precio;
     private javax.swing.JTextField txt_stock;

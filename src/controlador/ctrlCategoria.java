@@ -21,24 +21,25 @@ public class ctrlCategoria {
     
 
     public boolean guardar(Categoria objeto) {
-        boolean respuesta = false;
-        Connection cn = Conexion.getConnection();
-        try {
-            PreparedStatement consulta = cn.prepareStatement("insert into categorias values(?,?,?)");
-            consulta.setInt(1, 0);
-            consulta.setString(2, objeto.getNombre_categoria());
-            consulta.setString(3, objeto.getDescripcion());
+    boolean respuesta = false;
+    Connection cn = Conexion.getConnection();
+    try {
+        PreparedStatement consulta = cn.prepareStatement(
+            "INSERT INTO categorias (nombre_categoria, descripcion) VALUES (?, ?)"
+        );
+        consulta.setString(1, objeto.getNombre_categoria());
+        consulta.setString(2, objeto.getDescripcion());
 
-            if (consulta.executeUpdate() > 0) {
-                respuesta = true;
-            }
-
-            cn.close();
-        } catch (SQLException e) {
-            System.out.println("Error al guardar categoria: " + e);
+        if (consulta.executeUpdate() > 0) {
+            respuesta = true;
         }
 
-        return respuesta;
+        cn.close();
+    } catch (SQLException e) {
+        System.out.println("Error al guardar categoria: " + e);
+    }
+
+    return respuesta;
     }
 
     public boolean existeCategoria(String categoria) {

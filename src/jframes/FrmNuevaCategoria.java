@@ -14,9 +14,14 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
 
     public FrmNuevaCategoria() {
         initComponents();
-        this.setSize(new Dimension (400, 200));
+        this.setSize(new Dimension (400, 262));
         this.setTitle("Nueva Categoría");
     }
+    
+    private void limpiarCampos() {
+    txt_nombre.setText("");
+    txt_descripcion.setText("");
+    } 
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -28,8 +33,6 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        txt_id = new javax.swing.JTextField();
         btnguardar = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -47,18 +50,6 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         jLabel1.setText("Nueva Categoría");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
 
-        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel2.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel2.setText("Id_categoria:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 70, -1, -1));
-
-        txt_id.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txt_idActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txt_id, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 70, 190, 20));
-
         btnguardar.setBackground(new java.awt.Color(0, 204, 204));
         btnguardar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnguardar.setText("Guardar");
@@ -67,11 +58,11 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
                 btnguardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 210, -1, -1));
+        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Nombre_categoria:");
+        jLabel3.setText("Nombre Categoria:");
         jLabel3.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
             public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
                 jLabel3AncestorMoved(evt);
@@ -79,42 +70,55 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
             public void ancestorResized(java.awt.event.HierarchyEvent evt) {
             }
         });
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 110, -1, 20));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Descripción Categoría:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 150, -1, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
 
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 110, 190, 20));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 190, -1));
 
         txt_descripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_descripcionActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 150, 190, 20));
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 190, -1));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 260));
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 230));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_idActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txt_idActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txt_idActionPerformed
-
     private void btnguardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnguardarActionPerformed
-  
+  // Verificar si algún campo está vacío
+if (txt_nombre.getText().trim().isEmpty() ||
+    txt_descripcion.getText().trim().isEmpty()) {
 
-//limpiar campo
-txt_id.setText("");
+    JOptionPane.showMessageDialog(this, "Complete todos los campos");
+    return;
+}
+
+// Crear el objeto Categoria
+Categoria categoria = new Categoria();
+categoria.setNombre_categoria(txt_nombre.getText().trim());
+categoria.setDescripcion(txt_descripcion.getText().trim());
+
+// Llamar al controlador para guardar
+ctrlCategoria control = new ctrlCategoria();
+if (control.guardar(categoria)) {
+    JOptionPane.showMessageDialog(this, "Categoría guardada correctamente");
+    limpiarCampos();
+} else {
+    JOptionPane.showMessageDialog(this, "Error al guardar la categoría");
+    }
     }//GEN-LAST:event_btnguardarActionPerformed
 
     private void jLabel3AncestorMoved(java.awt.event.HierarchyEvent evt) {//GEN-FIRST:event_jLabel3AncestorMoved
@@ -133,12 +137,10 @@ txt_id.setText("");
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnguardar;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel_wallpaper;
     private javax.swing.JTextField txt_descripcion;
-    private javax.swing.JTextField txt_id;
     private javax.swing.JTextField txt_nombre;
     // End of variables declaration//GEN-END:variables
 }

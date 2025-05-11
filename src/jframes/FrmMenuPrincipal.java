@@ -370,4 +370,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_VerHistorial;
     private javax.swing.JMenuItem jMenuItem_nuevaVenta;
     // End of variables declaration//GEN-END:variables
+
+    
 }
