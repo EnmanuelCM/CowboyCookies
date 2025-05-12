@@ -2,7 +2,7 @@ package jframes;
 
 import conexion.Conexion;
 import controlador.VentaPDF;
-import controlador.ctrl_RegistrarVenta;
+import controlador.ctrlVentas;
 import java.sql.Connection;
 import java.sql.Statement;
 import java.sql.ResultSet;
@@ -408,7 +408,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
         CabeceraVenta cabeceraVenta = new CabeceraVenta();
         DetalleVenta detalleVenta = new DetalleVenta();
-        ctrl_RegistrarVenta controlVenta = new ctrl_RegistrarVenta();
+        ctrlVentas controlVenta = new ctrlVentas();
 
 
         if (listaProductos.size() > 0) {

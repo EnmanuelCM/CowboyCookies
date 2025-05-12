@@ -6,10 +6,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import javax.swing.table.DefaultTableModel;
 import modelo.CabeceraVenta;
 import modelo.DetalleVenta;
 
-public class ctrl_RegistrarVenta {
+public class ctrlVentas {
 
     //ultimo id de la cabecera
     public static int idCabeceraRegistrada;
@@ -79,6 +80,41 @@ public class ctrl_RegistrarVenta {
             System.out.println("Error al guardar detalle de venta: " + e);
         }
         return respuesta;
+    }
+    
+    public DefaultTableModel listarVentas() {
+        DefaultTableModel modelo = new DefaultTableModel();
+        String[] columnas = {"ID Venta", "Producto", "Cantidad", "Precio Unitario", "Subtotal", "ITBIS", "Total", "Fecha"};
+        modelo.setColumnIdentifiers(columnas);
+
+        String sql = "SELECT v.id_venta, d.nombre, d.cantidad, d.precio_unitario, " +
+                     "(d.cantidad * d.precio_unitario) AS subtotal, d.itbis, d.total, v.fecha_hora " +
+                     "FROM detalleventa d INNER JOIN ventas v ON d.id_venta = v.id_venta";
+
+        Connection cn = Conexion.getConnection();
+        try {
+            PreparedStatement ps = cn.prepareStatement(sql);
+            ResultSet rs = ps.executeQuery();
+
+            while (rs.next()) {
+                Object[] fila = new Object[8];
+                fila[0] = rs.getInt("id_venta");
+                fila[1] = rs.getString("nombre");
+                fila[2] = rs.getInt("cantidad");
+                fila[3] = rs.getDouble("precio_unitario");
+                fila[4] = rs.getDouble("subtotal");
+                fila[5] = rs.getDouble("itbis");
+                fila[6] = rs.getDouble("total");
+                fila[7] = rs.getString("fecha_hora");
+                modelo.addRow(fila);
+            }
+
+            cn.close();
+        } catch (SQLException e) {
+            System.out.println("Error al listar ventas: " + e);
+        }
+
+        return modelo;
     }
 
 }

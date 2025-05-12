@@ -4,7 +4,9 @@
  */
 package jframes;
 
+import controlador.ctrlVentas;
 import java.awt.Dimension;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -35,13 +37,13 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
         jLabel1 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         jScrollPane2 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        Jtable_Ventas = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         txt_totalapagar = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         txt_fecha = new javax.swing.JTextField();
-        jButton1 = new javax.swing.JButton();
+        btnActualizar = new javax.swing.JButton();
         jLabel2_wallpaper = new javax.swing.JLabel();
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -63,12 +65,12 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 47, 35));
-        jLabel1.setText("Gestionar Ventas");
+        jLabel1.setText("Administrar ventas");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        Jtable_Ventas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
                 {null, null, null, null},
@@ -79,7 +81,7 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        jScrollPane2.setViewportView(jTable2);
+        jScrollPane2.setViewportView(Jtable_Ventas);
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -120,10 +122,10 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 590, 110));
 
-        jButton1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(95, 47, 35));
-        jButton1.setText("Actualizar ");
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
+        btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(95, 47, 35));
+        btnActualizar.setText("Actualizar ");
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
         getContentPane().add(jLabel2_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 340));
 
         pack();
@@ -131,7 +133,8 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
+    private javax.swing.JTable Jtable_Ventas;
+    private javax.swing.JButton btnActualizar;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel2_wallpaper;
@@ -141,8 +144,45 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JTable jTable1;
-    private javax.swing.JTable jTable2;
     private javax.swing.JTextField txt_fecha;
     private javax.swing.JTextField txt_totalapagar;
     // End of variables declaration//GEN-END:variables
+
+private void cargarVentas() {
+    ctrlVentas control = new ctrlVentas();
+    DefaultTableModel modelo = control.listarVentas();
+    Jtable_Ventas.setModel(modelo);
+
+    // Ajustar el ancho de columnas (opcional)
+    Jtable_Ventas.getColumnModel().getColumn(0).setPreferredWidth(50);  // ID Venta
+    Jtable_Ventas.getColumnModel().getColumn(1).setPreferredWidth(150); // Producto
+    Jtable_Ventas.getColumnModel().getColumn(2).setPreferredWidth(60);  // Cantidad
+    Jtable_Ventas.getColumnModel().getColumn(3).setPreferredWidth(100); // Precio Unitario
+    Jtable_Ventas.getColumnModel().getColumn(4).setPreferredWidth(100); // Subtotal
+    Jtable_Ventas.getColumnModel().getColumn(5).setPreferredWidth(80);  // ITBIS
+    Jtable_Ventas.getColumnModel().getColumn(6).setPreferredWidth(100); // Total
+    Jtable_Ventas.getColumnModel().getColumn(7).setPreferredWidth(120); // Fecha
+
+    // Calcular total general
+    double total = 0.0;
+    for (int i = 0; i < modelo.getRowCount(); i++) {
+        total += Double.parseDouble(modelo.getValueAt(i, 6).toString());
+    }
+
+    txt_totalapagar.setText(String.format("%.2f", total));
+
+    // Si deseas mostrar la fecha de la última venta
+    if (modelo.getRowCount() > 0) {
+        txt_fecha.setText(modelo.getValueAt(modelo.getRowCount() - 1, 7).toString());
+    } else {
+        txt_fecha.setText("");
+    }
+
 }
+
+private void limpiarCampos() {
+    txt_totalapagar.setText("");
+    txt_fecha.setText("");
+}
+}
+
