@@ -57,9 +57,12 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        setClosable(true);
+        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        jLabel1.setForeground(new java.awt.Color(95, 47, 35));
         jLabel1.setText("Gestionar Ventas");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
 
@@ -105,10 +108,12 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
         jPanel1.add(txt_totalapagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 180, -1));
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel2.setForeground(new java.awt.Color(95, 47, 35));
         jLabel2.setText("Total a Pagar:");
         jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(95, 47, 35));
         jLabel3.setText("Fecha:");
         jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
         jPanel1.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 180, -1));
@@ -116,6 +121,7 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 590, 110));
 
         jButton1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(95, 47, 35));
         jButton1.setText("Actualizar ");
         getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
         getContentPane().add(jLabel2_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 340));

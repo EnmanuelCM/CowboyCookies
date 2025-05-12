@@ -64,6 +64,7 @@ public class jfLogin extends javax.swing.JFrame {
         lblpass.setForeground(new java.awt.Color(95, 47, 35));
         lblpass.setText("Contraseña");
 
+        txtUsuario.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txtUsuario.setCursor(new java.awt.Cursor(java.awt.Cursor.TEXT_CURSOR));
 
         btnIniciarsesion.setBackground(new java.awt.Color(95, 47, 35));

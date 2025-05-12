@@ -1,6 +1,7 @@
 package jframes;
 
 import conexion.Conexion;
+import controlador.VentaPDF;
 import controlador.ctrl_RegistrarVenta;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -177,6 +178,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnAgregarProd.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnAgregarProd.setForeground(new java.awt.Color(255, 255, 255));
         btnAgregarProd.setText("Agregar Producto");
+        btnAgregarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProd.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarProdActionPerformed(evt);
@@ -259,6 +261,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnCalcularCambio.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnCalcularCambio.setForeground(new java.awt.Color(255, 255, 255));
         btnCalcularCambio.setText("Calcular Cambio");
+        btnCalcularCambio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnCalcularCambio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalcularCambioActionPerformed(evt);
@@ -272,6 +275,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnRegistrarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnRegistrarVenta.setForeground(new java.awt.Color(255, 255, 255));
         btnRegistrarVenta.setText("Registrar Venta");
+        btnRegistrarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarVentaActionPerformed(evt);
@@ -416,6 +420,11 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
             if (controlVenta.guardar(cabeceraVenta)) {
                 JOptionPane.showMessageDialog(null, "¡Venta Registrada!");
+                
+                //Generar la factura de venta
+                VentaPDF pdf = new VentaPDF();
+                pdf.DatosEmpleado(UsuarioActual.getIdUsuario());
+                pdf.generarFacturaPDF();
 
                 //guardar detalle
                 for (DetalleVenta elemento : listaProductos) {
@@ -473,7 +482,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JScrollPane jScrollPane1;
+    public static javax.swing.JScrollPane jScrollPane1;
     public static javax.swing.JTable jTable_Productos;
     private javax.swing.JLabel lblEmpleado;
     private javax.swing.JLabel lbl_wallpaper;
@@ -482,7 +491,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtEfectivo;
     private javax.swing.JTextField txtITBIS;
     private javax.swing.JTextField txtSubtotal;
-    private javax.swing.JTextField txtTotal;
+    public static javax.swing.JTextField txtTotal;
     // End of variables declaration//GEN-END:variables
 
 //combobox Productos
