@@ -1,5 +1,6 @@
 package jframes;
 
+import controlador.Reportes;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 import javax.swing.plaf.DesktopPaneUI;
@@ -191,6 +192,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_Reporteprod.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/reporte1.png"))); // NOI18N
         jMenuItem_Reporteprod.setText("Reportes Productos");
         jMenuItem_Reporteprod.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem_Reporteprod.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ReporteprodActionPerformed(evt);
+            }
+        });
         MenuReportes.add(jMenuItem_Reporteprod);
 
         jMenuItem_ReportesVentas.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
@@ -198,6 +204,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_ReportesVentas.setText("Reportes Ventas");
         jMenuItem_ReportesVentas.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         jMenuItem_ReportesVentas.setPreferredSize(new java.awt.Dimension(200, 30));
+        jMenuItem_ReportesVentas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ReportesVentasActionPerformed(evt);
+            }
+        });
         MenuReportes.add(jMenuItem_ReportesVentas);
 
         jMenuBar1.add(MenuReportes);
@@ -309,8 +320,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_jMenuItem_GestionarVentaActionPerformed
 
     private void jMenuItem_ReporteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ReporteCatActionPerformed
-        // TODO add your handling code here:
+        Reportes reporte = new Reportes();
+        reporte.ReportesCategorias();
     }//GEN-LAST:event_jMenuItem_ReporteCatActionPerformed
+
+    private void jMenuItem_ReporteprodActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ReporteprodActionPerformed
+        Reportes reporte = new Reportes();
+        reporte.ReportesProductos();
+    }//GEN-LAST:event_jMenuItem_ReporteprodActionPerformed
+
+    private void jMenuItem_ReportesVentasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ReportesVentasActionPerformed
+        Reportes reporte = new Reportes();
+        reporte.ReportesVentas();
+    }//GEN-LAST:event_jMenuItem_ReportesVentasActionPerformed
 
     /**
      * @param args the command line arguments

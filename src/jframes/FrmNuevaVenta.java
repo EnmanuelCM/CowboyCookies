@@ -274,16 +274,19 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnRegistrarVenta.setBackground(new java.awt.Color(95, 47, 35));
         btnRegistrarVenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnRegistrarVenta.setForeground(new java.awt.Color(255, 255, 255));
+        btnRegistrarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/cajero-automatico.png"))); // NOI18N
         btnRegistrarVenta.setText("Registrar Venta");
         btnRegistrarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnRegistrarVenta.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnRegistrarVenta.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnRegistrarVenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnRegistrarVentaActionPerformed(evt);
             }
         });
-        getContentPane().add(btnRegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 150, 60));
+        getContentPane().add(btnRegistrarVenta, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 370, 150, 110));
 
-        lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Fondocow facturacion.jpg"))); // NOI18N
+        lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_NuevaVenta.jpg"))); // NOI18N
         getContentPane().add(lbl_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 990, 570));
 
         pack();
