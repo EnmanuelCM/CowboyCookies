@@ -77,6 +77,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
         //Agregar los datos del modelo a la tabla
         this.jTable_Productos.setModel(modeloDatosProductos);
+        jTable_Productos.setRowHeight(20); // Ajuste del alto de fila
 
         // Ajustar anchos de columna
         TableColumnModel columnModel = jTable_Productos.getColumnModel();
@@ -177,6 +178,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         btnAgregarProd.setBackground(new java.awt.Color(95, 47, 35));
         btnAgregarProd.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         btnAgregarProd.setForeground(new java.awt.Color(255, 255, 255));
+        btnAgregarProd.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/anadir-al-carrito.png"))); // NOI18N
         btnAgregarProd.setText("Agregar Producto");
         btnAgregarProd.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnAgregarProd.addActionListener(new java.awt.event.ActionListener() {
@@ -184,11 +186,13 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                 btnAgregarProdActionPerformed(evt);
             }
         });
-        getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 90, -1, -1));
+        getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 83, -1, 30));
 
-        jPanel1.setBackground(new java.awt.Color(162, 210, 255));
+        jPanel1.setBackground(new java.awt.Color(254, 176, 200));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
         jTable_Productos.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jTable_Productos.setModel(new javax.swing.table.DefaultTableModel(
@@ -213,7 +217,7 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(15, 130, 960, 210));
 
-        jPanel2.setBackground(new java.awt.Color(162, 210, 255));
+        jPanel2.setBackground(new java.awt.Color(254, 176, 200));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
@@ -258,16 +262,19 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         jPanel2.add(txtTotal, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 100, 100, -1));
 
         btnCalcularCambio.setBackground(new java.awt.Color(95, 47, 35));
-        btnCalcularCambio.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnCalcularCambio.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnCalcularCambio.setForeground(new java.awt.Color(255, 255, 255));
+        btnCalcularCambio.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/calculadora.png"))); // NOI18N
         btnCalcularCambio.setText("Calcular Cambio");
         btnCalcularCambio.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        btnCalcularCambio.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
+        btnCalcularCambio.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         btnCalcularCambio.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnCalcularCambioActionPerformed(evt);
             }
         });
-        jPanel2.add(btnCalcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 150, 140, 50));
+        jPanel2.add(btnCalcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 160, 70));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 420, 220));
 

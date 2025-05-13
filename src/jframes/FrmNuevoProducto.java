@@ -51,51 +51,51 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
         setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 47, 35));
         jLabel1.setText("Nuevo Producto");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 0, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 10, -1, -1));
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 47, 35));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("ITBIS:");
         jLabel2.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 250, 80, 30));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 260, 80, 30));
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 47, 35));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Precio:");
         jLabel4.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 130, 80, 30));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 140, 80, 30));
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 47, 35));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel5.setText("Stock:");
         jLabel5.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 170, 80, 30));
+        getContentPane().add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 180, 80, 30));
 
         jLabel6.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel6.setForeground(new java.awt.Color(95, 47, 35));
         jLabel6.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel6.setText("Nombre:");
-        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 50, 80, 30));
+        getContentPane().add(jLabel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 80, 30));
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 47, 35));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel7.setText("Descripción:");
         jLabel7.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 90, 100, 30));
+        getContentPane().add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 100, 100, 30));
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 47, 35));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel8.setText("Categoria:");
         jLabel8.setHorizontalTextPosition(javax.swing.SwingConstants.RIGHT);
-        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 210, 80, 30));
+        getContentPane().add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 220, 80, 30));
 
         txt_nombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
@@ -103,33 +103,38 @@ public class FrmNuevoProducto extends javax.swing.JInternalFrame {
                 txt_nombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 50, 170, -1));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, 170, -1));
 
         txt_descripcion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 90, 170, -1));
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 100, 170, -1));
 
         txt_precio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 130, 170, -1));
+        getContentPane().add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 140, 170, -1));
 
         txt_stock.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 170, 170, -1));
+        getContentPane().add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 180, 170, -1));
 
         cbo_categoria.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         cbo_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria ", "Galletas", "Postres", "Sandwiches", "Bebidas", "Cafes" }));
-        getContentPane().add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 210, 170, -1));
+        getContentPane().add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 220, 170, -1));
 
         txt_itbis.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        getContentPane().add(txt_itbis, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 250, 170, -1));
+        getContentPane().add(txt_itbis, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 260, 170, -1));
 
-        jButton1.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
+        jButton1.setBackground(new java.awt.Color(95, 47, 35));
+        jButton1.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Disquette 16.png"))); // NOI18N
         jButton1.setText("Guardar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 300, -1, -1));
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 490, 380));
+        getContentPane().add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(210, 295, -1, 30));
+
+        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_NuevoProducto.jpg"))); // NOI18N
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 2, 490, 330));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

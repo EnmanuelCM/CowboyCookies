@@ -108,6 +108,7 @@ public class FrmActualizarStock extends javax.swing.JInternalFrame {
         btnActualizar.setBackground(new java.awt.Color(95, 47, 35));
         btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/actualizar.png"))); // NOI18N
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
