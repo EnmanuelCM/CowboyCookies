@@ -14,6 +14,8 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 import java.sql.PreparedStatement;
 import javax.swing.JOptionPane;
+import javax.swing.table.TableColumnModel;
+import static jframes.FrmNuevaVenta.jTable_Productos;
 import modelo.Categoria;
 
 
@@ -60,18 +62,18 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         setResizable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
+        jLabel1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 47, 35));
-        jLabel1.setText("Administar categorias");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
+        jLabel1.setText("Administar categorías");
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(150, 20, -1, -1));
 
         jPanel1.setBackground(new java.awt.Color(254, 176, 200));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 11)); // NOI18N
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 10)); // NOI18N
 
-        jTable_categoria.setFont(new java.awt.Font("Montserrat", 0, 11)); // NOI18N
+        jTable_categoria.setFont(new java.awt.Font("Montserrat", 0, 10)); // NOI18N
         jTable_categoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -85,7 +87,7 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable_categoria);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, 310, 220));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 330, 240));
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 350, 280));
 
@@ -99,9 +101,9 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
         txt_nombrecategoria.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jPanel4.add(txt_nombrecategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, -1));
+        jPanel4.add(txt_nombrecategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 190, -1));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 210, 80));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 210, 70));
 
         jPanel2.setBackground(new java.awt.Color(254, 176, 200));
         jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -117,7 +119,7 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
                 btnactualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, -1));
+        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 15, 120, -1));
 
         btneliminar.setBackground(new java.awt.Color(95, 47, 35));
         btneliminar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -129,9 +131,9 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 120, -1));
+        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(45, 45, 120, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 210, 70));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 210, 80));
 
         jPanel3.setBackground(new java.awt.Color(254, 176, 200));
         jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
@@ -147,9 +149,9 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         txt_descripcion.setRows(5);
         jScrollPane2.setViewportView(txt_descripcion);
 
-        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 26, 190, 70));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 26, 190, 90));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 210, 110));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 210, 210, 130));
 
         jLabel_walpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_GestionarCategoria.jpg"))); // NOI18N
         getContentPane().add(jLabel_walpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
@@ -231,9 +233,15 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
             FrmGestionarCategoria.jTable_categoria = new JTable(model);
             FrmGestionarCategoria.jScrollPane1.setViewportView(FrmGestionarCategoria.jTable_categoria);
 
-            model.addColumn("id_categoria");
-            model.addColumn("nombre_categoria");
-            model.addColumn("descripcion");
+            model.addColumn("ID");
+            model.addColumn("Categoria");
+            model.addColumn("Descripción");
+            
+            // Ajustar anchos de columna
+        TableColumnModel columnModel = jTable_categoria.getColumnModel();
+        columnModel.getColumn(0).setPreferredWidth(30);  // "ID"
+        columnModel.getColumn(1).setPreferredWidth(100); // "Nombre" más ancho
+        columnModel.getColumn(2).setPreferredWidth(200);  // "Descrpcion"
 
             while (rs.next()) {
                 Object fila[] = new Object[3];

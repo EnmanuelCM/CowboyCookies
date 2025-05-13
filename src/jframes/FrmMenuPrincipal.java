@@ -37,7 +37,9 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         if (!UsuarioActual.getTipo_usuario().equalsIgnoreCase("admin")) {
             MenuUsuarios.setVisible(false);
             MenuItem_GestionarUsuarios.setVisible(false); // ocultar si no es admin
-            jMenuItem_GestionarVenta.setVisible(false);
+            jMenuItem_GestionarProd.setVisible(false);
+            jMenuItem_GestionarCat.setVisible(false);
+            
         }
 
     }
@@ -64,7 +66,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_ActStock = new javax.swing.JMenuItem();
         MenuFacturar = new javax.swing.JMenu();
         jMenuItem_nuevaVenta = new javax.swing.JMenuItem();
-        jMenuItem_GestionarVenta = new javax.swing.JMenuItem();
         MenuReportes = new javax.swing.JMenu();
         jMenuItem_ReporteCat = new javax.swing.JMenuItem();
         jMenuItem_Reporteprod = new javax.swing.JMenuItem();
@@ -182,18 +183,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             }
         });
         MenuFacturar.add(jMenuItem_nuevaVenta);
-
-        jMenuItem_GestionarVenta.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        jMenuItem_GestionarVenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/configuraciones.png"))); // NOI18N
-        jMenuItem_GestionarVenta.setText("Gestionar Ventas");
-        jMenuItem_GestionarVenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem_GestionarVenta.setPreferredSize(new java.awt.Dimension(200, 30));
-        jMenuItem_GestionarVenta.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_GestionarVentaActionPerformed(evt);
-            }
-        });
-        MenuFacturar.add(jMenuItem_GestionarVenta);
 
         jMenuBar1.add(MenuFacturar);
 
@@ -316,12 +305,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         FrmNuevaVenta.setVisible(true);
     }//GEN-LAST:event_jMenuItem_nuevaVentaActionPerformed
 
-    private void jMenuItem_GestionarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarVentaActionPerformed
-        FrmGestionarVentas FrmGestionarventa = new FrmGestionarVentas();
-        jDesktopPane_menu.add(FrmGestionarventa);
-        FrmGestionarventa.setVisible(true);
-    }//GEN-LAST:event_jMenuItem_GestionarVentaActionPerformed
-
     private void jMenuItem_ReporteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ReporteCatActionPerformed
         Reportes reporte = new Reportes();
         reporte.ReportesCategorias();
@@ -393,7 +376,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_Cerrarsesion;
     private javax.swing.JMenuItem jMenuItem_GestionarCat;
     private javax.swing.JMenuItem jMenuItem_GestionarProd;
-    private javax.swing.JMenuItem jMenuItem_GestionarVenta;
     private javax.swing.JMenuItem jMenuItem_NuevaCat;
     private javax.swing.JMenuItem jMenuItem_NuevoProducto;
     private javax.swing.JMenuItem jMenuItem_ReporteCat;
