@@ -51,7 +51,8 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         btneliminar = new javax.swing.JButton();
         jPanel3 = new javax.swing.JPanel();
         jLabel2 = new javax.swing.JLabel();
-        txt_descripcion = new javax.swing.JTextField();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        txt_descripcion = new javax.swing.JTextArea();
         jLabel_walpaper = new javax.swing.JLabel();
 
         setClosable(true);
@@ -60,13 +61,17 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(254, 176, 200));
+        jLabel1.setForeground(new java.awt.Color(95, 47, 35));
         jLabel1.setText("Administar categorias");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(190, 20, -1, -1));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
+        jPanel1.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 11)); // NOI18N
+
+        jTable_categoria.setFont(new java.awt.Font("Montserrat", 0, 11)); // NOI18N
         jTable_categoria.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -84,6 +89,8 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
 
         getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 350, 280));
 
+        jPanel4.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel4.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel4.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -91,38 +98,43 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         jLabel4.setText("Nombre Categoría:");
         jPanel4.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        txt_nombrecategoria.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jPanel4.add(txt_nombrecategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
+        txt_nombrecategoria.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel4.add(txt_nombrecategoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 190, -1));
 
-        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 160, 180, 80));
+        getContentPane().add(jPanel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 140, 210, 80));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        btnactualizar.setBackground(new java.awt.Color(162, 210, 255));
+        btnactualizar.setBackground(new java.awt.Color(95, 47, 35));
         btnactualizar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        btnactualizar.setForeground(new java.awt.Color(95, 47, 35));
+        btnactualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/actualizar.png"))); // NOI18N
         btnactualizar.setText("Actualizar");
         btnactualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnactualizarActionPerformed(evt);
             }
         });
-        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 20, 100, -1));
+        jPanel2.add(btnactualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 120, -1));
 
-        btneliminar.setBackground(new java.awt.Color(254, 176, 200));
+        btneliminar.setBackground(new java.awt.Color(95, 47, 35));
         btneliminar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        btneliminar.setForeground(new java.awt.Color(95, 47, 35));
+        btneliminar.setForeground(new java.awt.Color(255, 255, 255));
+        btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/cancelar.png"))); // NOI18N
         btneliminar.setText("Eliminar");
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);
             }
         });
-        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 50, 100, -1));
+        jPanel2.add(btneliminar, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 40, 120, -1));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(410, 50, 160, 90));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 210, 70));
 
+        jPanel3.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
@@ -130,12 +142,16 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         jLabel2.setText("Descripción:");
         jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, -1, -1));
 
-        txt_descripcion.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 40, 160, -1));
+        txt_descripcion.setColumns(20);
+        txt_descripcion.setFont(new java.awt.Font("Montserrat", 0, 11)); // NOI18N
+        txt_descripcion.setRows(5);
+        jScrollPane2.setViewportView(txt_descripcion);
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 260, 180, 80));
+        jPanel3.add(jScrollPane2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 26, 190, 70));
 
-        jLabel_walpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/image.png"))); // NOI18N
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 230, 210, 110));
+
+        jLabel_walpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_GestionarCategoria.jpg"))); // NOI18N
         getContentPane().add(jLabel_walpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 590, 370));
 
         pack();
@@ -197,8 +213,9 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     public static javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
     public static javax.swing.JTable jTable_categoria;
-    private javax.swing.JTextField txt_descripcion;
+    private javax.swing.JTextArea txt_descripcion;
     private javax.swing.JTextField txt_nombrecategoria;
     // End of variables declaration//GEN-END:variables
 

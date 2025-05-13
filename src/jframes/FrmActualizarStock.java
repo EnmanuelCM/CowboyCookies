@@ -56,62 +56,65 @@ public class FrmActualizarStock extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 47, 35));
         jLabel1.setText("Actualizar Stock de Productos");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 20, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 30, -1, -1));
 
         jLabel2.setBackground(new java.awt.Color(95, 47, 35));
-        jLabel2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 47, 35));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel2.setText("Producto:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 60, 100, -1));
+        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 80, 100, -1));
 
         jLabel3.setBackground(new java.awt.Color(95, 47, 35));
-        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel3.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 47, 35));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel3.setText("Stock Actual:");
-        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 90, 100, -1));
+        getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 110, 100, -1));
 
         jLabel4.setBackground(new java.awt.Color(95, 47, 35));
-        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        jLabel4.setFont(new java.awt.Font("Montserrat SemiBold", 0, 14)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 47, 35));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Stock Nuevo:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 130, 100, -1));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 150, 100, -1));
 
         txt_cantidad_actual.setEditable(false);
-        txt_cantidad_actual.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_cantidad_actual.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         txt_cantidad_actual.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_cantidad_actualActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cantidad_actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 90, 170, -1));
+        getContentPane().add(txt_cantidad_actual, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 110, 170, -1));
 
-        txt_cantidad_nueva.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        txt_cantidad_nueva.setFont(new java.awt.Font("Montserrat", 0, 14)); // NOI18N
         txt_cantidad_nueva.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_cantidad_nuevaActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_cantidad_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 130, 170, -1));
+        getContentPane().add(txt_cantidad_nueva, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 150, 170, -1));
 
+        jComboBox_producto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jComboBox_producto.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Producto:", "Item 2", "Item 3", "Item 4" }));
         jComboBox_producto.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox_productoActionPerformed(evt);
             }
         });
-        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 60, 170, -1));
+        getContentPane().add(jComboBox_producto, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 80, 170, -1));
 
-        btnActualizar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
+        btnActualizar.setBackground(new java.awt.Color(95, 47, 35));
+        btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnActualizar.setText("Actualizar");
         btnActualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnActualizarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, 170, 30));
+        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(160, 200, 170, 30));
 
         jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_ActualizarStock.jpg"))); // NOI18N
         getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 270));

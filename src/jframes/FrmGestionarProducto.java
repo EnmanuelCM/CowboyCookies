@@ -13,6 +13,7 @@ import javax.swing.table.DefaultTableModel;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.table.TableColumnModel;
 import modelo.Producto;
 
 public class FrmGestionarProducto extends javax.swing.JInternalFrame {
@@ -22,10 +23,10 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
         initComponents();
         mostrarProductos();
         jTable_producto.addMouseListener(new java.awt.event.MouseAdapter() {
-    public void mouseClicked(java.awt.event.MouseEvent evt) {
-        jTable_productoMouseClicked(evt);
-    }
-});
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                jTable_productoMouseClicked(evt);
+            }
+        });
         this.setSize(new Dimension(900, 500));
         this.setTitle("Gestionar Categorias");
 
@@ -42,70 +43,76 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
     }
 
     void mostrarProductos() {
-    // Creamos el modelo de tabla
-    DefaultTableModel modelo = new DefaultTableModel();
+        // Creamos el modelo de tabla
+        DefaultTableModel modelo = new DefaultTableModel();
 
-    // Añadimos las columnas al modelo
-    modelo.addColumn("ID");
-    modelo.addColumn("Nombre");
-    modelo.addColumn("Descripción");
-    modelo.addColumn("Precio");
-    modelo.addColumn("Stock");
-    modelo.addColumn("Categoría");
-    modelo.addColumn("ITBIS");
+        // Añadimos las columnas al modelo
+        modelo.addColumn("ID");
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Descripción");
+        modelo.addColumn("Precio");
+        modelo.addColumn("Stock");
+        modelo.addColumn("Categoría");
+        modelo.addColumn("ITBIS");
 
-    // Sentencia SQL para obtener los datos
-    String sql = "SELECT * FROM productos";
+        // Sentencia SQL para obtener los datos
+        String sql = "SELECT * FROM productos";
 
-    try {
-        // Conexión a la base de datos
-        Connection con = Conexion.getConnection(); // Asegúrate que tu clase de conexión se llame así
-        Statement st = con.createStatement();
-        ResultSet rs = st.executeQuery(sql);
+        try {
+            // Conexión a la base de datos
+            Connection con = Conexion.getConnection(); // Asegúrate que tu clase de conexión se llame así
+            Statement st = con.createStatement();
+            ResultSet rs = st.executeQuery(sql);
 
-        // Recorremos los resultados
-        while (rs.next()) {
-            Object[] fila = new Object[7];
-            fila[0] = rs.getInt("id_producto");
-            fila[1] = rs.getString("nombre");
-            fila[2] = rs.getString("descripcion");
-            fila[3] = rs.getDouble("precio");
-            fila[4] = rs.getInt("stock");
-            fila[5] = rs.getString("categoria");
-            fila[6] = rs.getInt("porcentajeitbis");
+            // Recorremos los resultados
+            while (rs.next()) {
+                Object[] fila = new Object[7];
+                fila[0] = rs.getInt("id_producto");
+                fila[1] = rs.getString("nombre");
+                fila[2] = rs.getString("descripcion");
+                fila[3] = rs.getDouble("precio");
+                fila[4] = rs.getInt("stock");
+                fila[5] = rs.getString("categoria");
+                fila[6] = rs.getInt("porcentajeitbis");
 
-            modelo.addRow(fila);
+                modelo.addRow(fila);
+            }
+
+            // Asignamos el modelo a la tabla
+            jTable_producto.setModel(modelo);
+            jTable_producto.setRowHeight(20); // Ajuste del alto de fila
+
+            // Ajustar el ancho de columnas
+            jTable_producto.getColumnModel().getColumn(0).setPreferredWidth(30);  // ID
+            jTable_producto.getColumnModel().getColumn(1).setPreferredWidth(170); // Nombre
+            jTable_producto.getColumnModel().getColumn(2).setPreferredWidth(250); // Descripción
+            jTable_producto.getColumnModel().getColumn(3).setPreferredWidth(60);  // Precio
+            jTable_producto.getColumnModel().getColumn(4).setPreferredWidth(60);  // Stock
+            jTable_producto.getColumnModel().getColumn(5).setPreferredWidth(100); // Categoría
+            jTable_producto.getColumnModel().getColumn(6).setPreferredWidth(40);  // ITBIS
+
+        } catch (SQLException e) {
+            JOptionPane.showMessageDialog(this, "Error al mostrar productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
         }
-
-        // Asignamos el modelo a la tabla
-        jTable_producto.setModel(modelo);
-
-    } catch (SQLException e) {
-        JOptionPane.showMessageDialog(this, "Error al mostrar productos: " + e.getMessage(), "Error", JOptionPane.ERROR_MESSAGE);
     }
-}
-    
+
     private void jTable_productoMouseClicked(java.awt.event.MouseEvent evt) {
-    int filaSeleccionada = jTable_producto.getSelectedRow();
+        int filaSeleccionada = jTable_producto.getSelectedRow();
 
-    if (filaSeleccionada >= 0) {
-        
-        txt_nombre.setText(jTable_producto.getValueAt(filaSeleccionada, 1).toString());
-        txt_descripcion.setText(jTable_producto.getValueAt(filaSeleccionada, 2).toString());
-        txt_precio.setText(jTable_producto.getValueAt(filaSeleccionada, 3).toString());
-        txt_stock.setText(jTable_producto.getValueAt(filaSeleccionada, 4).toString());
+        if (filaSeleccionada >= 0) {
 
-        // Seleccionar categoría en el JComboBox
-        String categoria = jTable_producto.getValueAt(filaSeleccionada, 5).toString();
-        cbo_categoria.setSelectedItem(categoria);
+            txt_nombre.setText(jTable_producto.getValueAt(filaSeleccionada, 1).toString());
+            txt_descripcion.setText(jTable_producto.getValueAt(filaSeleccionada, 2).toString());
+            txt_precio.setText(jTable_producto.getValueAt(filaSeleccionada, 3).toString());
+            txt_stock.setText(jTable_producto.getValueAt(filaSeleccionada, 4).toString());
 
-        txt_itbis.setText(jTable_producto.getValueAt(filaSeleccionada, 6).toString());
+            // Seleccionar categoría en el JComboBox
+            String categoria = jTable_producto.getValueAt(filaSeleccionada, 5).toString();
+            cbo_categoria.setSelectedItem(categoria);
+
+            txt_itbis.setText(jTable_producto.getValueAt(filaSeleccionada, 6).toString());
+        }
     }
-}
-    
-    
-    
-    
 
     @SuppressWarnings("unchecked")
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
@@ -142,9 +149,13 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
         jLabel1.setText("Administrar Productos");
         getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(340, 20, -1, -1));
 
-        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel1.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
+        jScrollPane1.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
+        jTable_producto.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jTable_producto.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {null, null, null, null},
@@ -158,152 +169,159 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
         ));
         jScrollPane1.setViewportView(jTable_producto);
 
-        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 20, 690, 230));
+        jPanel1.add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 20, 690, 230));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 730, 270));
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 710, 270));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        jButton1.setBackground(new java.awt.Color(162, 210, 255));
+        jButton1.setBackground(new java.awt.Color(95, 47, 35));
         jButton1.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jButton1.setForeground(new java.awt.Color(95, 47, 35));
+        jButton1.setForeground(new java.awt.Color(255, 255, 255));
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/actualizar.png"))); // NOI18N
         jButton1.setText("Actualizar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 30, 110, -1));
+        jPanel2.add(jButton1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 10, 120, 30));
 
-        jButton2.setBackground(new java.awt.Color(254, 176, 200));
+        jButton2.setBackground(new java.awt.Color(95, 47, 35));
         jButton2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(95, 47, 35));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/cancelar.png"))); // NOI18N
         jButton2.setText("Eliminar");
         jButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
-        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 110, -1));
+        jPanel2.add(jButton2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 120, 30));
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(750, 50, 130, 270));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(740, 230, 140, 90));
 
+        jPanel3.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel3.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
         jPanel3.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 47, 35));
         jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Nombre:");
-        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 10, -1, -1));
+        jPanel3.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
-        txt_nombre.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel3.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 10, 170, -1));
+        txt_nombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel3.add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 30, 170, -1));
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 47, 35));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Stock:");
-        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 40, -1, -1));
+        jPanel3.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 60, -1, -1));
 
         jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel4.setForeground(new java.awt.Color(95, 47, 35));
         jLabel4.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel4.setText("Precio:");
-        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 10, -1, -1));
+        jPanel3.add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 30, -1, -1));
 
         jLabel5.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel5.setForeground(new java.awt.Color(95, 47, 35));
         jLabel5.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel5.setText("Descripción:");
-        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 40, -1, -1));
+        jPanel3.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(280, 60, -1, -1));
 
         jLabel7.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 47, 35));
         jLabel7.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel7.setText("ITBIS:");
-        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 40, -1, -1));
+        jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, -1));
 
-        txt_stock.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel3.add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 40, 170, -1));
+        txt_stock.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel3.add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 170, -1));
 
-        txt_precio.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel3.add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 10, 160, -1));
+        txt_precio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel3.add(txt_precio, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 30, 160, -1));
 
-        txt_descripcion.setFont(new java.awt.Font("Segoe UI", 1, 12)); // NOI18N
-        jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 40, 160, -1));
+        txt_descripcion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel3.add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(370, 60, 160, -1));
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 47, 35));
         jLabel8.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel8.setText("Categoría:");
-        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 10, -1, -1));
+        jPanel3.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 30, -1, -1));
 
-        txt_itbis.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jPanel3.add(txt_itbis, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 40, 180, -1));
+        txt_itbis.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel3.add(txt_itbis, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 60, 180, -1));
 
-        cbo_categoria.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        cbo_categoria.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         cbo_categoria.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione categoria ", "Galletas", "Postres", "Sandwiches", "Bebidas", "Cafes" }));
-        jPanel3.add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 10, 180, -1));
+        jPanel3.add(cbo_categoria, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 30, 180, -1));
 
-        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 350, 870, 100));
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 460));
+        getContentPane().add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 330, 870, 100));
+
+        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_NuevaVenta.jpg"))); // NOI18N
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 890, 470));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int fila = jTable_producto.getSelectedRow();
-    if (fila < 0) {
-        JOptionPane.showMessageDialog(null, "Debes seleccionar un producto de la tabla.");
-        return;
-    }
-
-    try {
-        int id_producto = Integer.parseInt(jTable_producto.getValueAt(fila, 0).toString());
-
-        Producto producto = new Producto();
-        producto.setNombre(txt_nombre.getText().trim());
-        producto.setDescripcion(txt_descripcion.getText().trim());
-        producto.setPrecio(Double.parseDouble(txt_precio.getText().trim()));
-        producto.setStock(Integer.parseInt(txt_stock.getText().trim()));
-        producto.setCategoria(cbo_categoria.getSelectedItem().toString());
-        producto.setPorcentajeitbis(Integer.parseInt(txt_itbis.getText().trim()));
-
-        ctrlProducto controlProducto = new ctrlProducto();
-        if (controlProducto.actualizar(producto, id_producto)) {
-            JOptionPane.showMessageDialog(null, "Producto actualizado correctamente.");
-            mostrarProductos();
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al actualizar el producto.");
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un producto de la tabla.");
+            return;
         }
-    } catch (Exception e) {
-        JOptionPane.showMessageDialog(null, "Error: " + e);
-    }
+
+        try {
+            int id_producto = Integer.parseInt(jTable_producto.getValueAt(fila, 0).toString());
+
+            Producto producto = new Producto();
+            producto.setNombre(txt_nombre.getText().trim());
+            producto.setDescripcion(txt_descripcion.getText().trim());
+            producto.setPrecio(Double.parseDouble(txt_precio.getText().trim()));
+            producto.setStock(Integer.parseInt(txt_stock.getText().trim()));
+            producto.setCategoria(cbo_categoria.getSelectedItem().toString());
+            producto.setPorcentajeitbis(Integer.parseInt(txt_itbis.getText().trim()));
+
+            ctrlProducto controlProducto = new ctrlProducto();
+            if (controlProducto.actualizar(producto, id_producto)) {
+                JOptionPane.showMessageDialog(null, "Producto actualizado correctamente.");
+                mostrarProductos();
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al actualizar el producto.");
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Error: " + e);
+        }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         int fila = jTable_producto.getSelectedRow();
-    if (fila < 0) {
-        JOptionPane.showMessageDialog(null, "Debes seleccionar un producto para eliminar.");
-        return;
-    }
-
-    int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este producto?", "Confirmar", JOptionPane.YES_NO_OPTION);
-
-    if (confirmacion == JOptionPane.YES_OPTION) {
-        int id_producto = Integer.parseInt(jTable_producto.getValueAt(fila, 0).toString());
-
-        ctrlProducto controlProducto = new ctrlProducto();
-        if (controlProducto.eliminar(id_producto)) {
-            JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.");
-            mostrarProductos();
-            limpiarCampos();
-        } else {
-            JOptionPane.showMessageDialog(null, "Error al eliminar el producto.");
+        if (fila < 0) {
+            JOptionPane.showMessageDialog(null, "Debes seleccionar un producto para eliminar.");
+            return;
         }
-    }
+
+        int confirmacion = JOptionPane.showConfirmDialog(null, "¿Estás seguro de eliminar este producto?", "Confirmar", JOptionPane.YES_NO_OPTION);
+
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            int id_producto = Integer.parseInt(jTable_producto.getValueAt(fila, 0).toString());
+
+            ctrlProducto controlProducto = new ctrlProducto();
+            if (controlProducto.eliminar(id_producto)) {
+                JOptionPane.showMessageDialog(null, "Producto eliminado correctamente.");
+                mostrarProductos();
+                limpiarCampos();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al eliminar el producto.");
+            }
+        }
     }//GEN-LAST:event_jButton2ActionPerformed
 
 

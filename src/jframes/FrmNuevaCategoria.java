@@ -46,22 +46,24 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
-        jLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel1.setForeground(new java.awt.Color(95, 47, 35));
         jLabel1.setText("Nueva Categoría");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(110, 20, -1, -1));
 
-        btnguardar.setBackground(new java.awt.Color(0, 204, 204));
-        btnguardar.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
+        btnguardar.setBackground(new java.awt.Color(95, 47, 35));
+        btnguardar.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
+        btnguardar.setForeground(new java.awt.Color(255, 255, 255));
+        btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Disquette 16.png"))); // NOI18N
         btnguardar.setText("Guardar");
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
             }
         });
-        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 180, -1, -1));
+        getContentPane().add(btnguardar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 175, -1, 30));
 
-        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel3.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel3.setForeground(new java.awt.Color(95, 47, 35));
         jLabel3.setText("Nombre Categoria:");
         jLabel3.addHierarchyBoundsListener(new java.awt.event.HierarchyBoundsListener() {
             public void ancestorMoved(java.awt.event.HierarchyEvent evt) {
@@ -72,27 +74,29 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         });
         getContentPane().add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(30, 80, -1, 20));
 
-        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel4.setFont(new java.awt.Font("Montserrat", 1, 13)); // NOI18N
+        jLabel4.setForeground(new java.awt.Color(95, 47, 35));
         jLabel4.setText("Descripción Categoría:");
-        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 120, -1, 20));
+        getContentPane().add(jLabel4, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, -1, 20));
 
+        txt_nombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txt_nombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_nombreActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 80, 190, -1));
+        getContentPane().add(txt_nombre, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 80, 190, -1));
 
+        txt_descripcion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         txt_descripcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txt_descripcionActionPerformed(evt);
             }
         });
-        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(170, 120, 190, -1));
+        getContentPane().add(txt_descripcion, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 120, 190, -1));
 
-        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/fondo3.jpg"))); // NOI18N
-        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 380, 230));
+        jLabel_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_ActualizarStock.jpg"))); // NOI18N
+        getContentPane().add(jLabel_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 390, 230));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents

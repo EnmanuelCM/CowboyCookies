@@ -66,9 +66,10 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 18)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(95, 47, 35));
         jLabel1.setText("Administrar ventas");
-        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(270, 10, -1, -1));
+        getContentPane().add(jLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(220, 20, -1, -1));
 
-        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder());
+        jPanel2.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel2.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
 
         Jtable_Ventas.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -90,9 +91,9 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
             .addGap(0, 586, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(0, 0, Short.MAX_VALUE)
+                    .addGap(0, 13, Short.MAX_VALUE)
                     .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 560, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGap(0, 0, Short.MAX_VALUE)))
+                    .addGap(0, 13, Short.MAX_VALUE)))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -104,29 +105,40 @@ public class FrmGestionarVentas extends javax.swing.JInternalFrame {
                     .addGap(0, 0, Short.MAX_VALUE)))
         );
 
-        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 60, 590, 170));
+        getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 50, 590, 170));
 
+        jPanel1.setBackground(new java.awt.Color(254, 176, 200));
+        jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder(javax.swing.border.EtchedBorder.RAISED));
+        jPanel1.setForeground(new java.awt.Color(254, 176, 200));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-        jPanel1.add(txt_totalapagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 10, 180, -1));
+
+        txt_totalapagar.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel1.add(txt_totalapagar, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 30, 180, -1));
 
         jLabel2.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(95, 47, 35));
         jLabel2.setText("Total a Pagar:");
-        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(130, 10, -1, -1));
+        jPanel1.add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 30, -1, -1));
 
         jLabel3.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(95, 47, 35));
         jLabel3.setText("Fecha:");
-        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(180, 60, -1, -1));
-        jPanel1.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(250, 60, 180, -1));
+        jPanel1.add(jLabel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 70, -1, -1));
 
-        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 230, 590, 110));
+        txt_fecha.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        jPanel1.add(txt_fecha, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 70, 180, -1));
 
+        btnActualizar.setBackground(new java.awt.Color(95, 47, 35));
         btnActualizar.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
-        btnActualizar.setForeground(new java.awt.Color(95, 47, 35));
+        btnActualizar.setForeground(new java.awt.Color(255, 255, 255));
+        btnActualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/actualizar.png"))); // NOI18N
         btnActualizar.setText("Actualizar ");
-        getContentPane().add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(610, 130, -1, -1));
-        getContentPane().add(jLabel2_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 790, 340));
+        jPanel1.add(btnActualizar, new org.netbeans.lib.awtextra.AbsoluteConstraints(390, 45, -1, 30));
+
+        getContentPane().add(jPanel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 220, 590, 110));
+
+        jLabel2_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_GestionarVentas.jpg"))); // NOI18N
+        getContentPane().add(jLabel2_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 610, 340));
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
