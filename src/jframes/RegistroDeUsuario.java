@@ -196,7 +196,7 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
                 .addGap(46, 46, 46))
         );
 
-        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(140, 40, 410, 520));
+        jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 30, 410, 520));
 
         lblFondo.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Fondo cafe.png"))); // NOI18N
         jPanel2.add(lblFondo, new org.netbeans.lib.awtextra.AbsoluteConstraints(-30, -30, 670, 660));
