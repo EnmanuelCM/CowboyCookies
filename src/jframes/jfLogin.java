@@ -192,8 +192,7 @@ public class jfLogin extends javax.swing.JFrame {
 
             Conexion cn = new Conexion();
             Connection con = cn.getConexion();
-            FrmMenuPrincipal Menu = new FrmMenuPrincipal();
-
+            
             String user = txtUsuario.getText();
             String password = String.valueOf(txtPassword.getPassword());
             String query = "SELECT * FROM usuarios WHERE usuario='" + user + "'";
@@ -206,6 +205,9 @@ public class jfLogin extends javax.swing.JFrame {
 
                     UsuarioActual.setNombreUsuario(rs.getString("usuario"));
                     UsuarioActual.setIdUsuario(rs.getInt("id_usuario"));
+                    UsuarioActual.setTipo_usuario(rs.getString("tipo_usuario"));
+                    
+                    FrmMenuPrincipal Menu = new FrmMenuPrincipal();
 
                     JOptionPane.showMessageDialog(this, "Sesión iniciada correctamente");
                     this.dispose();

@@ -4,6 +4,7 @@ import controlador.Reportes;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
 import javax.swing.plaf.DesktopPaneUI;
+import modelo.UsuarioActual;
 
 /**
  *
@@ -31,6 +32,14 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         this.jDesktopPane_menu.setBounds(0, 0, ancho, (alto - 110));
         this.add(jDesktopPane_menu);
 
+        UsuarioActual.getTipo_usuario();
+        // Controlar visibilidad del menú de usuarios
+        if (!UsuarioActual.getTipo_usuario().equalsIgnoreCase("admin")) {
+            MenuUsuarios.setVisible(false);
+            MenuItem_GestionarUsuarios.setVisible(false); // ocultar si no es admin
+            jMenuItem_GestionarVenta.setVisible(false);
+        }
+
     }
 
     /**
@@ -44,6 +53,8 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
+        MenuUsuarios = new javax.swing.JMenu();
+        MenuItem_GestionarUsuarios = new javax.swing.JMenuItem();
         MenuCategorias = new javax.swing.JMenu();
         jMenuItem_NuevaCat = new javax.swing.JMenuItem();
         jMenuItem_GestionarCat = new javax.swing.JMenuItem();
@@ -58,12 +69,27 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_ReporteCat = new javax.swing.JMenuItem();
         jMenuItem_Reporteprod = new javax.swing.JMenuItem();
         jMenuItem_ReportesVentas = new javax.swing.JMenuItem();
-        MenuHistorial = new javax.swing.JMenu();
-        jMenuItem_VerHistorial = new javax.swing.JMenuItem();
         MenuLogout = new javax.swing.JMenu();
         jMenuItem_Cerrarsesion = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+
+        MenuUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/usuario.png"))); // NOI18N
+        MenuUsuarios.setText("Usuarios");
+        MenuUsuarios.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
+
+        MenuItem_GestionarUsuarios.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        MenuItem_GestionarUsuarios.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/configuraciones.png"))); // NOI18N
+        MenuItem_GestionarUsuarios.setText("Gestionar Usuarios");
+        MenuItem_GestionarUsuarios.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        MenuItem_GestionarUsuarios.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                MenuItem_GestionarUsuariosActionPerformed(evt);
+            }
+        });
+        MenuUsuarios.add(MenuItem_GestionarUsuarios);
+
+        jMenuBar1.add(MenuUsuarios);
 
         MenuCategorias.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/categorias.png"))); // NOI18N
         MenuCategorias.setText("Categorias");
@@ -213,25 +239,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
 
         jMenuBar1.add(MenuReportes);
 
-        MenuHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/historial1.png"))); // NOI18N
-        MenuHistorial.setText("Historial");
-        MenuHistorial.setFont(new java.awt.Font("Montserrat SemiBold", 0, 18)); // NOI18N
-        MenuHistorial.setPreferredSize(new java.awt.Dimension(150, 40));
-
-        jMenuItem_VerHistorial.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
-        jMenuItem_VerHistorial.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/historial1.png"))); // NOI18N
-        jMenuItem_VerHistorial.setText("Ver Historial");
-        jMenuItem_VerHistorial.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
-        jMenuItem_VerHistorial.setPreferredSize(new java.awt.Dimension(200, 30));
-        jMenuItem_VerHistorial.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem_VerHistorialActionPerformed(evt);
-            }
-        });
-        MenuHistorial.add(jMenuItem_VerHistorial);
-
-        jMenuBar1.add(MenuHistorial);
-
         MenuLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/cerrar-sesion.png"))); // NOI18N
         MenuLogout.setText("Cerrar Sesión");
         MenuLogout.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
@@ -272,10 +279,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         this.dispose();
         login.setVisible(true);
     }//GEN-LAST:event_jMenuItem_CerrarsesionActionPerformed
-
-    private void jMenuItem_VerHistorialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_VerHistorialActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_jMenuItem_VerHistorialActionPerformed
 
     private void jMenuItem_NuevaCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_NuevaCatActionPerformed
         FrmNuevaCategoria FrmNuevaCategoria = new FrmNuevaCategoria();
@@ -334,6 +337,12 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         reporte.ReportesVentas();
     }//GEN-LAST:event_jMenuItem_ReportesVentasActionPerformed
 
+    private void MenuItem_GestionarUsuariosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_MenuItem_GestionarUsuariosActionPerformed
+        FrmGestionarUsuarios FrmGestionarUsuarios = new FrmGestionarUsuarios();
+        jDesktopPane_menu.add(FrmGestionarUsuarios);
+        FrmGestionarUsuarios.setVisible(true);
+    }//GEN-LAST:event_MenuItem_GestionarUsuariosActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -373,10 +382,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenu MenuCategorias;
     private javax.swing.JMenu MenuFacturar;
-    private javax.swing.JMenu MenuHistorial;
+    private javax.swing.JMenuItem MenuItem_GestionarUsuarios;
     private javax.swing.JMenu MenuLogout;
     private javax.swing.JMenu MenuProductos;
     private javax.swing.JMenu MenuReportes;
+    private javax.swing.JMenu MenuUsuarios;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem_ActStock;
@@ -389,9 +399,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_ReporteCat;
     private javax.swing.JMenuItem jMenuItem_Reporteprod;
     private javax.swing.JMenuItem jMenuItem_ReportesVentas;
-    private javax.swing.JMenuItem jMenuItem_VerHistorial;
     private javax.swing.JMenuItem jMenuItem_nuevaVenta;
     // End of variables declaration//GEN-END:variables
 
-    
 }

@@ -113,7 +113,6 @@ public class VentaPDF {
             String nombre = "Cowboy Cookies";
             String telefono = "(829)975-9719";
             String direccion = "Calle #7 Almanzar, Honduras del Norte";
-            String slogan = "Galletas con actitud, Café con estilo";
 
 // Celda con información del negocio
             Paragraph infoNegocio = new Paragraph();
@@ -123,8 +122,6 @@ public class VentaPDF {
             infoNegocio.add(new Phrase(telefono + "\n", fuentePersonalizada));
             infoNegocio.add(new Phrase("DIRECCIÓN: ", Negrita));
             infoNegocio.add(new Phrase(direccion + "\n", fuentePersonalizada));
-            infoNegocio.add(new Phrase("SLOGAN: ", Negrita));
-            infoNegocio.add(new Phrase(slogan + "\n", fuentePersonalizada));
 
             PdfPCell celdaInfo = new PdfPCell(infoNegocio);
             celdaInfo.setBorder(0);
