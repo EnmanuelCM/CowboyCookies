@@ -25,7 +25,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         this.setLocationRelativeTo(null);
 
         this.setLayout(null);
-        jDesktopPane_menu = new JDesktopPane();
+        jDesktopPane_menu = new controlador.FondoEscritorio();
 
         int ancho = java.awt.Toolkit.getDefaultToolkit().getScreenSize().width;
         int alto = java.awt.Toolkit.getDefaultToolkit().getScreenSize().height;
@@ -53,7 +53,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
         MenuUsuarios = new javax.swing.JMenu();
         MenuItem_GestionarUsuarios = new javax.swing.JMenuItem();
@@ -253,11 +252,11 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 926, Short.MAX_VALUE)
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         pack();
@@ -370,7 +369,6 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenu MenuProductos;
     private javax.swing.JMenu MenuReportes;
     private javax.swing.JMenu MenuUsuarios;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuItem jMenuItem_ActStock;
     private javax.swing.JMenuItem jMenuItem_Cerrarsesion;
