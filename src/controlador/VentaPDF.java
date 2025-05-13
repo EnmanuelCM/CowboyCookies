@@ -82,6 +82,8 @@ public class VentaPDF {
             BaseFont montserratBold = BaseFont.createFont("src/fonts/Montserrat-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
             Font Negrita = new Font(montserratBold, 12, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23)); // color #5f2f23
 
+            Font montserrat12Negro = new Font(montserrat, 12, Font.NORMAL, BaseColor.BLACK);
+
             // Crear la imagen del logo y ajustarla
             Image img = Image.getInstance("src/files/PDFventaslogo.png");
             img.scalePercent(6); // 20% del tamaño original
@@ -125,12 +127,13 @@ public class VentaPDF {
 
             PdfPCell celdaInfo = new PdfPCell(infoNegocio);
             celdaInfo.setBorder(0);
+            celdaInfo.setPaddingTop(5f); // Espacio superior
             Encabezado.addCell(celdaInfo);
 
-// Celda con fecha
             PdfPCell celdaFecha = new PdfPCell(fecha);
             celdaFecha.setBorder(0);
             celdaFecha.setVerticalAlignment(Element.ALIGN_TOP);
+            celdaFecha.setPaddingTop(5f); // Espacio superior
             Encabezado.addCell(celdaFecha);
 
 // Agregar el encabezado al documento
@@ -187,26 +190,61 @@ public class VentaPDF {
                 String precio = FrmNuevaVenta.jTable_Productos.getValueAt(i, 3).toString();
                 String total = FrmNuevaVenta.jTable_Productos.getValueAt(i, 6).toString();
 
-                tablaProducto.addCell(cantidad);
-                tablaProducto.addCell(producto);
-                tablaProducto.addCell(precio);
-                tablaProducto.addCell(total);
+                PdfPCell celdaCantidad = new PdfPCell(new Phrase(cantidad, montserrat12Negro));
+                celdaCantidad.setPaddingTop(5f);
+                celdaCantidad.setPaddingBottom(5f);
+
+                PdfPCell celdaProducto = new PdfPCell(new Phrase(producto, montserrat12Negro));
+                celdaProducto.setPaddingTop(5f);
+                celdaProducto.setPaddingBottom(5f);
+
+                PdfPCell celdaPrecio = new PdfPCell(new Phrase(precio, montserrat12Negro));
+                celdaPrecio.setPaddingTop(5f);
+                celdaPrecio.setPaddingBottom(5f);
+
+                PdfPCell celdaTotal = new PdfPCell(new Phrase(total, montserrat12Negro));
+                celdaTotal.setPaddingTop(5f);
+                celdaTotal.setPaddingBottom(5f);
+
+                // Opcional: remover bordes si quieres mantenerlos como en el encabezado
+                celdaCantidad.setBorder(0);
+                celdaProducto.setBorder(0);
+                celdaPrecio.setBorder(0);
+                celdaTotal.setBorder(0);
+
+                tablaProducto.addCell(celdaCantidad);
+                tablaProducto.addCell(celdaProducto);
+                tablaProducto.addCell(celdaPrecio);
+                tablaProducto.addCell(celdaTotal);
 
             }
 
             //agregar al documento
             doc.add(tablaProducto);
 
-            //Total pagar
-            Paragraph info = new Paragraph("Total a pagar: " + FrmNuevaVenta.txtTotal.getText(), fuentePersonalizada);
-            info.add(Chunk.NEWLINE);
-            info.setAlignment(Element.ALIGN_RIGHT);
-            doc.add(info);
+            // Separar visualmente el total
+            Paragraph espacioEntreTablaYTotal = new Paragraph();
+            espacioEntreTablaYTotal.add(Chunk.NEWLINE);
+            espacioEntreTablaYTotal.setSpacingAfter(5f);
+            doc.add(espacioEntreTablaYTotal);
 
-            //Mensaje
-            Paragraph mensaje = new Paragraph("¡Gracias por su compra!", fuentePersonalizada);
-            mensaje.add(Chunk.NEWLINE);
+            // Total en una tabla aparte
+            PdfPTable totalTabla = new PdfPTable(1);
+            totalTabla.setWidthPercentage(40);
+            totalTabla.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            PdfPCell totalCelda = new PdfPCell(new Phrase("Total a pagar: " + FrmNuevaVenta.txtTotal.getText(), Negrita));
+            totalCelda.setHorizontalAlignment(Element.ALIGN_RIGHT);
+            totalCelda.setPadding(10f);
+            totalCelda.setBackgroundColor(new BaseColor(255, 243, 209)); // Color suave
+            totalCelda.setBorderColor(BaseColor.LIGHT_GRAY);
+            totalCelda.setBorderWidth(0.5f);
+            totalTabla.addCell(totalCelda);
+            doc.add(totalTabla);
+
+            // Mensaje de agradecimiento
+            Paragraph mensaje = new Paragraph("¡Gracias por su compra!", Negrita);
             mensaje.setAlignment(Element.ALIGN_CENTER);
+            mensaje.setSpacingBefore(20f);
             doc.add(mensaje);
 
             //cerrar el documento y el archivo
