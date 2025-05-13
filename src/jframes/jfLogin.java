@@ -47,6 +47,8 @@ public class jfLogin extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setTitle("Iniciar Sesion");
+        setResizable(false);
 
         jPanel1.setBackground(new java.awt.Color(95, 47, 35));
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
