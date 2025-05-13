@@ -201,66 +201,66 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
 
     private void btn_actualizarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_actualizarActionPerformed
         Usuario usuario = new Usuario();
-        ctrlUsuarios controlUsuario = new ctrlUsuarios();
+ctrlUsuarios controlUsuario = new ctrlUsuarios();
 
-        if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un Usuario!");
+if (idUsuario == 0) {
+    JOptionPane.showMessageDialog(null, "¡Seleccione un Usuario!");
+} else {
+    if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty()
+            || txt_correo.getText().isEmpty() || txt_usuario.getText().isEmpty()
+            || cbo_tipodeusuario.getSelectedItem() == null) {
+
+        JOptionPane.showMessageDialog(null, "¡Completa todos los campos!");
+    } else {
+        usuario.setNombre(txt_nombre.getText().trim());
+        usuario.setApellido(txt_apellido.getText().trim());
+        usuario.setCorreo(txt_correo.getText().trim());
+        usuario.setUsuario(txt_usuario.getText().trim());
+
+        // Obtener el tipo de usuario seleccionado del JComboBox
+        String tipoUsuario = cbo_tipodeusuario.getSelectedItem().toString();
+        usuario.setTipo_usuario(tipoUsuario);
+
+        // No se modifica la contraseña por privacidad
+        // usuario.setConstrasena("...");  // OMITIDO
+        usuario.setFecha_creacion(txt_fecha_creacion.getText().trim());
+
+        if (controlUsuario.actualizar(usuario, idUsuario)) {
+            JOptionPane.showMessageDialog(null, "¡Actualización exitosa!");
+            this.Limpiar();
+            this.CargarTablaUsuarios();
+            idUsuario = 0;
         } else {
-            if (txt_nombre.getText().isEmpty() || txt_apellido.getText().isEmpty()
-                    || txt_correo.getText().isEmpty() || txt_usuario.getText().isEmpty()
-                    || txt_tipo_usuario.getText().isEmpty()) {
-
-                JOptionPane.showMessageDialog(null, "¡Completa todos los campos obligatorios!");
-            } else {
-                usuario.setNombre(txt_nombre.getText().trim());
-                usuario.setApellido(txt_apellido.getText().trim());
-                usuario.setCorreo(txt_correo.getText().trim());
-                usuario.setUsuario(txt_usuario.getText().trim());
-                usuario.setTipo_usuario(txt_tipo_usuario.getText().trim());
-                // No se modifica la contraseña por privacidad
-                // usuario.setConstrasena("...");  // OMITIDO
-                usuario.setFecha_creacion(txt_fecha_creacion.getText().trim());
-
-                if (controlUsuario.actualizar(usuario, idUsuario)) {
-                    JOptionPane.showMessageDialog(null, "¡Actualización exitosa!");
-                    this.Limpiar();
-                    this.CargarTablaUsuarios();
-                    idUsuario = 0;
-                } else {
-                    JOptionPane.showMessageDialog(null, "¡Error al actualizar usuario!");
-                }
-            }
+            JOptionPane.showMessageDialog(null, "¡Error al actualizar usuario!");
         }
+    }
+    }
     }//GEN-LAST:event_btn_actualizarActionPerformed
 
     private void btn_eliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_eliminarActionPerformed
         ctrlUsuarios controlUsuario = new ctrlUsuarios();
 
-        if (idUsuario == 0) {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un usuario!");
-        } else {
-            int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este usuario?", "Confirmar", JOptionPane.YES_NO_OPTION);
-            if (confirm == JOptionPane.YES_OPTION) {
-                if (controlUsuario.eliminar(idUsuario)) {
-                    JOptionPane.showMessageDialog(null, "¡Usuario eliminado!");
-                    this.CargarTablaUsuarios();
-                    this.Limpiar();
-                    idUsuario = 0;
-                } else {
-                    JOptionPane.showMessageDialog(null, "¡Error al eliminar usuario!");
-                }
+if (idUsuario == 0) {
+    JOptionPane.showMessageDialog(null, "¡Seleccione un usuario!");
+} else {
+    // Verificamos si tiene ventas
+    if (controlUsuario.tieneVentas(idUsuario)) {
+        JOptionPane.showMessageDialog(null, "¡No se puede eliminar! El usuario tiene ventas registradas.");
+    } else {
+        // Confirmamos la eliminación
+        int confirm = JOptionPane.showConfirmDialog(null, "¿Está seguro de eliminar este usuario?", "Confirmar", JOptionPane.YES_NO_OPTION);
+        if (confirm == JOptionPane.YES_OPTION) {
+            if (controlUsuario.eliminar(idUsuario)) {
+                JOptionPane.showMessageDialog(null, "¡Usuario eliminado!");
+                this.CargarTablaUsuarios();
+                this.Limpiar();
+                idUsuario = 0;
+            } else {
+                JOptionPane.showMessageDialog(null, "¡Error al eliminar usuario!");
             }
         }
-        if (controlUsuario.tieneVentas(idUsuario)) {
-            JOptionPane.showMessageDialog(null, "¡No se puede eliminar! El usuario tiene ventas registradas.");
-        } else if (controlUsuario.eliminar(idUsuario)) {
-            JOptionPane.showMessageDialog(null, "¡Usuario eliminado!");
-            this.CargarTablaUsuarios();
-            this.Limpiar();
-            idUsuario = 0;
-        } else {
-            JOptionPane.showMessageDialog(null, "¡Error al eliminar usuario!");
-        }
+    }
+    }
 
     }//GEN-LAST:event_btn_eliminarActionPerformed
 
@@ -380,7 +380,7 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
                 txt_apellido.setText(rs.getString("apellido"));
                 txt_usuario.setText(rs.getString("usuario"));
                 txt_correo.setText(rs.getString("correo"));
-                txt_tipo_usuario.setText(rs.getString("tipo_usuario"));
+                cbo_tipodeusuario.setSelectedItem(rs.getString("tipo_usuario"));
                 txt_fecha_creacion.setText(rs.getString("fecha_creacion"));
 
                 // La contraseña no se mostrará ni se modificará, solo dejarla vacía
