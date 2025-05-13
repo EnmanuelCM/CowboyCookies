@@ -66,10 +66,12 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
         txt_apellido = new javax.swing.JTextField();
         txt_correo = new javax.swing.JTextField();
         txt_usuario = new javax.swing.JTextField();
-        txt_tipo_usuario = new javax.swing.JTextField();
         txt_fecha_creacion = new javax.swing.JTextField();
+        cbo_tipodeusuario = new javax.swing.JComboBox<>();
         jLabel1_wallpaper = new javax.swing.JLabel();
 
+        setClosable(true);
+        setIconifiable(true);
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jLabel1.setFont(new java.awt.Font("Montserrat", 1, 24)); // NOI18N
@@ -154,12 +156,12 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
         jLabel7.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel7.setForeground(new java.awt.Color(95, 47, 35));
         jLabel7.setText("Tipo de Usuario:");
-        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(523, 78, 108, -1));
+        jPanel2.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 108, -1));
 
         jLabel8.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel8.setForeground(new java.awt.Color(95, 47, 35));
         jLabel8.setText("Fecha creación:");
-        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 30, 110, -1));
+        jPanel2.add(jLabel8, new org.netbeans.lib.awtextra.AbsoluteConstraints(530, 80, 100, -1));
 
         jLabel9.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
         jLabel9.setForeground(new java.awt.Color(95, 47, 35));
@@ -181,11 +183,12 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
         txt_usuario.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         jPanel2.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(634, 30, 170, -1));
 
-        txt_tipo_usuario.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jPanel2.add(txt_tipo_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 50, 145, -1));
-
         txt_fecha_creacion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jPanel2.add(txt_fecha_creacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(637, 75, 166, -1));
+        jPanel2.add(txt_fecha_creacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 166, 20));
+
+        cbo_tipodeusuario.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
+        cbo_tipodeusuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Usuario:", "empleado", "admin" }));
+        jPanel2.add(cbo_tipodeusuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(840, 60, 160, -1));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 280, 1010, 130));
 
@@ -265,6 +268,7 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_actualizar;
     private javax.swing.JButton btn_eliminar;
+    private javax.swing.JComboBox<String> cbo_tipodeusuario;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel1_wallpaper;
     private javax.swing.JLabel jLabel2;
@@ -282,7 +286,6 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txt_correo;
     private javax.swing.JTextField txt_fecha_creacion;
     private javax.swing.JTextField txt_nombre;
-    private javax.swing.JTextField txt_tipo_usuario;
     private javax.swing.JTextField txt_usuario;
     private javax.swing.JTextField txtid_usuario;
     // End of variables declaration//GEN-END:variables
@@ -297,7 +300,7 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
         txt_apellido.setText("");
         txt_correo.setText("");
         txt_usuario.setText("");
-        txt_tipo_usuario.setText("");
+        cbo_tipodeusuario.setSelectedIndex(0);
         txt_fecha_creacion.setText("");
         txtid_usuario.setText("");  // Este campo probablemente no lo quieres limpiar si es el ID
     }
