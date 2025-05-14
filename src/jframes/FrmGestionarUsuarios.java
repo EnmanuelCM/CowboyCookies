@@ -184,7 +184,7 @@ public class FrmGestionarUsuarios extends javax.swing.JInternalFrame {
         jPanel2.add(txt_usuario, new org.netbeans.lib.awtextra.AbsoluteConstraints(634, 30, 170, -1));
 
         txt_fecha_creacion.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
-        jPanel2.add(txt_fecha_creacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 166, 20));
+        jPanel2.add(txt_fecha_creacion, new org.netbeans.lib.awtextra.AbsoluteConstraints(640, 80, 166, -1));
 
         cbo_tipodeusuario.setFont(new java.awt.Font("Montserrat Medium", 0, 12)); // NOI18N
         cbo_tipodeusuario.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Seleccione Usuario:", "empleado", "admin" }));

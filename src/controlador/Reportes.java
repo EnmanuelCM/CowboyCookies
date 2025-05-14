@@ -24,6 +24,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import javax.swing.JOptionPane;
 
 /**
@@ -31,6 +33,9 @@ import javax.swing.JOptionPane;
  * @author Edison Zambrano
  */
 public class Reportes {
+
+    private String fechaActual = "";
+
 
     /* ********************************************************************
     * metodo para crear reportes de los productos registrados en el sistema
@@ -40,9 +45,19 @@ public class Reportes {
 
         try {
 
-            String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/Reporte_Productos.pdf"));
+            //cargar la fecha actual
+            Date date = new Date();
+            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            //cambiar el formato de la fecha de / a _
+            String fechaNueva = "";
+            for (int i = 0; i < fechaActual.length(); i++) {
+                if (fechaActual.charAt(i) == '/') {
+                    fechaNueva = fechaActual.replace("/", "_");
+                }
+            }
 
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/Reporte_Productos_" + fechaNueva + ".pdf"));
 
             // Cargar imagen
             Image header = Image.getInstance("src/files/header.jpg");
@@ -74,7 +89,7 @@ public class Reportes {
 
             documento.add(encabezado);
 
-            float[] columnWidths = {2, 5, 4, 5, 9, 4, 6};
+            float[] columnWidths = {2, 7, 3, 5, 9, 4, 5};
             PdfPTable tabla = new PdfPTable(columnWidths);
             tabla.setWidthPercentage(100f);
             tabla.setSpacingBefore(10f);
@@ -126,8 +141,20 @@ public class Reportes {
     public void ReportesCategorias() {
         Document documento = new Document();
         try {
+            
+             //cargar la fecha actual
+            Date date = new Date();
+            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            //cambiar el formato de la fecha de / a _
+            String fechaNueva = "";
+            for (int i = 0; i < fechaActual.length(); i++) {
+                if (fechaActual.charAt(i) == '/') {
+                    fechaNueva = fechaActual.replace("/", "_");
+                }
+            }
+            
             String ruta = System.getProperty("user.home");
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/Reporte_Categorias.pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/Reporte_Categorias_" + fechaNueva + ".pdf"));
 
             // Cargar imagen del encabezado
             Image header = Image.getInstance("src/files/header.jpg");
@@ -220,97 +247,108 @@ public class Reportes {
     /* ********************************************************************
     * metodo para crear reportes de las ventas registrados en el sistema
     *********************************************************************** */
-   public void ReportesVentas() {
-    Document documento = new Document();
-    try {
-        String ruta = System.getProperty("user.home");
-        PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/Reporte_Ventas.pdf"));
-
-        // Cargar imagen
-        Image header = Image.getInstance("src/files/header.jpg");
-        header.scaleToFit(650, 1000);
-        header.setAlignment(Chunk.ALIGN_CENTER);
-
-        // Tipografías personalizadas
-        BaseFont montserrat = BaseFont.createFont("src/fonts/Montserrat-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        Font fuentePersonalizada = new Font(montserrat, 11, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
-
-        BaseFont montserratBold = BaseFont.createFont("src/fonts/Montserrat-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-        Font titulo = new Font(montserratBold, 18, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
-        Font subtitulo = new Font(montserrat, 12, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
-        Font fontEncabezado = new Font(montserratBold, 11, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
-        Font fontCuerpo = new Font(montserrat, 10, Font.NORMAL, BaseColor.BLACK);
-
-        documento.open();
-        documento.add(header);
-
-        // Encabezado
-        Paragraph encabezado = new Paragraph();
-        encabezado.setAlignment(Element.ALIGN_CENTER);
-        encabezado.setSpacingBefore(5f);
-        encabezado.add(new Phrase("Reporte creado por", subtitulo));
-        encabezado.add(new Chunk("\n"));
-        encabezado.add(new Phrase("Cowboy Cookies\n\n", subtitulo));
-        encabezado.add(new Phrase("Reporte de Ventas\n\n", titulo));
-        documento.add(encabezado);
-
-        // Tabla
-        PdfPTable tabla = new PdfPTable(4);
-        tabla.setSpacingBefore(10f);
-        tabla.setSpacingAfter(10f);
-        tabla.setWidths(new float[]{3f, 9f, 4f, 5f});
-        tabla.setWidthPercentage(100);
-
-        BaseColor fondoEncabezado = new BaseColor(0xa2, 0xd2, 0xff); // #a2d2ff
-
-        String[] columnas = {"Código", "Empleado", "Total Pagar", "Fecha Venta"};
-        for (String tituloCol : columnas) {
-            PdfPCell celdaEncabezado = new PdfPCell(new Phrase(tituloCol, fontEncabezado));
-            celdaEncabezado.setBackgroundColor(fondoEncabezado);
-            celdaEncabezado.setHorizontalAlignment(Element.ALIGN_CENTER);
-            celdaEncabezado.setPadding(8f);
-            celdaEncabezado.setBorderWidth(1);
-            tabla.addCell(celdaEncabezado);
-        }
-
-        // Datos
+    public void ReportesVentas() {
+        Document documento = new Document();
         try {
-            Connection cn = Conexion.getConnection();
-            PreparedStatement pst = cn.prepareStatement(
-                "SELECT v.id_venta AS id, CONCAT(u.nombre, ' ', u.apellido) AS Empleado, " +
-                "v.total AS total, v.fecha_hora AS fecha " +
-                "FROM ventas AS v, usuarios AS u WHERE v.id_usuario = u.id_usuario ORDER BY v.id_venta ASC;"
-            );
-            ResultSet rs = pst.executeQuery();
-            while (rs.next()) {
-                PdfPCell c1 = new PdfPCell(new Phrase(rs.getString(1), fontCuerpo));
-                PdfPCell c2 = new PdfPCell(new Phrase(rs.getString(2), fontCuerpo));
-                PdfPCell c3 = new PdfPCell(new Phrase(rs.getString(3), fontCuerpo));
-                PdfPCell c4 = new PdfPCell(new Phrase(rs.getString(4), fontCuerpo));
-
-                for (PdfPCell celda : new PdfPCell[]{c1, c2, c3, c4}) {
-                    celda.setPadding(6f);
-                    celda.setBorderWidth(0.5f);
+            
+             //cargar la fecha actual
+            Date date = new Date();
+            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            //cambiar el formato de la fecha de / a _
+            String fechaNueva = "";
+            for (int i = 0; i < fechaActual.length(); i++) {
+                if (fechaActual.charAt(i) == '/') {
+                    fechaNueva = fechaActual.replace("/", "_");
                 }
+            }
+            
+            String ruta = System.getProperty("user.home");
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/OneDrive/Desktop/Reporte_Ventas_" + fechaNueva + ".pdf"));
 
-                tabla.addCell(c1);
-                tabla.addCell(c2);
-                tabla.addCell(c3);
-                tabla.addCell(c4);
+            // Cargar imagen
+            Image header = Image.getInstance("src/files/header.jpg");
+            header.scaleToFit(650, 1000);
+            header.setAlignment(Chunk.ALIGN_CENTER);
+
+            // Tipografías personalizadas
+            BaseFont montserrat = BaseFont.createFont("src/fonts/Montserrat-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font fuentePersonalizada = new Font(montserrat, 11, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
+
+            BaseFont montserratBold = BaseFont.createFont("src/fonts/Montserrat-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            Font titulo = new Font(montserratBold, 18, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
+            Font subtitulo = new Font(montserrat, 12, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
+            Font fontEncabezado = new Font(montserratBold, 11, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
+            Font fontCuerpo = new Font(montserrat, 10, Font.NORMAL, BaseColor.BLACK);
+
+            documento.open();
+            documento.add(header);
+
+            // Encabezado
+            Paragraph encabezado = new Paragraph();
+            encabezado.setAlignment(Element.ALIGN_CENTER);
+            encabezado.setSpacingBefore(5f);
+            encabezado.add(new Phrase("Reporte creado por", subtitulo));
+            encabezado.add(new Chunk("\n"));
+            encabezado.add(new Phrase("Cowboy Cookies\n\n", subtitulo));
+            encabezado.add(new Phrase("Reporte de Ventas\n\n", titulo));
+            documento.add(encabezado);
+
+            // Tabla
+            PdfPTable tabla = new PdfPTable(4);
+            tabla.setSpacingBefore(10f);
+            tabla.setSpacingAfter(10f);
+            tabla.setWidths(new float[]{3f, 9f, 4f, 5f});
+            tabla.setWidthPercentage(100);
+
+            BaseColor fondoEncabezado = new BaseColor(0xa2, 0xd2, 0xff); // #a2d2ff
+
+            String[] columnas = {"Código", "Empleado", "Total Pagar", "Fecha Venta"};
+            for (String tituloCol : columnas) {
+                PdfPCell celdaEncabezado = new PdfPCell(new Phrase(tituloCol, fontEncabezado));
+                celdaEncabezado.setBackgroundColor(fondoEncabezado);
+                celdaEncabezado.setHorizontalAlignment(Element.ALIGN_CENTER);
+                celdaEncabezado.setPadding(8f);
+                celdaEncabezado.setBorderWidth(1);
+                tabla.addCell(celdaEncabezado);
             }
 
-            documento.add(tabla);
-        } catch (SQLException e) {
-            System.out.println("Error al obtener ventas: " + e);
+            // Datos
+            try {
+                Connection cn = Conexion.getConnection();
+                PreparedStatement pst = cn.prepareStatement(
+                        "SELECT v.id_venta AS id, CONCAT(u.nombre, ' ', u.apellido) AS Empleado, "
+                        + "v.total AS total, v.fecha_hora AS fecha "
+                        + "FROM ventas AS v, usuarios AS u WHERE v.id_usuario = u.id_usuario ORDER BY v.id_venta ASC;"
+                );
+                ResultSet rs = pst.executeQuery();
+                while (rs.next()) {
+                    PdfPCell c1 = new PdfPCell(new Phrase(rs.getString(1), fontCuerpo));
+                    PdfPCell c2 = new PdfPCell(new Phrase(rs.getString(2), fontCuerpo));
+                    PdfPCell c3 = new PdfPCell(new Phrase(rs.getString(3), fontCuerpo));
+                    PdfPCell c4 = new PdfPCell(new Phrase(rs.getString(4), fontCuerpo));
+
+                    for (PdfPCell celda : new PdfPCell[]{c1, c2, c3, c4}) {
+                        celda.setPadding(6f);
+                        celda.setBorderWidth(0.5f);
+                    }
+
+                    tabla.addCell(c1);
+                    tabla.addCell(c2);
+                    tabla.addCell(c3);
+                    tabla.addCell(c4);
+                }
+
+                documento.add(tabla);
+            } catch (SQLException e) {
+                System.out.println("Error al obtener ventas: " + e);
+            }
+
+            documento.close();
+            JOptionPane.showMessageDialog(null, "Reporte creado");
+
+        } catch (DocumentException | IOException e) {
+            System.out.println("Error al generar reporte: " + e);
         }
-
-        documento.close();
-        JOptionPane.showMessageDialog(null, "Reporte creado");
-
-    } catch (DocumentException | IOException e) {
-        System.out.println("Error al generar reporte: " + e);
     }
-}
-
 
 }

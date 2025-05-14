@@ -15,8 +15,12 @@ import com.itextpdf.text.pdf.PdfPTable;
 import com.itextpdf.text.pdf.PdfWriter;
 import conexion.Conexion;
 import java.awt.Desktop;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileOutputStream;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -66,7 +70,8 @@ public class VentaPDF {
                 }
             }
 
-            nombreArchivoPDFVenta = "Venta_" + nombreEmpleado + "_" + fechaNueva + ".pdf";
+            int numeroFactura = obtenerNumeroFactura();
+            nombreArchivoPDFVenta = "Venta_" + nombreEmpleado + "_" + fechaNueva + "_"+ String.format("%03d", numeroFactura) +".pdf";
 
             FileOutputStream archivo;
             File file = new File("src/pdf/" + nombreArchivoPDFVenta);
@@ -89,11 +94,12 @@ public class VentaPDF {
             img.scalePercent(6); // 20% del tamaño original
             img.setAlignment(Image.ALIGN_LEFT);
 
-// Crear el párrafo con la fecha
-            Paragraph fecha = new Paragraph("Factura: 001\nFecha: " + fechaActual, fuentePersonalizada);
+            // Crear el párrafo con la fecha
+            Paragraph fecha = new Paragraph("Factura: " + String.format("%03d", numeroFactura) + "\nFecha: " + fechaActual, fuentePersonalizada);
+
             fecha.setAlignment(Element.ALIGN_RIGHT);
 
-// Crear tabla del encabezado
+            // Crear tabla del encabezado
             PdfPTable Encabezado = new PdfPTable(4);
             Encabezado.setWidthPercentage(100);
             Encabezado.getDefaultCell().setBorder(0);
@@ -101,7 +107,7 @@ public class VentaPDF {
             Encabezado.setWidths(ColumnaEncabezado);
             Encabezado.setHorizontalAlignment(Element.ALIGN_LEFT);
 
-// Celda con imagen
+            // Celda con imagen
             PdfPCell celdaImg = new PdfPCell(img);
             celdaImg.setBorder(0);
             celdaImg.setRowspan(2);
@@ -257,6 +263,32 @@ public class VentaPDF {
         } catch (DocumentException | IOException e) {
             System.out.println("Error en: " + e);
         }
+    }
+
+    private int obtenerNumeroFactura() {
+        int numero = 1; // valor por defecto si el archivo no existe
+        File archivo = new File("src/files/contador_factura.txt");
+
+        try {
+            if (archivo.exists()) {
+                BufferedReader reader = new BufferedReader(new FileReader(archivo));
+                numero = Integer.parseInt(reader.readLine());
+                reader.close();
+            }
+        } catch (IOException | NumberFormatException e) {
+            System.out.println("Error al leer número de factura: " + e.getMessage());
+        }
+
+        // guardar el nuevo número para la siguiente factura
+        try {
+            BufferedWriter writer = new BufferedWriter(new FileWriter(archivo));
+            writer.write(String.valueOf(numero + 1));
+            writer.close();
+        } catch (IOException e) {
+            System.out.println("Error al guardar número de factura: " + e.getMessage());
+        }
+
+        return numero;
     }
 
 }
