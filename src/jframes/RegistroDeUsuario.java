@@ -67,31 +67,44 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         jLabel9.setForeground(new java.awt.Color(95, 47, 35));
         jLabel9.setText("Nombre: ");
 
+        txtnombre.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
         jLabel11.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel11.setForeground(new java.awt.Color(95, 47, 35));
         jLabel11.setText("Apellido:");
+
+        txtapellido.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
         jLabel12.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel12.setForeground(new java.awt.Color(95, 47, 35));
         jLabel12.setText("Correo:");
 
+        txtcorreo.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
         jLabel13.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel13.setForeground(new java.awt.Color(95, 47, 35));
         jLabel13.setText("Usuario:");
+
+        txtusuario.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
         jLabel14.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel14.setForeground(new java.awt.Color(95, 47, 35));
         jLabel14.setText("Contraseña: ");
 
+        txtcontrasena.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+
         jLabel15.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         jLabel15.setForeground(new java.awt.Color(95, 47, 35));
         jLabel15.setText("Confirmar Contraseña:");
+
+        txtconfirmarcontrasena.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
 
         btncrearcuenta.setBackground(new java.awt.Color(95, 47, 35));
         btncrearcuenta.setFont(new java.awt.Font("Montserrat", 1, 14)); // NOI18N
         btncrearcuenta.setForeground(new java.awt.Color(255, 255, 255));
         btncrearcuenta.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/agregar.png"))); // NOI18N
         btncrearcuenta.setText("Crear cuenta");
+        btncrearcuenta.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncrearcuenta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncrearcuentaActionPerformed(evt);
@@ -103,6 +116,7 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         btncancelar.setForeground(new java.awt.Color(255, 255, 255));
         btncancelar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/cancelar.png"))); // NOI18N
         btncancelar.setText("Cancelar");
+        btncancelar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btncancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btncancelarActionPerformed(evt);
@@ -148,7 +162,7 @@ public class RegistroDeUsuario extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
+                .addContainerGap(20, Short.MAX_VALUE)
                 .addComponent(jLabel2)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel1)

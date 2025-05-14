@@ -114,6 +114,7 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         btnactualizar.setForeground(new java.awt.Color(255, 255, 255));
         btnactualizar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/actualizar.png"))); // NOI18N
         btnactualizar.setText("Actualizar");
+        btnactualizar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnactualizar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnactualizarActionPerformed(evt);
@@ -126,6 +127,7 @@ public class FrmGestionarCategoria extends javax.swing.JInternalFrame {
         btneliminar.setForeground(new java.awt.Color(255, 255, 255));
         btneliminar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/cancelar.png"))); // NOI18N
         btneliminar.setText("Eliminar");
+        btneliminar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btneliminar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btneliminarActionPerformed(evt);

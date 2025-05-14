@@ -55,6 +55,7 @@ public class FrmNuevaCategoria extends javax.swing.JInternalFrame {
         btnguardar.setForeground(new java.awt.Color(255, 255, 255));
         btnguardar.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/Disquette 16.png"))); // NOI18N
         btnguardar.setText("Guardar");
+        btnguardar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
         btnguardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnguardarActionPerformed(evt);
