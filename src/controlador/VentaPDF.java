@@ -119,7 +119,7 @@ public class VentaPDF {
             Encabezado.addCell(vacio);
 
             String nombre = "Cowboy Cookies";
-            String telefono = "(829)975-9719";
+            String telefono = "(829)-975-9719";
             String direccion = "Calle #7 Almanzar, Honduras del Norte";
 
 // Celda con información del negocio
@@ -161,39 +161,44 @@ public class VentaPDF {
             doc.add(espacio);
 
             //AGREGAR LOS PRODUCTOS
-            PdfPTable tablaProducto = new PdfPTable(4);
+            PdfPTable tablaProducto = new PdfPTable(5);
             tablaProducto.setWidthPercentage(100);
             tablaProducto.getDefaultCell().setBorder(0);
             //tamaño de celdas
-            float[] ColumnaProducto = new float[]{15f, 50f, 15f, 20f};
+            float[] ColumnaProducto = new float[]{15f, 50f, 15f, 15f, 20f};
             tablaProducto.setWidths(ColumnaProducto);
             tablaProducto.setHorizontalAlignment(Element.ALIGN_LEFT);
             PdfPCell producto1 = new PdfPCell(new Phrase("Cantidad: ", Negrita));
             PdfPCell producto2 = new PdfPCell(new Phrase("Descripción: ", Negrita));
             PdfPCell producto3 = new PdfPCell(new Phrase("Precio Unitario: ", Negrita));
-            PdfPCell producto4 = new PdfPCell(new Phrase("Precio Total: ", Negrita));
+            PdfPCell producto4 = new PdfPCell(new Phrase("ITBIS: ", Negrita));
+            PdfPCell producto5 = new PdfPCell(new Phrase("Precio Total: ", Negrita));
 
             //quitar bordes
             producto1.setBorder(0);
             producto2.setBorder(0);
             producto3.setBorder(0);
             producto4.setBorder(0);
+            producto5.setBorder(0);
             //agregar color al encabezado del producto
             BaseColor colorCelda = new BaseColor(162, 210, 255); // Color #a2d2ff
             producto1.setBackgroundColor(colorCelda);
             producto2.setBackgroundColor(colorCelda);
             producto3.setBackgroundColor(colorCelda);
             producto4.setBackgroundColor(colorCelda);
+            producto5.setBackgroundColor(colorCelda);
             //agg celda a la tabla
             tablaProducto.addCell(producto1);
             tablaProducto.addCell(producto2);
             tablaProducto.addCell(producto3);
             tablaProducto.addCell(producto4);
+            tablaProducto.addCell(producto5);
 
             for (int i = 0; i < FrmNuevaVenta.jTable_Productos.getRowCount(); i++) {
                 String producto = FrmNuevaVenta.jTable_Productos.getValueAt(i, 1).toString();
                 String cantidad = FrmNuevaVenta.jTable_Productos.getValueAt(i, 2).toString();
                 String precio = FrmNuevaVenta.jTable_Productos.getValueAt(i, 3).toString();
+                String ITBIS = FrmNuevaVenta.jTable_Productos.getValueAt(i, 5).toString();
                 String total = FrmNuevaVenta.jTable_Productos.getValueAt(i, 6).toString();
 
                 PdfPCell celdaCantidad = new PdfPCell(new Phrase(cantidad, montserrat12Negro));
@@ -207,6 +212,10 @@ public class VentaPDF {
                 PdfPCell celdaPrecio = new PdfPCell(new Phrase(precio, montserrat12Negro));
                 celdaPrecio.setPaddingTop(5f);
                 celdaPrecio.setPaddingBottom(5f);
+                
+                PdfPCell celdaITBIS = new PdfPCell(new Phrase(ITBIS, montserrat12Negro));
+                celdaPrecio.setPaddingTop(5f);
+                celdaPrecio.setPaddingBottom(5f);
 
                 PdfPCell celdaTotal = new PdfPCell(new Phrase(total, montserrat12Negro));
                 celdaTotal.setPaddingTop(5f);
@@ -216,11 +225,13 @@ public class VentaPDF {
                 celdaCantidad.setBorder(0);
                 celdaProducto.setBorder(0);
                 celdaPrecio.setBorder(0);
+                celdaITBIS.setBorder(0);
                 celdaTotal.setBorder(0);
 
                 tablaProducto.addCell(celdaCantidad);
                 tablaProducto.addCell(celdaProducto);
                 tablaProducto.addCell(celdaPrecio);
+                tablaProducto.addCell(celdaITBIS);
                 tablaProducto.addCell(celdaTotal);
 
             }

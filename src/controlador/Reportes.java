@@ -95,7 +95,7 @@ public class Reportes {
             tabla.setSpacingBefore(10f);
 
             // Encabezados de tabla con padding y fuente
-            String[] headers = {"ID", "Nombre", "Stock", "Precio", "Descripción", "ITBIS", "Categoría"};
+            String[] headers = {"ID", "Nombre", "Stock", "Precio", "Descripción", "Por. ITBIS", "Categoría"};
             for (String h : headers) {
                 PdfPCell cell = new PdfPCell(new Phrase(h, encabezadoTabla));
                 cell.setBackgroundColor(new BaseColor(0xa2, 0xd2, 0xff)); // color celeste suave
