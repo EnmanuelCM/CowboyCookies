@@ -2,6 +2,7 @@ package jframes;
 
 import conexion.Conexion;
 import controlador.VentaPDF;
+import controlador.ctrlProducto;
 import controlador.ctrlVentas;
 import java.sql.Connection;
 import java.sql.Statement;
@@ -17,6 +18,7 @@ import javax.swing.table.TableColumnModel;
 import modelo.UsuarioActual;
 import modelo.CabeceraVenta;
 import modelo.DetalleVenta;
+import modelo.Producto;
 
 public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
@@ -353,11 +355,11 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
                             btnCalcularCambio.setEnabled(true);
 
                         } else {
-                            JOptionPane.showMessageDialog(null, "la cantidad supera el Stock");
+                            JOptionPane.showMessageDialog(null, "La cantidad supera el Stock");
                         }
 
                     } else {
-                        JOptionPane.showMessageDialog(null, "la cantidad no puede ser cero (0), ni negativa");
+                        JOptionPane.showMessageDialog(null, "La cantidad no puede ser cero (0), ni negativa");
                     }
                 } else {
                     JOptionPane.showMessageDialog(null, "En la cantidad no se admiten datos no numericos");
@@ -417,62 +419,60 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
 
     private void btnRegistrarVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRegistrarVentaActionPerformed
         CabeceraVenta cabeceraVenta = new CabeceraVenta();
-        DetalleVenta detalleVenta = new DetalleVenta();
-        ctrlVentas controlVenta = new ctrlVentas();
+DetalleVenta detalleVenta = new DetalleVenta();
+ctrlVentas controlVenta = new ctrlVentas();
 
+if (listaProductos.size() > 0) {
 
-        if (listaProductos.size() > 0) {
+    // registrar cabecera
+    cabeceraVenta.setId_usuario(UsuarioActual.getIdUsuario());
+    cabeceraVenta.setFecha_hora(getFechaHoraActual());
+    cabeceraVenta.setTotal(Double.parseDouble(txtTotal.getText()));
 
-            // registrar cabecera
-            cabeceraVenta.setId_usuario(UsuarioActual.getIdUsuario());
-            cabeceraVenta.setFecha_hora(getFechaHoraActual());
-            cabeceraVenta.setTotal(Double.parseDouble(txtTotal.getText()));
+    if (controlVenta.guardar(cabeceraVenta)) {
+        JOptionPane.showMessageDialog(null, "¡Venta Registrada!");
 
-            if (controlVenta.guardar(cabeceraVenta)) {
-                JOptionPane.showMessageDialog(null, "¡Venta Registrada!");
-                
-                //Generar la factura de venta
-                VentaPDF pdf = new VentaPDF();
-                pdf.DatosEmpleado(UsuarioActual.getIdUsuario());
-                pdf.generarFacturaPDF();
+        // Generar la factura de venta
+        VentaPDF pdf = new VentaPDF();
+        pdf.DatosEmpleado(UsuarioActual.getIdUsuario());
+        pdf.generarFacturaPDF();
 
-                //guardar detalle
-                for (DetalleVenta elemento : listaProductos) {
-                    detalleVenta.setId_detalle(0);
-                    detalleVenta.setId_venta(0);
-                    detalleVenta.setId_producto(elemento.getId_producto());
-                    detalleVenta.setCantidad(elemento.getCantidad());
-                    detalleVenta.setPrecio_unitario(elemento.getPrecio_unitario());
-                    detalleVenta.setSubtotal(elemento.getSubtotal());
-                    detalleVenta.setItbis(elemento.getItbis());
-                    detalleVenta.setTotal(elemento.getTotal());
+        // guardar detalle
+        for (DetalleVenta elemento : listaProductos) {
+            detalleVenta.setId_detalle(0);
+            detalleVenta.setId_venta(0);
+            detalleVenta.setId_producto(elemento.getId_producto());
+            detalleVenta.setCantidad(elemento.getCantidad());
+            detalleVenta.setPrecio_unitario(elemento.getPrecio_unitario());
+            detalleVenta.setSubtotal(elemento.getSubtotal());
+            detalleVenta.setItbis(elemento.getItbis());
+            detalleVenta.setTotal(elemento.getTotal());
 
-                    if (controlVenta.guardarDetalle(detalleVenta)) {
-                        //System.out.println("Detalle de Venta Registrado");
+            if (controlVenta.guardarDetalle(detalleVenta)) {
+                txtSubtotal.setText("0.0");
+                txtITBIS.setText("0.0");
+                txtTotal.setText("0.0");
+                txtEfectivo.setText("");
+                txtCambio.setText("0.0");
+                auxIdDetalle = 1;
 
-                        txtSubtotal.setText("0.0");
-                        txtITBIS.setText("0.0");
-                        txtTotal.setText("0.0");
-                        txtEfectivo.setText("");
-                        txtCambio.setText("0.0");
-                        auxIdDetalle = 1;
-
-                        this.RestarStockProductos(elemento.getId_producto(), elemento.getCantidad());
-
-                    } else {
-                        JOptionPane.showMessageDialog(null, "¡Error al guardar detalle de venta!");
-                    }
-                }
-                //vaciamos la lista
-                listaProductos.clear();
-                ListaTablaProductos();
+                this.RestarStockProductos(elemento.getId_producto(), elemento.getCantidad());
 
             } else {
-                JOptionPane.showMessageDialog(null, "¡Error al guardar cabecera de venta!");
+                JOptionPane.showMessageDialog(null, "¡Error al guardar detalle de venta!");
             }
-        } else {
-            JOptionPane.showMessageDialog(null, "¡Seleccione un producto!");
         }
+
+        // vaciamos la lista
+        listaProductos.clear();
+        ListaTablaProductos();
+
+    } else {
+        JOptionPane.showMessageDialog(null, "¡Error al guardar cabecera de venta!");
+    }
+} else {
+    JOptionPane.showMessageDialog(null, "¡Seleccione un producto!");
+}
 
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 

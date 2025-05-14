@@ -10,6 +10,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.util.ArrayList;
 import javax.swing.JComboBox;
 import modelo.Producto;
 
@@ -136,6 +137,31 @@ consulta.setInt(7, id_producto);  // ESTE ES CORRECTO AQUÍ
         }
         return respuesta;
     }
+    
+    public ArrayList<Producto> obtenerProductosConBajoStock(int limite) {
+    ArrayList<Producto> listaBajoStock = new ArrayList<>();
+    Connection cn = Conexion.getConnection();
+    String sql = "SELECT id_producto, nombre, stock FROM productos WHERE stock < ?";
+    
+    try {
+        PreparedStatement ps = cn.prepareStatement(sql);
+        ps.setInt(1, limite);
+        ResultSet rs = ps.executeQuery();
+        
+        while (rs.next()) {
+            Producto producto = new Producto();
+            producto.setId_producto(rs.getInt("id_producto"));
+            producto.setNombre(rs.getString("nombre"));
+            producto.setStock(rs.getInt("stock"));
+            listaBajoStock.add(producto);
+        }
+        cn.close();
+    } catch (SQLException e) {
+        System.out.println("Error al obtener productos con bajo stock: " + e);
+    }
+
+    return listaBajoStock;
+}
 
     
     

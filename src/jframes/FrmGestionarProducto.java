@@ -7,12 +7,16 @@ package jframes;
 import conexion.Conexion;
 import controlador.ctrlProducto;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import java.sql.Statement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import javax.swing.Timer;
 import javax.swing.table.TableColumnModel;
 import modelo.Producto;
 
@@ -22,15 +26,44 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
 
         initComponents();
         mostrarProductos();
+        
+        // Usamos un Timer para ejecutar la verificación después de 2 segundos
+    Timer timer = new Timer(1000, new ActionListener() {
+        public void actionPerformed(ActionEvent e) {
+            // ADVERTENCIA POR STOCK BAJO
+        ctrlProducto controlProducto = new ctrlProducto();
+        ArrayList<Producto> productosBajoStock = controlProducto.obtenerProductosConBajoStock(20);
+        if (!productosBajoStock.isEmpty()) {
+            StringBuilder mensaje = new StringBuilder("¡ATENCIÓN! Los siguientes productos tienen bajo stock:\n\n");
+            for (Producto p : productosBajoStock) {
+                mensaje.append("- ").append(p.getNombre()).append(" (Stock: ").append(p.getStock()).append(")\n");
+            }
+            JOptionPane.showMessageDialog(null, mensaje.toString(), "Stock Bajo", JOptionPane.WARNING_MESSAGE);
+        }
+        }
+    });
+    timer.setRepeats(false);  // Solo lo ejecuta una vez
+    timer.start();
+        
+
+    
+    
+        
+    
+    
+        
+            
         jTable_producto.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
                 jTable_productoMouseClicked(evt);
             }
         });
         this.setSize(new Dimension(900, 500));
-        this.setTitle("Gestionar Categorias");
+        this.setTitle("Gestionar Productos");
 
     }
+    
+    
 
     private void limpiarCampos() {
         txt_nombre.setText("");
@@ -240,7 +273,9 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
         jLabel7.setText("ITBIS:");
         jPanel3.add(jLabel7, new org.netbeans.lib.awtextra.AbsoluteConstraints(560, 60, -1, -1));
 
+        txt_stock.setEditable(false);
         txt_stock.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
+        txt_stock.setEnabled(false);
         jPanel3.add(txt_stock, new org.netbeans.lib.awtextra.AbsoluteConstraints(90, 60, 170, -1));
 
         txt_precio.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
@@ -272,33 +307,63 @@ public class FrmGestionarProducto extends javax.swing.JInternalFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         int fila = jTable_producto.getSelectedRow();
-        if (fila < 0) {
-            JOptionPane.showMessageDialog(null, "Debes seleccionar un producto de la tabla.");
+    if (fila < 0) {
+        JOptionPane.showMessageDialog(null, "Debes seleccionar un producto de la tabla.");
+        return;
+    }
+
+    try {
+        // ID del producto
+        int id_producto = Integer.parseInt(jTable_producto.getValueAt(fila, 0).toString());
+
+        // Valores actuales de la tabla
+        String nombreTabla = jTable_producto.getValueAt(fila, 1).toString();
+        String descripcionTabla = jTable_producto.getValueAt(fila, 2).toString();
+        String precioTabla = jTable_producto.getValueAt(fila, 3).toString();
+        String stockTabla = jTable_producto.getValueAt(fila, 4).toString();
+        String categoriaTabla = jTable_producto.getValueAt(fila, 5).toString();
+        String itbisTabla = jTable_producto.getValueAt(fila, 6).toString();
+
+        // Valores del formulario
+        String nombreForm = txt_nombre.getText().trim();
+        String descripcionForm = txt_descripcion.getText().trim();
+        String precioForm = txt_precio.getText().trim();
+        String stockForm = txt_stock.getText().trim();
+        String categoriaForm = cbo_categoria.getSelectedItem().toString();
+        String itbisForm = txt_itbis.getText().trim();
+
+        // Comparar si hay cambios
+        if (nombreTabla.equals(nombreForm) &&
+            descripcionTabla.equals(descripcionForm) &&
+            precioTabla.equals(precioForm) &&
+            stockTabla.equals(stockForm) &&
+            categoriaTabla.equals(categoriaForm) &&
+            itbisTabla.equals(itbisForm)) {
+
+            JOptionPane.showMessageDialog(null, "No se ha hecho ningún cambio en el producto.");
             return;
         }
 
-        try {
-            int id_producto = Integer.parseInt(jTable_producto.getValueAt(fila, 0).toString());
+        // Si hay cambios, se actualiza
+        Producto producto = new Producto();
+        producto.setNombre(nombreForm);
+        producto.setDescripcion(descripcionForm);
+        producto.setPrecio(Double.parseDouble(precioForm));
+        producto.setStock(Integer.parseInt(stockForm));
+        producto.setCategoria(categoriaForm);
+        producto.setPorcentajeitbis(Integer.parseInt(itbisForm));
 
-            Producto producto = new Producto();
-            producto.setNombre(txt_nombre.getText().trim());
-            producto.setDescripcion(txt_descripcion.getText().trim());
-            producto.setPrecio(Double.parseDouble(txt_precio.getText().trim()));
-            producto.setStock(Integer.parseInt(txt_stock.getText().trim()));
-            producto.setCategoria(cbo_categoria.getSelectedItem().toString());
-            producto.setPorcentajeitbis(Integer.parseInt(txt_itbis.getText().trim()));
-
-            ctrlProducto controlProducto = new ctrlProducto();
-            if (controlProducto.actualizar(producto, id_producto)) {
-                JOptionPane.showMessageDialog(null, "Producto actualizado correctamente.");
-                mostrarProductos();
-                limpiarCampos();
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al actualizar el producto.");
-            }
-        } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Error: " + e);
+        ctrlProducto controlProducto = new ctrlProducto();
+        if (controlProducto.actualizar(producto, id_producto)) {
+            JOptionPane.showMessageDialog(null, "Producto actualizado correctamente.");
+            mostrarProductos();
+            limpiarCampos();
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al actualizar el producto.");
         }
+    } catch (Exception e) {
+        JOptionPane.showMessageDialog(null, "Error: " + e);
+    }
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
