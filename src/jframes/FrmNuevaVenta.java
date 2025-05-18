@@ -2,7 +2,6 @@ package jframes;
 
 import conexion.Conexion;
 import controlador.VentaPDF;
-import controlador.ctrlCupon;
 import controlador.ctrlProducto;
 import controlador.ctrlVentas;
 import java.sql.Connection;
@@ -18,7 +17,6 @@ import javax.swing.table.DefaultTableModel;
 import javax.swing.table.TableColumnModel;
 import modelo.UsuarioActual;
 import modelo.CabeceraVenta;
-import modelo.Cupón;
 import modelo.DetalleVenta;
 import modelo.Producto;
 
@@ -122,7 +120,6 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        btnaplicarcupon = new javax.swing.JButton();
         txtCantidad = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         lblEmpleado = new javax.swing.JLabel();
@@ -131,7 +128,6 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         jLabel4 = new javax.swing.JLabel();
         btnRegistrarVenta = new javax.swing.JButton();
         btnAgregarProd = new javax.swing.JButton();
-        txtcupon = new javax.swing.JTextField();
         jPanel1 = new javax.swing.JPanel();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable_Productos = new javax.swing.JTable();
@@ -147,25 +143,12 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         txtCambio = new javax.swing.JTextField();
         txtTotal = new javax.swing.JTextField();
         btnCalcularCambio = new javax.swing.JButton();
-        jLabel2 = new javax.swing.JLabel();
         lbl_wallpaper = new javax.swing.JLabel();
 
         setClosable(true);
         setIconifiable(true);
         setPreferredSize(new java.awt.Dimension(1000, 602));
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
-
-        btnaplicarcupon.setBackground(new java.awt.Color(95, 47, 35));
-        btnaplicarcupon.setFont(new java.awt.Font("Montserrat", 1, 12)); // NOI18N
-        btnaplicarcupon.setForeground(new java.awt.Color(255, 255, 255));
-        btnaplicarcupon.setIcon(new javax.swing.ImageIcon(getClass().getResource("/files/agregar.png"))); // NOI18N
-        btnaplicarcupon.setText("Aplicar Cupón");
-        btnaplicarcupon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnaplicarcuponActionPerformed(evt);
-            }
-        });
-        getContentPane().add(btnaplicarcupon, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 440, -1, -1));
 
         txtCantidad.setFont(new java.awt.Font("Montserrat", 0, 12)); // NOI18N
         getContentPane().add(txtCantidad, new org.netbeans.lib.awtextra.AbsoluteConstraints(510, 90, 70, -1));
@@ -221,13 +204,6 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
             }
         });
         getContentPane().add(btnAgregarProd, new org.netbeans.lib.awtextra.AbsoluteConstraints(600, 83, -1, 30));
-
-        txtcupon.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtcuponActionPerformed(evt);
-            }
-        });
-        getContentPane().add(txtcupon, new org.netbeans.lib.awtextra.AbsoluteConstraints(120, 400, 110, 20));
 
         jPanel1.setBackground(new java.awt.Color(254, 176, 200));
         jPanel1.setBorder(javax.swing.BorderFactory.createEtchedBorder());
@@ -318,10 +294,6 @@ public class FrmNuevaVenta extends javax.swing.JInternalFrame {
         jPanel2.add(btnCalcularCambio, new org.netbeans.lib.awtextra.AbsoluteConstraints(240, 140, 160, 70));
 
         getContentPane().add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(550, 340, 420, 220));
-
-        jLabel2.setFont(new java.awt.Font("Montserrat SemiBold", 0, 12)); // NOI18N
-        jLabel2.setText("Ingresar Cupón:");
-        getContentPane().add(jLabel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(20, 400, -1, -1));
 
         lbl_wallpaper.setIcon(new javax.swing.ImageIcon(getClass().getResource("/backgrounds/Fondo_NuevaVenta.jpg"))); // NOI18N
         getContentPane().add(lbl_wallpaper, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, -4, 990, 570));
@@ -504,46 +476,13 @@ if (listaProductos.size() > 0) {
 
     }//GEN-LAST:event_btnRegistrarVentaActionPerformed
 
-    private void txtcuponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtcuponActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_txtcuponActionPerformed
-
-    private void btnaplicarcuponActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnaplicarcuponActionPerformed
-        String codigoIngresado = txtcupon.getText().trim();
-    ctrlCupon ctrlCupon = new ctrlCupon();
-    Cupón cupon = ctrlCupon.buscarCupon(codigoIngresado);
-    
-    // VERIFICAR SI HAY PRODUCTOS EN LA FACTURA
-        if (jTable_Productos.getRowCount() == 0) {
-            JOptionPane.showMessageDialog(null, "Selecciona un producto para aplicarle el cupón.");
-            return;
-        }
-
-    if (cupon == null) {
-        JOptionPane.showMessageDialog(this, "Cupón no válido", "Cupón", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-
-    if (cupon.isUsado()) {
-        JOptionPane.showMessageDialog(this, "Este cupón ya fue utilizado", "Cupón ya gastado", JOptionPane.INFORMATION_MESSAGE);
-        return;
-    }
-
-    JOptionPane.showMessageDialog(this, "Cupón aplicado: " + cupon.getDescripcion(), "¡Descuento aplicado!", JOptionPane.INFORMATION_MESSAGE);
-
-    aplicarDescuento(cupon); // lo creas más abajo
-    ctrlCupon.marcarComoUsado(cupon.getCodigo());
-    }//GEN-LAST:event_btnaplicarcuponActionPerformed
-
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregarProd;
     private javax.swing.JButton btnCalcularCambio;
     private javax.swing.JButton btnRegistrarVenta;
-    private javax.swing.JButton btnaplicarcupon;
     private javax.swing.JComboBox<String> cbxProductos;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -563,7 +502,6 @@ if (listaProductos.size() > 0) {
     private javax.swing.JTextField txtITBIS;
     private javax.swing.JTextField txtSubtotal;
     public static javax.swing.JTextField txtTotal;
-    private javax.swing.JTextField txtcupon;
     // End of variables declaration//GEN-END:variables
 
 //combobox Productos
@@ -713,23 +651,6 @@ if (listaProductos.size() > 0) {
         java.text.SimpleDateFormat formato = new java.text.SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
         return formato.format(fecha);
     }
-    
-    private void aplicarDescuento(Cupón cupon) {
-    double subtotal = Double.parseDouble(txtSubtotal.getText());
-    double nuevoTotal = subtotal;
-    
-    switch (cupon.getTipoDescuento()) {
-        case "PORCENTAJE":
-            double descuento = subtotal * (cupon.getValorDescuento() / 100);
-            nuevoTotal = subtotal - descuento;
-            break;
-        case "FIJO":
-            nuevoTotal = subtotal - cupon.getValorDescuento();
-            break;
-    }
-
-    txtTotal.setText(String.format("%.2f", nuevoTotal));
-}
 
 
 }
