@@ -3,6 +3,7 @@ package jframes;
 import controlador.Reportes;
 import java.awt.Dimension;
 import javax.swing.JDesktopPane;
+import javax.swing.JInternalFrame;
 import javax.swing.plaf.DesktopPaneUI;
 import modelo.UsuarioActual;
 
@@ -39,7 +40,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
             MenuItem_GestionarUsuarios.setVisible(false); // ocultar si no es admin
             jMenuItem_GestionarProd.setVisible(false);
             jMenuItem_GestionarCat.setVisible(false);
-            
+
         }
 
     }
@@ -69,6 +70,7 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         jMenuItem_ReporteCat = new javax.swing.JMenuItem();
         jMenuItem_Reporteprod = new javax.swing.JMenuItem();
         jMenuItem_ReportesVentas = new javax.swing.JMenuItem();
+        jMenuItem_ProdVendido = new javax.swing.JMenuItem();
         MenuLogout = new javax.swing.JMenu();
         jMenuItem_Cerrarsesion = new javax.swing.JMenuItem();
 
@@ -225,6 +227,17 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         });
         MenuReportes.add(jMenuItem_ReportesVentas);
 
+        jMenuItem_ProdVendido.setFont(new java.awt.Font("Montserrat Medium", 0, 14)); // NOI18N
+        jMenuItem_ProdVendido.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/reporte1.png"))); // NOI18N
+        jMenuItem_ProdVendido.setText("Reporte P. Vendidos");
+        jMenuItem_ProdVendido.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        jMenuItem_ProdVendido.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem_ProdVendidoActionPerformed(evt);
+            }
+        });
+        MenuReportes.add(jMenuItem_ProdVendido);
+
         jMenuBar1.add(MenuReportes);
 
         MenuLogout.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imgmenu/cerrar-sesion.png"))); // NOI18N
@@ -272,36 +285,42 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         FrmNuevaCategoria FrmNuevaCategoria = new FrmNuevaCategoria();
         jDesktopPane_menu.add(FrmNuevaCategoria);
         FrmNuevaCategoria.setVisible(true);
+        centrarInternalFrame(FrmNuevaCategoria, jDesktopPane_menu);
     }//GEN-LAST:event_jMenuItem_NuevaCatActionPerformed
 
     private void jMenuItem_GestionarCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarCatActionPerformed
         FrmGestionarCategoria FrmGestionarCategoria = new FrmGestionarCategoria();
         jDesktopPane_menu.add(FrmGestionarCategoria);
         FrmGestionarCategoria.setVisible(true);
+        centrarInternalFrame(FrmGestionarCategoria, jDesktopPane_menu);
     }//GEN-LAST:event_jMenuItem_GestionarCatActionPerformed
 
     private void jMenuItem_NuevoProductoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_NuevoProductoActionPerformed
         FrmNuevoProducto FrmNuevoProducto = new FrmNuevoProducto();
         jDesktopPane_menu.add(FrmNuevoProducto);
         FrmNuevoProducto.setVisible(true);
+        centrarInternalFrame(FrmNuevoProducto, jDesktopPane_menu);
     }//GEN-LAST:event_jMenuItem_NuevoProductoActionPerformed
 
     private void jMenuItem_GestionarProdActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_GestionarProdActionPerformed
         FrmGestionarProducto FrmGestionarProducto = new FrmGestionarProducto();
         jDesktopPane_menu.add(FrmGestionarProducto);
         FrmGestionarProducto.setVisible(true);
+        centrarInternalFrame(FrmGestionarProducto, jDesktopPane_menu);
     }//GEN-LAST:event_jMenuItem_GestionarProdActionPerformed
 
     private void jMenuItem_ActStockActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ActStockActionPerformed
         FrmActualizarStock FrmActualizarStock = new FrmActualizarStock();
         jDesktopPane_menu.add(FrmActualizarStock);
         FrmActualizarStock.setVisible(true);
+        centrarInternalFrame(FrmActualizarStock, jDesktopPane_menu);
     }//GEN-LAST:event_jMenuItem_ActStockActionPerformed
 
     private void jMenuItem_nuevaVentaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_nuevaVentaActionPerformed
         FrmNuevaVenta FrmNuevaVenta = new FrmNuevaVenta();
         jDesktopPane_menu.add(FrmNuevaVenta);
         FrmNuevaVenta.setVisible(true);
+        centrarInternalFrame(FrmNuevaVenta, jDesktopPane_menu);
     }//GEN-LAST:event_jMenuItem_nuevaVentaActionPerformed
 
     private void jMenuItem_ReporteCatActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ReporteCatActionPerformed
@@ -323,7 +342,13 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
         FrmGestionarUsuarios FrmGestionarUsuarios = new FrmGestionarUsuarios();
         jDesktopPane_menu.add(FrmGestionarUsuarios);
         FrmGestionarUsuarios.setVisible(true);
+        centrarInternalFrame(FrmGestionarUsuarios, jDesktopPane_menu);
     }//GEN-LAST:event_MenuItem_GestionarUsuariosActionPerformed
+
+    private void jMenuItem_ProdVendidoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem_ProdVendidoActionPerformed
+        Reportes reporte = new Reportes();
+        reporte.ReporteProductosVendidos();
+    }//GEN-LAST:event_jMenuItem_ProdVendidoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -376,10 +401,19 @@ public class FrmMenuPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem jMenuItem_GestionarProd;
     private javax.swing.JMenuItem jMenuItem_NuevaCat;
     private javax.swing.JMenuItem jMenuItem_NuevoProducto;
+    private javax.swing.JMenuItem jMenuItem_ProdVendido;
     private javax.swing.JMenuItem jMenuItem_ReporteCat;
     private javax.swing.JMenuItem jMenuItem_Reporteprod;
     private javax.swing.JMenuItem jMenuItem_ReportesVentas;
     private javax.swing.JMenuItem jMenuItem_nuevaVenta;
     // End of variables declaration//GEN-END:variables
+
+    public static void centrarInternalFrame(JInternalFrame frame, JDesktopPane escritorio) {
+        Dimension desktopSize = escritorio.getSize();
+        Dimension frameSize = frame.getSize();
+        int x = (desktopSize.width - frameSize.width) / 2;
+        int y = (desktopSize.height - frameSize.height) / 2;
+        frame.setLocation(x, y);
+    }
 
 }
