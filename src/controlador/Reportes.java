@@ -379,19 +379,15 @@ public class Reportes {
         }
     }
 
-
- /**************************************************************************
- * metodo para crear reportes de los productos mas vendidos y menos vendidos
- *********************************************************************** */
     public void ReporteProductosVendidos() {
         Document documento = new Document();
         try {
-             // Cargar la fecha actual
+            // Cargar la fecha actual
             Date date = new Date();
-            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            String fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
             String fechaNueva = fechaActual.replace("/", "_");
 
-            // Crear carpeta "reportes" si no existe
+            // Crear carpeta "reportes" dentro del proyecto si no existe
             String ruta = System.getProperty("user.dir") + "/reportes";
             File directorio = new File(ruta);
             if (!directorio.exists()) {
@@ -399,17 +395,29 @@ public class Reportes {
             }
 
             // Crear el PDF dentro de la carpeta
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Productos_Vendidos" + fechaNueva + ".pdf"));
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Productos_Vendidos_" + fechaNueva + ".pdf"));
 
-            // Cargar imagen
-            Image header = Image.getInstance("src/files/header.jpg");
+            // Cargar imagen desde recursos
+            InputStream imagenStream = getClass().getResourceAsStream("/files/header.jpg");
+            ByteArrayOutputStream buffer = new ByteArrayOutputStream();
+            int nRead;
+            byte[] data = new byte[16384];
+            while ((nRead = imagenStream.read(data, 0, data.length)) != -1) {
+                buffer.write(data, 0, nRead);
+            }
+            buffer.flush();
+            Image header = Image.getInstance(buffer.toByteArray());
             header.scaleToFit(650, 1000);
             header.setAlignment(Chunk.ALIGN_CENTER);
             header.setBorder(0);
 
-            // Tipografías personalizadas
-            BaseFont montserrat = BaseFont.createFont("src/fonts/Montserrat-Regular.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
-            BaseFont montserratBold = BaseFont.createFont("src/fonts/Montserrat-Bold.ttf", BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            // Tipografías desde recursos
+            BaseFont montserrat = BaseFont.createFont(
+                    getClass().getResource("/fonts/Montserrat-Regular.ttf").toString(),
+                    BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
+            BaseFont montserratBold = BaseFont.createFont(
+                    getClass().getResource("/fonts/Montserrat-Bold.ttf").toString(),
+                    BaseFont.IDENTITY_H, BaseFont.EMBEDDED);
 
             Font titulo = new Font(montserratBold, 18, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
             Font subtitulo = new Font(montserrat, 12, Font.NORMAL, new BaseColor(0x5f, 0x2f, 0x23));
@@ -419,7 +427,7 @@ public class Reportes {
             documento.open();
             documento.add(header);
 
-            // Encabezado del documento
+            // Encabezado
             Paragraph encabezado = new Paragraph();
             encabezado.setAlignment(Element.ALIGN_CENTER);
             encabezado.setSpacingBefore(5f);
@@ -441,11 +449,10 @@ public class Reportes {
                 + "GROUP BY p.id_producto, p.nombre ORDER BY total_vendido ASC LIMIT 5;"
             };
 
-            BaseColor fondoEncabezado = new BaseColor(0xa2, 0xd2, 0xff); // #a2d2ff
+            BaseColor fondoEncabezado = new BaseColor(0xa2, 0xd2, 0xff);
             String[] headers = {"ID", "Nombre", "Cantidad Vendida"};
 
             for (int i = 0; i < titulos.length; i++) {
-                // Sección del título
                 Paragraph seccion = new Paragraph(titulos[i] + "\n\n", subtitulo);
                 seccion.setAlignment(Element.ALIGN_LEFT);
                 documento.add(seccion);
@@ -456,7 +463,7 @@ public class Reportes {
                 tabla.setSpacingAfter(10f);
                 tabla.setWidths(new float[]{3f, 7f, 4f});
 
-                // Encabezados de tabla
+                // Encabezados
                 for (String h : headers) {
                     PdfPCell cell = new PdfPCell(new Phrase(h, fontEncabezado));
                     cell.setBackgroundColor(fondoEncabezado);
@@ -466,7 +473,7 @@ public class Reportes {
                     tabla.addCell(cell);
                 }
 
-                // Llenar datos
+                // Datos
                 PreparedStatement pst = cn.prepareStatement(consultas[i]);
                 ResultSet rs = pst.executeQuery();
                 while (rs.next()) {
@@ -488,7 +495,7 @@ public class Reportes {
             }
 
             documento.close();
-            JOptionPane.showMessageDialog(null, "Reporte creado con éxito");
+            JOptionPane.showMessageDialog(null, "Reporte creado con éxito en la carpeta /reportes");
 
         } catch (Exception e) {
             System.out.println("Error al generar el reporte: " + e);
