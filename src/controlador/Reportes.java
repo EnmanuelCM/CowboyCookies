@@ -386,18 +386,20 @@ public class Reportes {
     public void ReporteProductosVendidos() {
         Document documento = new Document();
         try {
-            // Cargar fecha actual en formato yyyy_MM_dd
+             // Cargar la fecha actual
             Date date = new Date();
-            String fecha = new SimpleDateFormat("yyyy_MM_dd").format(date);
+            fechaActual = new SimpleDateFormat("yyyy/MM/dd").format(date);
+            String fechaNueva = fechaActual.replace("/", "_");
 
             // Crear carpeta "reportes" si no existe
             String ruta = System.getProperty("user.dir") + "/reportes";
-            File carpeta = new File(ruta);
-            if (!carpeta.exists()) {
-                carpeta.mkdirs();
+            File directorio = new File(ruta);
+            if (!directorio.exists()) {
+                directorio.mkdirs();
             }
 
-            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Productos_Vendidos_" + fecha + ".pdf"));
+            // Crear el PDF dentro de la carpeta
+            PdfWriter.getInstance(documento, new FileOutputStream(ruta + "/Reporte_Productos_Vendidos" + fechaNueva + ".pdf"));
 
             // Cargar imagen
             Image header = Image.getInstance("src/files/header.jpg");
